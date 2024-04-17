@@ -5,10 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  *
  * @author aiviz
  */
-public class Clientes_Has_Cuentas {
+@Entity
+@Table(name = "clientes_Has_Cuentas")
+public class Clientes_Has_Cuentas implements Serializable{
     
 }
