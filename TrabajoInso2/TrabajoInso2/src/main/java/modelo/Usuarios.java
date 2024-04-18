@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +22,12 @@ import javax.persistence.Table;
  */
 /**
  * La clase Usuarios representa a los usuarios del sistema.
- * Contiene información como el ID, DNI, nombre, apellido, nombre de usuario, contraseña, teléfono, email y dirección.
+ * Contiene información como el ID, DNI, nombre, apellido, nombre de usuario,
+ * contraseña, teléfono, email y dirección.
  */
 @Entity
 @Table(name = "usuarios")
-public class Usuarios implements Serializable{
+public class Usuarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -52,6 +55,10 @@ public class Usuarios implements Serializable{
 
     @Column(name = "direccion", nullable = false, length = 45)
     private String direccion;
+
+    @ManyToOne
+    @JoinColumn(name = "Sucursales_idSucursal", referencedColumnName = "idSucursal")
+    private Sucursales sucursal;
 
     public int getId() {
         return id;
@@ -125,6 +132,14 @@ public class Usuarios implements Serializable{
         this.direccion = direccion;
     }
 
+    public Sucursales getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursales sucursal) {
+        this.sucursal = sucursal;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -135,9 +150,10 @@ public class Usuarios implements Serializable{
         result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
         result = prime * result + ((userName == null) ? 0 : userName.hashCode());
         result = prime * result + ((contrasenia == null) ? 0 : contrasenia.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
+        result = prime * result + ((sucursal == null) ? 0 : sucursal.hashCode());
         return result;
     }
 
@@ -177,20 +193,25 @@ public class Usuarios implements Serializable{
                 return false;
         } else if (!contrasenia.equals(other.contrasenia))
             return false;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
-            return false;
         if (telefono == null) {
             if (other.telefono != null)
                 return false;
         } else if (!telefono.equals(other.telefono))
             return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
         if (direccion == null) {
             if (other.direccion != null)
                 return false;
         } else if (!direccion.equals(other.direccion))
+            return false;
+        if (sucursal == null) {
+            if (other.sucursal != null)
+                return false;
+        } else if (!sucursal.equals(other.sucursal))
             return false;
         return true;
     }

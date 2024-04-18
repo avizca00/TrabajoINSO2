@@ -8,7 +8,6 @@ package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -149,9 +148,5 @@ public class Transferencias implements Serializable {
         return true;
     }
 
-    
-
-
-    
     // Getters and setters
 }
