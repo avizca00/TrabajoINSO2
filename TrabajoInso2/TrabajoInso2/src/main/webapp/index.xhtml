@@ -1,12 +1,141 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Inicio de Sesión o Registro de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1500px;
+            width: 1000px;
+            /* Aumenta el ancho del contenedor */
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .form-section {
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 30px;
+            text-align: center;
+            font-family: "Arial Black", sans-serif;
+        }
+
+        .form-section input[type="text"],
+        .form-section input[type="password"],
+        .form-section input[type="submit"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        .form-section input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .form-section input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-section a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .form-section a:hover {
+            text-decoration: underline;
+        }
+
+        .center-button {
+            text-align: center;
+        }
+
+        /* Estilos para centrar los outputLabel */
+        .form-section .output-label {
+            text-align: center;
+            width: 100px;
+            /* Ancho fijo para los outputLabel */
+            align-items: center;
+            align-content: center;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <div class="form-section">
+            <h1>Iniciar Sesión</h1>
+            <div class="form-section">
+                <h:form>
+                    <p:fieldset legend="Datos de Inicio de Sesión">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="usuario" value="Usuario:" styleClass="output-label" />
+                            <p:inputText id="usuario" required="true" />
+                            <p:outputLabel for="contraseña" value="Contraseña:" styleClass="output-label" />
+                            <p:password id="contraseña" required="true" />
+                        </p:panelGrid>
+                        <div class="center-button">
+                            <p:commandButton value="Iniciar Sesión" />
+                        </div>
+                    </p:fieldset>
+                </h:form>
+            </div>
+        </div>
+        <div class="form-section">
+            <h1>Registro de Usuario</h1>
+            <div class="form-section">
+                <h:form>
+                    <p:fieldset legend="Datos de Registro">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="nombre" value="Nombre:" styleClass="output-label" />
+                            <p:inputText id="nombre" required="true" />
+                            <p:outputLabel for="apellido" value="Apellido:" styleClass="output-label" />
+                            <p:inputText id="apellido" required="true" />
+                            <p:outputLabel for="email" value="Email:" styleClass="output-label" />
+                            <p:inputText id="email" required="true" />
+                            <p:outputLabel for="nuevaContraseña" value="Contraseña:" styleClass="output-label" />
+                            <p:password id="nuevaContraseña" required="true" />
+                        </p:panelGrid>
+                        <div class="center-button">
+                            <p:commandButton value="Registrarse" />
+                        </div>
+                    </p:fieldset>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+
+</html>
