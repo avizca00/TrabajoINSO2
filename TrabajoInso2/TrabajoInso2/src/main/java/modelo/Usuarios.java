@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,6 +60,16 @@ public class Usuarios implements Serializable {
     @ManyToOne
     @JoinColumn(name = "Sucursales_idSucursal")
     private Sucursales sucursal;
+    
+    private String rol;
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
     public int getId() {
         return id;
@@ -142,77 +153,66 @@ public class Usuarios implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((dniUsuario == null) ? 0 : dniUsuario.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-        result = prime * result + ((contrasenia == null) ? 0 : contrasenia.hashCode());
-        result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
-        result = prime * result + ((sucursal == null) ? 0 : sucursal.hashCode());
-        return result;
+        int hash = 3;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.dniUsuario);
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.apellido);
+        hash = 53 * hash + Objects.hashCode(this.userName);
+        hash = 53 * hash + Objects.hashCode(this.contrasenia);
+        hash = 53 * hash + Objects.hashCode(this.telefono);
+        hash = 53 * hash + Objects.hashCode(this.email);
+        hash = 53 * hash + Objects.hashCode(this.direccion);
+        hash = 53 * hash + Objects.hashCode(this.sucursal);
+        hash = 53 * hash + Objects.hashCode(this.rol);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Usuarios other = (Usuarios) obj;
-        if (id != other.id)
+        }
+        final Usuarios other = (Usuarios) obj;
+        if (this.id != other.id) {
             return false;
-        if (dniUsuario == null) {
-            if (other.dniUsuario != null)
-                return false;
-        } else if (!dniUsuario.equals(other.dniUsuario))
+        }
+        if (!Objects.equals(this.dniUsuario, other.dniUsuario)) {
             return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
-        if (apellido == null) {
-            if (other.apellido != null)
-                return false;
-        } else if (!apellido.equals(other.apellido))
+        }
+        if (!Objects.equals(this.apellido, other.apellido)) {
             return false;
-        if (userName == null) {
-            if (other.userName != null)
-                return false;
-        } else if (!userName.equals(other.userName))
+        }
+        if (!Objects.equals(this.userName, other.userName)) {
             return false;
-        if (contrasenia == null) {
-            if (other.contrasenia != null)
-                return false;
-        } else if (!contrasenia.equals(other.contrasenia))
+        }
+        if (!Objects.equals(this.contrasenia, other.contrasenia)) {
             return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
+        }
+        if (!Objects.equals(this.telefono, other.telefono)) {
             return false;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
+        }
+        if (!Objects.equals(this.email, other.email)) {
             return false;
-        if (direccion == null) {
-            if (other.direccion != null)
-                return false;
-        } else if (!direccion.equals(other.direccion))
+        }
+        if (!Objects.equals(this.direccion, other.direccion)) {
             return false;
-        if (sucursal == null) {
-            if (other.sucursal != null)
-                return false;
-        } else if (!sucursal.equals(other.sucursal))
+        }
+        if (!Objects.equals(this.rol, other.rol)) {
             return false;
+        }
+        if (!Objects.equals(this.sucursal, other.sucursal)) {
+            return false;
+        }
         return true;
     }
 
