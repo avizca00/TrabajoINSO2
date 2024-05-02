@@ -1,97 +1,96 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <title>Iniciar Sesión</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-        }
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Iniciar Sesión</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100%;
+            }
 
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 1000px;
-            width: 100%;
-            text-align: center;
-        }
+            .container {
+                background-color: #fff;
+                padding: 40px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 1000px;
+                width: 100%;
+                text-align: center;
+            }
 
-        h1 {
-            margin-bottom: 20px;
-            color: #333;
-            font-size: 34px;
-        }
+            h1 {
+                margin-bottom: 20px;
+                color: #333;
+                font-size: 34px;
+            }
 
-        .input-text {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 20px;
-        }
+            .input-text {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                font-size: 20px;
+            }
 
-        .output-text {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            font-size: 20px;
-        }
+            .output-text {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                font-size: 20px;
+            }
 
-        .login-button {
-            background-color: #ff6666;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 24px;
-        }
+            .login-button {
+                background-color: #ff6666;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                width: 100%;
+                padding: 12px;
+                border: none;
+                border-radius: 4px;
+                font-size: 24px;
+            }
 
-        .login-button:hover {
-            background-color: #e65c5c;
-        }
+            .login-button:hover {
+                background-color: #e65c5c;
+            }
 
-        .register-link {
-            color: #ff6666;
-            text-decoration: none;
-            margin-top: 5;
-            font-size: 24px;
-        }
+            .register-link {
+                color: #ff6666;
+                text-decoration: none;
+                margin-top: 5;
+                font-size: 24px;
+            }
 
-        .register-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</h:head>
-<h:body>
-    <div class="container">
-        <h1>Iniciar Sesión</h1>
-        <h:form>
-            <h:panelGrid columns="2" width="100%">
-                <h:outputLabel for="username" value="Usuario:" styleClass="output-text" />
-                <h:inputText id="username" styleClass="input-text" value="#{inicioController.usuario.userName}" />
-                <h:outputLabel for="password" value="Contraseña:" styleClass="output-text" />
-                <h:inputSecret id="password" styleClass="input-text" value="#{inicioController.usuario.contrasenia}" />
-            </h:panelGrid>
-            <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="login-button" />
-        </h:form>
-        <p:commandLink action="registro.xhtml" styleClass="register-link">¿No
-            tienes una cuenta? ¡Regístrate!</p:commandLink>
-    </div>
-</h:body>
+            .register-link:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Iniciar Sesión</h1>
+            <h:form>
+                <h:panelGrid columns="2" width="100%">
+                    <h:outputLabel for="username" value="Usuario:" styleClass="output-text" />
+                    <h:inputText id="username" styleClass="input-text" value="#{inicioController.usuario.userName}" />
+                    <h:outputLabel for="password" value="Contraseña:" styleClass="output-text" />
+                    <h:inputSecret id="password" styleClass="input-text" value="#{inicioController.usuario.contrasenia}" />
+                </h:panelGrid>
+                <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="login-button" />
+            </h:form>
+            <p:commandLink action="publico/registro?faces-redirect=true" value="Registro" styleClass="register-link">¿No tienes una cuenta? ¡Regístrate!</p:commandLink>
+        </div>
+    </h:body>
 
 </html>
