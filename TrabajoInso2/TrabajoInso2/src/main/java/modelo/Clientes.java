@@ -30,7 +30,7 @@ public class Clientes implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "Usuarios_idUsuario", referencedColumnName = "idUsuario")
+    @JoinColumn(name = "Usuarios_idUsuario")
     private Usuarios usuario;
 
     @Column(name = "fechaAlta", nullable = false)

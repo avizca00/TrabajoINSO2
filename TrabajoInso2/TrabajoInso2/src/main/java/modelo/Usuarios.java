@@ -57,7 +57,7 @@ public class Usuarios implements Serializable {
     private String direccion;
 
     @ManyToOne
-    @JoinColumn(name = "Sucursales_idSucursal", referencedColumnName = "idSucursal")
+    @JoinColumn(name = "Sucursales_idSucursal")
     private Sucursales sucursal;
 
     public int getId() {

@@ -6,10 +6,10 @@
 package modelo;
 
 import java.io.Serializable;
-
+import java.util.Objects;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,63 +20,73 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientes_Has_Cuentas")
 public class Clientes_Has_Cuentas implements Serializable {
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "Clientes_idCliente"),
-            @JoinColumn(name = "Clientes_Usuarios_idUsuario")
-    })
-    private Clientes cliente;
 
-    @ManyToOne
+    @EmbeddedId
+    private ClientesHasCuentasPK clientesHasCuentasPK;
+
     @JoinColumn(name = "Cuentas_idCuenta")
-    private Cuentas cuenta;
+    @ManyToOne
+    private Cuentas cuentas;
 
-    public Clientes getCliente() {
-        return cliente;
+    @JoinColumn(name = "Clientes_idCliente")
+    @ManyToOne
+    private Clientes clientes;
+
+    public ClientesHasCuentasPK getClientesHasCuentasPK() {
+        return clientesHasCuentasPK;
     }
 
-    public void setCliente(Clientes cliente) {
-        this.cliente = cliente;
+    public void setClientesHasCuentasPK(ClientesHasCuentasPK clientesHasCuentasPK) {
+        this.clientesHasCuentasPK = clientesHasCuentasPK;
     }
 
-    public Cuentas getCuenta() {
-        return cuenta;
+    public Cuentas getCuentas() {
+        return cuentas;
     }
 
-    public void setCuenta(Cuentas cuenta) {
-        this.cuenta = cuenta;
+    public void setCuentas(Cuentas cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    public Clientes getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(Clientes clientes) {
+        this.clientes = clientes;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        return result;
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.clientesHasCuentasPK);
+        hash = 17 * hash + Objects.hashCode(this.cuentas);
+        hash = 17 * hash + Objects.hashCode(this.clientes);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Clientes_Has_Cuentas other = (Clientes_Has_Cuentas) obj;
-        if (cliente == null) {
-            if (other.cliente != null)
-                return false;
-        } else if (!cliente.equals(other.cliente))
+        }
+        final Clientes_Has_Cuentas other = (Clientes_Has_Cuentas) obj;
+        if (!Objects.equals(this.clientesHasCuentasPK, other.clientesHasCuentasPK)) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (!Objects.equals(this.cuentas, other.cuentas)) {
             return false;
+        }
+        if (!Objects.equals(this.clientes, other.clientes)) {
+            return false;
+        }
         return true;
     }
 
-    
 }
