@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
  * @author aiviz
  */
 @Entity
-@Table(name = "recibos Domiciliarios")
-public class Recibos_Domiciliados implements Serializable {
+@Table(name = "recibosDomiciliarios")
+public class RecibosDomiciliarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -127,7 +127,7 @@ public class Recibos_Domiciliados implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Recibos_Domiciliados other = (Recibos_Domiciliados) obj;
+        RecibosDomiciliarios other = (RecibosDomiciliarios) obj;
         if (id != other.id)
             return false;
         if (cuenta == null) {

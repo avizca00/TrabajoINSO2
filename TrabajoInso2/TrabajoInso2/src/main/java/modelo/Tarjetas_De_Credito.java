@@ -26,7 +26,7 @@ import javax.persistence.Table;
  * el CVV y el saldo disponible.
  */
 @Entity
-@Table(name = "tarjetas de crédito")
+@Table(name = "tarjetasCredito")
 public class Tarjetas_De_Credito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

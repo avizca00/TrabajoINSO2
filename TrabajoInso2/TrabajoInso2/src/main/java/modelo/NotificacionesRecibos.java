@@ -19,15 +19,15 @@ import javax.persistence.Table;
  * @author aiviz
  */
 @Entity
-@Table(name = "notificaciones_De_Recibos")
-public class Notificaciones_de_Recibos {
+@Table(name = "notificacionesRecibos")
+public class NotificacionesRecibos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "RecibosDomiciliarios_idRecibosDomiciliarios")
-    private Recibos_Domiciliados reciboDomiciliario;
+    private RecibosDomiciliarios reciboDomiciliario;
 
     @Column(name = "pagoRealizado", nullable = false)
     private int pagoRealizado;
@@ -43,11 +43,11 @@ public class Notificaciones_de_Recibos {
         this.id = id;
     }
 
-    public Recibos_Domiciliados getReciboDomiciliario() {
+    public RecibosDomiciliarios getReciboDomiciliario() {
         return reciboDomiciliario;
     }
 
-    public void setReciboDomiciliario(Recibos_Domiciliados reciboDomiciliario) {
+    public void setReciboDomiciliario(RecibosDomiciliarios reciboDomiciliario) {
         this.reciboDomiciliario = reciboDomiciliario;
     }
 
@@ -86,7 +86,7 @@ public class Notificaciones_de_Recibos {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Notificaciones_de_Recibos other = (Notificaciones_de_Recibos) obj;
+        NotificacionesRecibos other = (NotificacionesRecibos) obj;
         if (id != other.id)
             return false;
         if (reciboDomiciliario == null) {

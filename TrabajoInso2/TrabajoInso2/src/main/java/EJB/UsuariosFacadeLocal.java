@@ -29,7 +29,5 @@ public interface UsuariosFacadeLocal {
     List<Usuarios> findRange(int[] range);
 
     int count();
-
-    Usuarios findUsuarioByUsernameAndPassword(String username, String contrasenia);
     
 }
