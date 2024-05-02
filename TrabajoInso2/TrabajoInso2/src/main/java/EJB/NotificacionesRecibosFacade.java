@@ -8,14 +8,14 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import modelo.Usuarios;
+import modelo.NotificacionesRecibos;
 
 /**
  *
  * @author aiviz
  */
 @Stateless
-public class UsuariosFacade extends AbstractFacade<Usuarios> implements UsuariosFacadeLocal {
+public class NotificacionesRecibosFacade extends AbstractFacade<NotificacionesRecibos> implements NotificacionesRecibosFacadeLocal {
 
     @PersistenceContext(unitName = "BancoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         return em;
     }
 
-    public UsuariosFacade() {
-        super(Usuarios.class);
+    public NotificacionesRecibosFacade() {
+        super(NotificacionesRecibos.class);
     }
     
 }

@@ -30,6 +30,4 @@ public interface UsuariosFacadeLocal {
 
     int count();
     
-    Usuarios findUsuarioByUsernameAndPassword(String username, String contrasenia);
-    
 }

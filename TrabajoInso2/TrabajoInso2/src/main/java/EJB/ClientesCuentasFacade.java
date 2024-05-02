@@ -8,14 +8,14 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import modelo.Usuarios;
+import modelo.ClientesCuentas;
 
 /**
  *
  * @author aiviz
  */
 @Stateless
-public class UsuariosFacade extends AbstractFacade<Usuarios> implements UsuariosFacadeLocal {
+public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> implements ClientesCuentasFacadeLocal {
 
     @PersistenceContext(unitName = "BancoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         return em;
     }
 
-    public UsuariosFacade() {
-        super(Usuarios.class);
+    public ClientesCuentasFacade() {
+        super(ClientesCuentas.class);
     }
     
 }

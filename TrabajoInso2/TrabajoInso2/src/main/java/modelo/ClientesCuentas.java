@@ -1,6 +1,5 @@
 package modelo;
 
-
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -17,21 +16,20 @@ import modelo.Cuentas;
 
 @Entity
 @Table(name = "clientesCuentas")
-public class ClientesCuentas implements Serializable{
+public class ClientesCuentas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idClientesCuentas")
-    private Integer idClientesCuentas;
+    private int idClientesCuentas;
 
     @ManyToOne
-    @JoinColumn(name = "Cuentas_idCuenta", referencedColumnName = "idCuenta", nullable = false)
+    @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuentas;
 
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "Clientes_idCliente", referencedColumnName = "idCliente", nullable = false),
-            @JoinColumn(name = "Clientes_Usuarios_idUsuario", referencedColumnName = "Usuarios_idUsuario", nullable = false)
+        @JoinColumn(name = "Clientes_idCliente"),
+        @JoinColumn(name = "Clientes_Usuarios_idUsuario")
     })
     private Clientes clientes;
 

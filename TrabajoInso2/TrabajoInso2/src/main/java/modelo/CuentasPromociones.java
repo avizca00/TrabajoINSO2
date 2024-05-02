@@ -15,20 +15,19 @@ import modelo.Cuentas;
 import modelo.Promociones;
 
 @Entity
-@Table(name = "cuentasPromociones", schema = "Banco")
+@Table(name = "cuentasPromociones")
 public class CuentasPromociones implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCuentasPromociones")
     private Integer idCuentasPromociones;
 
     @ManyToOne
-    @JoinColumn(name = "Promociones_idPromociones", referencedColumnName = "idPromociones", nullable = false)
+    @JoinColumn(name = "Promociones_idPromociones")
     private Promociones promociones;
 
     @ManyToOne
-    @JoinColumn(name = "Cuentas_idCuenta", referencedColumnName = "idCuenta", nullable = false)
+    @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuentas;
 
     @Override
