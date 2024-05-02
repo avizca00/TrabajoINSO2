@@ -31,7 +31,7 @@ import javax.persistence.Table;
 public class Usuarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idusuario;
 
     @Column(name = "dniUsuario", unique = true, nullable = false, length = 45)
     private String dniUsuario;
@@ -72,11 +72,11 @@ public class Usuarios implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return idusuario;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idusuario = id;
     }
 
     public String getDniUsuario() {
@@ -154,7 +154,7 @@ public class Usuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + this.id;
+        hash = 53 * hash + this.idusuario;
         hash = 53 * hash + Objects.hashCode(this.dniUsuario);
         hash = 53 * hash + Objects.hashCode(this.nombre);
         hash = 53 * hash + Objects.hashCode(this.apellido);
@@ -180,7 +180,7 @@ public class Usuarios implements Serializable {
             return false;
         }
         final Usuarios other = (Usuarios) obj;
-        if (this.id != other.id) {
+        if (this.idusuario != other.idusuario) {
             return false;
         }
         if (!Objects.equals(this.dniUsuario, other.dniUsuario)) {

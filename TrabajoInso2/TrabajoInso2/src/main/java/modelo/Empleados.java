@@ -30,7 +30,7 @@ import javax.persistence.TemporalType;
 public class Empleados implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idempleado;
 
     @ManyToOne
     @JoinColumn(name = "Usuarios_idUsuario", referencedColumnName = "idUsuario")
@@ -45,7 +45,7 @@ public class Empleados implements Serializable{
      * @return El ID del empleado.
      */
     public int getId() {
-        return id;
+        return idempleado;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Empleados implements Serializable{
      * @param id El ID del empleado.
      */
     public void setId(int id) {
-        this.id = id;
+        this.idempleado = id;
     }
 
     /**
@@ -92,7 +92,7 @@ public class Empleados implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idempleado;
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         result = prime * result + ((fechaContratacion == null) ? 0 : fechaContratacion.hashCode());
         return result;
@@ -107,7 +107,7 @@ public class Empleados implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Empleados other = (Empleados) obj;
-        if (id != other.id)
+        if (idempleado != other.idempleado)
             return false;
         if (usuario == null) {
             if (other.usuario != null)

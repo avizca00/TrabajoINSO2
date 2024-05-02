@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 public class RecibosDomiciliarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idrecibosdomiciliarios;
 
     @ManyToOne
     @JoinColumn(name = "Cuentas_idCuenta")
@@ -50,11 +50,11 @@ public class RecibosDomiciliarios implements Serializable {
     private String entidadPersona;
 
     public int getId() {
-        return id;
+        return idrecibosdomiciliarios;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idrecibosdomiciliarios = id;
     }
 
     public Cuentas getCuenta() {
@@ -109,7 +109,7 @@ public class RecibosDomiciliarios implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idrecibosdomiciliarios;
         result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
         result = prime * result + ((importe == null) ? 0 : importe.hashCode());
         result = prime * result + ((fechaEmision == null) ? 0 : fechaEmision.hashCode());
@@ -128,7 +128,7 @@ public class RecibosDomiciliarios implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         RecibosDomiciliarios other = (RecibosDomiciliarios) obj;
-        if (id != other.id)
+        if (idrecibosdomiciliarios != other.idrecibosdomiciliarios)
             return false;
         if (cuenta == null) {
             if (other.cuenta != null)

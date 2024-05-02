@@ -30,7 +30,7 @@ import javax.persistence.Table;
 public class Tarjetas_De_Credito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idtarjetascredito;
 
     @ManyToOne
     @JoinColumn(name = "Cuentas_idCuenta")
@@ -52,11 +52,11 @@ public class Tarjetas_De_Credito implements Serializable {
     private BigDecimal saldoDisponible;
 
     public int getId() {
-        return id;
+        return idtarjetascredito;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idtarjetascredito = id;
     }
 
     public Cuentas getCuenta() {
@@ -111,7 +111,7 @@ public class Tarjetas_De_Credito implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idtarjetascredito;
         result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
         result = prime * result + ((numeroTarjeta == null) ? 0 : numeroTarjeta.hashCode());
         result = prime * result + ((tipoTarjeta == null) ? 0 : tipoTarjeta.hashCode());
@@ -130,7 +130,7 @@ public class Tarjetas_De_Credito implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Tarjetas_De_Credito other = (Tarjetas_De_Credito) obj;
-        if (id != other.id)
+        if (idtarjetascredito != other.idtarjetascredito)
             return false;
         if (cuenta == null) {
             if (other.cuenta != null)

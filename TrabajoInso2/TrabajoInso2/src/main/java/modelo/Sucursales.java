@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.persistence.Id;
 public class Sucursales implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idsucursal;
     
     @Column(name = "nombre", nullable = false, length = 100, unique = true)
     private String nombre;
@@ -38,12 +39,12 @@ public class Sucursales implements Serializable{
     @Column(name = "correo_electronico", nullable = false, length = 100, unique = true)
     private String correoElectronico;
 
-    public int getId() {
-        return id;
+    public int getIdsucursal() {
+        return idsucursal;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdsucursal(int idsucursal) {
+        this.idsucursal = idsucursal;
     }
 
     public String getNombre() {
@@ -77,54 +78,47 @@ public class Sucursales implements Serializable{
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+    
+    // Add any additional methods or annotations as needed
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((ubicacion == null) ? 0 : ubicacion.hashCode());
-        result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
-        result = prime * result + ((correoElectronico == null) ? 0 : correoElectronico.hashCode());
-        return result;
+        int hash = 7;
+        hash = 23 * hash + this.idsucursal;
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + Objects.hashCode(this.ubicacion);
+        hash = 23 * hash + Objects.hashCode(this.telefono);
+        hash = 23 * hash + Objects.hashCode(this.correoElectronico);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Sucursales other = (Sucursales) obj;
-        if (id != other.id)
+        }
+        final Sucursales other = (Sucursales) obj;
+        if (this.idsucursal != other.idsucursal) {
             return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
-        if (ubicacion == null) {
-            if (other.ubicacion != null)
-                return false;
-        } else if (!ubicacion.equals(other.ubicacion))
+        }
+        if (!Objects.equals(this.ubicacion, other.ubicacion)) {
             return false;
-        if (telefono == null) {
-            if (other.telefono != null)
-                return false;
-        } else if (!telefono.equals(other.telefono))
+        }
+        if (!Objects.equals(this.telefono, other.telefono)) {
             return false;
-        if (correoElectronico == null) {
-            if (other.correoElectronico != null)
-                return false;
-        } else if (!correoElectronico.equals(other.correoElectronico))
+        }
+        if (!Objects.equals(this.correoElectronico, other.correoElectronico)) {
             return false;
+        }
         return true;
     }
-    
-    
-    
-    // Add any additional methods or annotations as needed
 }

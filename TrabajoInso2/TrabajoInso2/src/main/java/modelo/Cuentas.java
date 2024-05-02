@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 public class Cuentas implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idcuentas;
 
     @Column(name = "tipoCuenta", nullable = false, length = 45)
     private String tipoCuenta;
@@ -51,11 +51,11 @@ public class Cuentas implements Serializable{
     private Date fechaUltimaTransaccion;
 
     public int getId() {
-        return id;
+        return idcuentas;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idcuentas = id;
     }
 
     public String getTipoCuenta() {
@@ -110,7 +110,7 @@ public class Cuentas implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idcuentas;
         result = prime * result + ((tipoCuenta == null) ? 0 : tipoCuenta.hashCode());
         result = prime * result + ((saldo == null) ? 0 : saldo.hashCode());
         result = prime * result + ((fechaApertura == null) ? 0 : fechaApertura.hashCode());
@@ -129,7 +129,7 @@ public class Cuentas implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Cuentas other = (Cuentas) obj;
-        if (id != other.id)
+        if (idcuentas != other.idcuentas)
             return false;
         if (tipoCuenta == null) {
             if (other.tipoCuenta != null)

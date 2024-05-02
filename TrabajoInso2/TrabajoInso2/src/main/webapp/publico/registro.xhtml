@@ -53,9 +53,9 @@
                             </p:selectOneButton>
 
                             <p:outputLabel for="sucursal" value="Selecciona una sucursal:" />
-                            <p:selectOneMenu id="sucursal" value="#{registroController.sucursal.id}">
+                            <p:selectOneMenu id="sucursal" value="#{registroController.sucursal.idsucursal}">
                                 <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
-                                <f:selectItems value="#{registroController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.id}" />
+                                <f:selectItems value="#{registroController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
                             </p:selectOneMenu>
                             <p:message for="sucursal" style="color: red" />
 

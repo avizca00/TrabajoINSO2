@@ -24,7 +24,7 @@ import javax.persistence.Table;
 public class NotificacionesRecibos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idnotificacionesrecibos;
 
     @ManyToOne
     @JoinColumn(name = "RecibosDomiciliarios_idRecibosDomiciliarios")
@@ -37,11 +37,11 @@ public class NotificacionesRecibos implements Serializable {
     private String descripcion;
 
     public int getId() {
-        return id;
+        return idnotificacionesrecibos;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idnotificacionesrecibos = id;
     }
 
     public RecibosDomiciliarios getReciboDomiciliario() {
@@ -72,7 +72,7 @@ public class NotificacionesRecibos implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idnotificacionesrecibos;
         result = prime * result + ((reciboDomiciliario == null) ? 0 : reciboDomiciliario.hashCode());
         result = prime * result + pagoRealizado;
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
@@ -88,7 +88,7 @@ public class NotificacionesRecibos implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         NotificacionesRecibos other = (NotificacionesRecibos) obj;
-        if (id != other.id)
+        if (idnotificacionesrecibos != other.idnotificacionesrecibos)
             return false;
         if (reciboDomiciliario == null) {
             if (other.reciboDomiciliario != null)

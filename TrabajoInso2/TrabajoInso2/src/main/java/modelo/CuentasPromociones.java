@@ -20,7 +20,7 @@ public class CuentasPromociones implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCuentasPromociones;
+    private int idCuentasPromociones;
 
     @ManyToOne
     @JoinColumn(name = "Promociones_idPromociones")
@@ -63,11 +63,11 @@ public class CuentasPromociones implements Serializable{
         return true;
     }
 
-    public Integer getIdCuentasPromociones() {
+    public int getIdCuentasPromociones() {
         return idCuentasPromociones;
     }
 
-    public void setIdCuentasPromociones(Integer idCuentasPromociones) {
+    public void setIdCuentasPromociones(int idCuentasPromociones) {
         this.idCuentasPromociones = idCuentasPromociones;
     }
 
@@ -86,4 +86,5 @@ public class CuentasPromociones implements Serializable{
     public void setCuentas(Cuentas cuentas) {
         this.cuentas = cuentas;
     }
+    
 }

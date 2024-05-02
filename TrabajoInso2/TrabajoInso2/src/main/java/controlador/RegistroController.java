@@ -7,6 +7,7 @@ package controlador;
 
 import EJB.ClientesFacadeLocal;
 import EJB.EmpleadosFacadeLocal;
+import EJB.SucursalesFacadeLocal;
 import EJB.UsuariosFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class RegistroController implements Serializable{
     @EJB
     private EmpleadosFacadeLocal empleadoEJB;
     
+    @EJB
+    private SucursalesFacadeLocal sucursalEJB;
+    
     @PostConstruct
     public void init() {
         usuario = new Usuarios();
@@ -50,6 +54,8 @@ public class RegistroController implements Serializable{
         empleado = new Empleados();
         sucursal = new Sucursales();
         sucursales= new ArrayList<>();
+        sucursales = sucursalEJB.findAll();
+        System.out.println(sucursales);
     }
 
     public Clientes getCliente() {

@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 public class Transferencias implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idtransferencias;
 
     @ManyToOne
     @JoinColumn(name = "Cuentas_idCuentaPagador")
@@ -49,11 +49,11 @@ public class Transferencias implements Serializable {
     private String concepto;
 
     public int getId() {
-        return id;
+        return idtransferencias;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idtransferencias = id;
     }
 
     public Cuentas getCuentaPagador() {
@@ -100,7 +100,7 @@ public class Transferencias implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idtransferencias;
         result = prime * result + ((cuentaPagador == null) ? 0 : cuentaPagador.hashCode());
         result = prime * result + ((cuentaBeneficiario == null) ? 0 : cuentaBeneficiario.hashCode());
         result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
@@ -118,7 +118,7 @@ public class Transferencias implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Transferencias other = (Transferencias) obj;
-        if (id != other.id)
+        if (idtransferencias != other.idtransferencias)
             return false;
         if (cuentaPagador == null) {
             if (other.cuentaPagador != null)

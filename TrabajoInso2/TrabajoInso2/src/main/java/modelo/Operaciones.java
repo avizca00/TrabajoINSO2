@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -25,11 +26,11 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "operaciones")
-public class Operaciones {
+public class Operaciones implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idoperacion;
 
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,11 +50,11 @@ public class Operaciones {
     private Cuentas cuenta;
 
     public int getId() {
-        return id;
+        return idoperacion;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idoperacion = id;
     }
 
     public Date getFecha() {
@@ -100,7 +101,7 @@ public class Operaciones {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idoperacion;
         result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
         result = prime * result + ((importe == null) ? 0 : importe.hashCode());
         result = prime * result + ((tipoOperacion == null) ? 0 : tipoOperacion.hashCode());
@@ -118,7 +119,7 @@ public class Operaciones {
         if (getClass() != obj.getClass())
             return false;
         Operaciones other = (Operaciones) obj;
-        if (id != other.id)
+        if (idoperacion != other.idoperacion)
             return false;
         if (fecha == null) {
             if (other.fecha != null)

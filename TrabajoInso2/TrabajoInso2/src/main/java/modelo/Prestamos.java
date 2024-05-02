@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class Prestamos implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idprestamo;
 
     @ManyToOne
     @JoinColumn(name = "Empleados_idEmpleado")
@@ -51,11 +51,11 @@ public class Prestamos implements Serializable{
     private Cuentas cuenta;
 
     public int getId() {
-        return id;
+        return idprestamo;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idprestamo = id;
     }
 
     public Empleados getEmpleado() {
@@ -118,7 +118,7 @@ public class Prestamos implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + idprestamo;
         result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
         result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
         result = prime * result + estado;
@@ -138,7 +138,7 @@ public class Prestamos implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Prestamos other = (Prestamos) obj;
-        if (id != other.id)
+        if (idprestamo != other.idprestamo)
             return false;
         if (empleado == null) {
             if (other.empleado != null)
