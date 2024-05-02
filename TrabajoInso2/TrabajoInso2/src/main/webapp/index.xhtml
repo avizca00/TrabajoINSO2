@@ -83,11 +83,11 @@
         <h:form>
             <h:panelGrid columns="2" width="100%">
                 <h:outputLabel for="username" value="Usuario:" styleClass="output-text" />
-                <h:inputText id="username" styleClass="input-text"  />
+                <h:inputText id="username" styleClass="input-text" value="#{inicioController.usuario.userName}" />
                 <h:outputLabel for="password" value="Contraseña:" styleClass="output-text" />
-                <h:inputSecret id="password" styleClass="input-text"  />
+                <h:inputSecret id="password" styleClass="input-text" value="#{inicioController.usuario.contrasenia}" />
             </h:panelGrid>
-            <h:commandButton value="Iniciar Sesión"  styleClass="login-button" />
+            <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="login-button" />
         </h:form>
         <p:commandLink action="registro.xhtml" styleClass="register-link">¿No
             tienes una cuenta? ¡Regístrate!</p:commandLink>

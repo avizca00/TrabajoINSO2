@@ -43,7 +43,9 @@ public class InicioController implements Serializable{
     }
 
     public void login() {
-        try {
+        System.out.println(usuario.getUserName());
+       /* try {
+            
             Usuarios usuarioAutenticado = usuarioEJB.findUsuarioByUsernameAndPassword(usuario.getUserName(),
                     usuario.getContrasenia());
 
@@ -66,7 +68,7 @@ public class InicioController implements Serializable{
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                     "Error al intentar iniciar sesión");
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }
+        }*/
     }
 
     public Usuarios getUsuario() {
