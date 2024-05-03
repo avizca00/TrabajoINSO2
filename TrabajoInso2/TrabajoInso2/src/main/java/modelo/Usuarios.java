@@ -60,16 +60,6 @@ public class Usuarios implements Serializable {
     @ManyToOne
     @JoinColumn(name = "Sucursales_idSucursal")
     private Sucursales sucursal;
-    
-    private String rol;
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
 
     public int getId() {
         return idusuario;
@@ -153,18 +143,17 @@ public class Usuarios implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.idusuario;
-        hash = 53 * hash + Objects.hashCode(this.dniUsuario);
-        hash = 53 * hash + Objects.hashCode(this.nombre);
-        hash = 53 * hash + Objects.hashCode(this.apellido);
-        hash = 53 * hash + Objects.hashCode(this.userName);
-        hash = 53 * hash + Objects.hashCode(this.contrasenia);
-        hash = 53 * hash + Objects.hashCode(this.telefono);
-        hash = 53 * hash + Objects.hashCode(this.email);
-        hash = 53 * hash + Objects.hashCode(this.direccion);
-        hash = 53 * hash + Objects.hashCode(this.sucursal);
-        hash = 53 * hash + Objects.hashCode(this.rol);
+        int hash = 7;
+        hash = 23 * hash + this.idusuario;
+        hash = 23 * hash + Objects.hashCode(this.dniUsuario);
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + Objects.hashCode(this.apellido);
+        hash = 23 * hash + Objects.hashCode(this.userName);
+        hash = 23 * hash + Objects.hashCode(this.contrasenia);
+        hash = 23 * hash + Objects.hashCode(this.telefono);
+        hash = 23 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + Objects.hashCode(this.direccion);
+        hash = 23 * hash + Objects.hashCode(this.sucursal);
         return hash;
     }
 
@@ -205,9 +194,6 @@ public class Usuarios implements Serializable {
             return false;
         }
         if (!Objects.equals(this.direccion, other.direccion)) {
-            return false;
-        }
-        if (!Objects.equals(this.rol, other.rol)) {
             return false;
         }
         if (!Objects.equals(this.sucursal, other.sucursal)) {

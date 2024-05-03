@@ -11,6 +11,8 @@ import EJB.SucursalesFacadeLocal;
 import EJB.UsuariosFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
@@ -175,5 +177,26 @@ public class RegistroController implements Serializable{
         return true;
     }
 
+    public void registrar(String rol){
+        Sucursales s = new Sucursales();
+        s = sucursalEJB.find(sucursal.getIdsucursal());
+        System.out.println(rol);
+
+        usuario.setSucursal(sucursal);
+        usuarioEJB.create(usuario);
+        Date date = new Date();
+        
+        if(rol.equals("Cliente")){
+            System.out.println("llallalaalaal");
+            cliente.setUsuario(usuario);
+            cliente.setFechaAlta(date);
+            clienteEJB.create(cliente);
+            
+        }else{
+            empleado.setUsuario(usuario);
+            empleado.setFechaContratacion(date);
+            empleadoEJB.create(empleado);
+        }
+    }
 
 }
