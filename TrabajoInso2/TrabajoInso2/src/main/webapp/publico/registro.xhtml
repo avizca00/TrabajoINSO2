@@ -18,6 +18,7 @@
                 <div class="container">
                     <h1>Registro</h1>
                     <h:form>
+                        <p:messages id="mess" globalOnly="true"/>
                         <h:panelGrid columns="3" width="100%">
                             <h:outputLabel for="nombre" value="Nombre:" />
                             <h:inputText id="nombre" styleClass="input-text" required="true" value="#{registroController.usuario.nombre}"/>
@@ -48,7 +49,7 @@
                             <h:message for="direccion" style="color: red" />
 
                             <h:outputLabel for="rol" value="Rol:" />
-                            <p:selectOneButton id="rol" value="role">
+                            <p:selectOneButton id="rol" value="#{registroController.rol}">
                                 <f:selectItem itemValue="Cliente" itemLabel="Cliente"/>
                                 <f:selectItem itemValue="Empleado" itemLabel="Empleado"/>
                             </p:selectOneButton>
@@ -66,12 +67,12 @@
                             <h:message for="password" style="color: red" />
 
                             <h:outputLabel for="confirm-password" value="Confirmar Contraseña:" />
-                            <h:inputSecret id="confirm-password" styleClass="input-text" required="true" />
+                            <h:inputSecret id="confirm-password" styleClass="input-text" required="true" value="#{registroController.confirmPassword}"/>
                             <h:message for="confirm-password" style="color: red" />
                         </h:panelGrid>
-                        <h:commandButton value="Registrarse" action="#{registroController.registrar(role)}" styleClass="register-button" />
+                        <h:commandButton value="Registrarse" action="#{registroController.registrar()}" styleClass="register-button"/>
+                        <p:commandLink action="../index?faces-redirect=true" styleClass="register-link">¿Ya tienes una cuenta? ¡Inicia Sesión!</p:commandLink>
                     </h:form>
-                    <p:commandLink action="index.xhtml?faces-redirect=true" value="Indice" styleClass="register-link">¿Ya tienes una cuenta? ¡Inicia Sesión!</p:commandLink>
                 </div>
             </ui:define>
 

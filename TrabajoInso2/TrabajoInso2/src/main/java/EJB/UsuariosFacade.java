@@ -5,9 +5,11 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Usuarios;
 
 /**
@@ -28,5 +30,21 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-    
+
+    @Override
+    public boolean existeUsuarioPorUsername(String username) {
+        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.userName = :username");
+        q.setParameter("username", username);
+        List<Usuarios> usuarios = q.getResultList();
+        return !usuarios.isEmpty();
+    }
+
+    @Override
+    public boolean existeUsuarioPorDNI(String dni) {
+        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.dniUsuario = :dni");
+        q.setParameter("dni", dni);
+        List<Usuarios> usuarios = q.getResultList();
+        return !usuarios.isEmpty();
+    }
+
 }

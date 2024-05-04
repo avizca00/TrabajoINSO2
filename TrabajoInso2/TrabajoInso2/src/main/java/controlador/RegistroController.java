@@ -12,11 +12,12 @@ import EJB.UsuariosFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Clientes;
@@ -30,12 +31,15 @@ import modelo.Usuarios;
  */
 @Named
 @ViewScoped
-public class RegistroController implements Serializable{
+public class RegistroController implements Serializable {
+
     private Clientes cliente;
     private Empleados empleado;
     private Usuarios usuario;
     private Sucursales sucursal;
     private List<Sucursales> sucursales;
+    private String rol;
+    private String confirmPassword;
 
     @EJB
     private UsuariosFacadeLocal usuarioEJB;
@@ -45,17 +49,17 @@ public class RegistroController implements Serializable{
 
     @EJB
     private EmpleadosFacadeLocal empleadoEJB;
-    
+
     @EJB
     private SucursalesFacadeLocal sucursalEJB;
-    
+
     @PostConstruct
     public void init() {
         usuario = new Usuarios();
         cliente = new Clientes();
         empleado = new Empleados();
         sucursal = new Sucursales();
-        sucursales= new ArrayList<>();
+        sucursales = new ArrayList<>();
         sucursales = sucursalEJB.findAll();
         System.out.println(sucursales);
     }
@@ -124,17 +128,44 @@ public class RegistroController implements Serializable{
         this.sucursales = sucursales;
     }
 
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public SucursalesFacadeLocal getSucursalEJB() {
+        return sucursalEJB;
+    }
+
+    public void setSucursalEJB(SucursalesFacadeLocal sucursalEJB) {
+        this.sucursalEJB = sucursalEJB;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.cliente);
-        hash = 41 * hash + Objects.hashCode(this.empleado);
-        hash = 41 * hash + Objects.hashCode(this.usuario);
-        hash = 41 * hash + Objects.hashCode(this.sucursal);
-        hash = 41 * hash + Objects.hashCode(this.sucursales);
-        hash = 41 * hash + Objects.hashCode(this.usuarioEJB);
-        hash = 41 * hash + Objects.hashCode(this.clienteEJB);
-        hash = 41 * hash + Objects.hashCode(this.empleadoEJB);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.cliente);
+        hash = 23 * hash + Objects.hashCode(this.empleado);
+        hash = 23 * hash + Objects.hashCode(this.usuario);
+        hash = 23 * hash + Objects.hashCode(this.sucursal);
+        hash = 23 * hash + Objects.hashCode(this.sucursales);
+        hash = 23 * hash + Objects.hashCode(this.rol);
+        hash = 23 * hash + Objects.hashCode(this.confirmPassword);
+        hash = 23 * hash + Objects.hashCode(this.usuarioEJB);
+        hash = 23 * hash + Objects.hashCode(this.clienteEJB);
+        hash = 23 * hash + Objects.hashCode(this.empleadoEJB);
+        hash = 23 * hash + Objects.hashCode(this.sucursalEJB);
         return hash;
     }
 
@@ -150,6 +181,12 @@ public class RegistroController implements Serializable{
             return false;
         }
         final RegistroController other = (RegistroController) obj;
+        if (!Objects.equals(this.rol, other.rol)) {
+            return false;
+        }
+        if (!Objects.equals(this.confirmPassword, other.confirmPassword)) {
+            return false;
+        }
         if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
         }
@@ -174,29 +211,50 @@ public class RegistroController implements Serializable{
         if (!Objects.equals(this.empleadoEJB, other.empleadoEJB)) {
             return false;
         }
+        if (!Objects.equals(this.sucursalEJB, other.sucursalEJB)) {
+            return false;
+        }
         return true;
     }
 
-    public void registrar(String rol){
+    public void registrar() {
+        System.out.println(this.confirmPassword + "--" + usuario.getContrasenia());
+        if (!usuario.getContrasenia().equals(confirmPassword)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
+            return;
+        }
+
+        // Verificar si ya existe un usuario con el mismo DNI
+        if (usuarioEJB.existeUsuarioPorDNI(usuario.getDniUsuario())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El DNI ya está en uso.", "El DNI ya está en uso."));
+            return;
+        }
+
+        // Verificar si ya existe un usuario con el mismo username
+        if (usuarioEJB.existeUsuarioPorUsername(usuario.getUserName())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El nombre de usuario ya está en uso.", "El nombre de usuario ya está en uso."));
+            return;
+        }
+
         Sucursales s = new Sucursales();
         s = sucursalEJB.find(sucursal.getIdsucursal());
-        System.out.println(rol);
-
         usuario.setSucursal(sucursal);
         usuarioEJB.create(usuario);
         Date date = new Date();
-        
-        if(rol.equals("Cliente")){
-            System.out.println("llallalaalaal");
+
+        if (rol.equals("Cliente")) {
             cliente.setUsuario(usuario);
             cliente.setFechaAlta(date);
             clienteEJB.create(cliente);
-            
-        }else{
+
+        } else {
             empleado.setUsuario(usuario);
             empleado.setFechaContratacion(date);
             empleadoEJB.create(empleado);
         }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: Su "+rol+" ha sido registrado exitosamente", "El nombre de usuario ya está en uso."));
+
     }
 
 }
