@@ -33,5 +33,7 @@ public interface UsuariosFacadeLocal {
     public boolean existeUsuarioPorUsername(String userName);
 
     public boolean existeUsuarioPorDNI(String dniUsuario);
+
+    public Usuarios encuentraUsuarioPorUsernameAndPassword(String userName, String contrasenia);
     
 }

@@ -9,6 +9,7 @@
         <div class="container">
             <h1>Iniciar Sesión</h1>
             <h:form>
+                <p:messages id="mess" globalOnly="true"/>
                 <h:panelGrid columns="2" width="100%">
                     <h:outputLabel for="username" value="Usuario:" styleClass="output-text" />
                     <h:inputText id="username" styleClass="input-text" value="#{inicioController.usuario.userName}" />

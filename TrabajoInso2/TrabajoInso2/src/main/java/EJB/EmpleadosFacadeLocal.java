@@ -29,5 +29,7 @@ public interface EmpleadosFacadeLocal {
     List<Empleados> findRange(int[] range);
 
     int count();
+
+    public Empleados encuentraPorIDUsuario(int id);
     
 }

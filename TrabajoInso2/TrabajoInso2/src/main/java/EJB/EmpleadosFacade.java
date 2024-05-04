@@ -7,7 +7,10 @@ package EJB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import modelo.Clientes;
 import modelo.Empleados;
 
 /**
@@ -27,6 +30,17 @@ public class EmpleadosFacade extends AbstractFacade<Empleados> implements Emplea
 
     public EmpleadosFacade() {
         super(Empleados.class);
+    }
+
+    @Override
+    public Empleados encuentraPorIDUsuario(int id) {
+        Query query = em.createQuery("SELECT e FROM Empleados e WHERE e.usuario.idusuario = :idUsuario");
+        query.setParameter("idUsuario", id);
+        try {
+            return (Empleados) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Cliente no encontrado
+        }
     }
     
 }

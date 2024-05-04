@@ -47,4 +47,17 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         return !usuarios.isEmpty();
     }
 
+    @Override
+    public Usuarios encuentraUsuarioPorUsernameAndPassword(String userName, String contrasenia) {
+        Query query = em.createQuery("SELECT u FROM Usuarios u WHERE u.userName = :username AND u.contrasenia = :password");
+        query.setParameter("username", userName);
+        query.setParameter("password", contrasenia);
+        List<Usuarios> usuarios = query.getResultList();
+        try {
+            return usuarios.get(0);
+        } catch (Exception e) {
+            return null; // Usuario no encontrado
+        }
+    }
+
 }

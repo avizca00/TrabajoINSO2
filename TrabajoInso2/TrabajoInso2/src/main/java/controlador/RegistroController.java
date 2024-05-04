@@ -9,6 +9,7 @@ import EJB.ClientesFacadeLocal;
 import EJB.EmpleadosFacadeLocal;
 import EJB.SucursalesFacadeLocal;
 import EJB.UsuariosFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

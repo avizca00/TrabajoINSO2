@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controlador;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -21,7 +22,8 @@ import modelo.Clientes;
 
 @Named
 @ViewScoped
-public class InicioController implements Serializable{
+public class InicioController implements Serializable {
+
     private Clientes cliente;
     private Empleados empleado;
     private Usuarios usuario;
@@ -43,32 +45,27 @@ public class InicioController implements Serializable{
     }
 
     public void login() {
-        System.out.println(usuario.getUserName());
-       /* try {
-            
-            Usuarios usuarioAutenticado = usuarioEJB.findUsuarioByUsernameAndPassword(usuario.getUserName(),
+        try {
+            Usuarios usuarioAutenticado = usuarioEJB.encuentraUsuarioPorUsernameAndPassword(usuario.getUserName(),
                     usuario.getContrasenia());
 
             if (usuarioAutenticado != null) {
-                // Usuario autenticado correctamente
-                cliente = clienteEJB.find(usuarioAutenticado.getId());
-                empleado = empleadoEJB.find(usuarioAutenticado.getId());
+                cliente = clienteEJB.encuentraPorIDUsuario(usuarioAutenticado.getId());
+                empleado = empleadoEJB.encuentraPorIDUsuario(usuarioAutenticado.getId());
                 if (cliente != null) {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("pagina_cliente.xhtml");
                 } else {
-                    // Redirigir a la página del empleado
                     FacesContext.getCurrentInstance().getExternalContext().redirect("pagina_empleado.xhtml");
                 }
             } else {
-                // Credenciales inválidas
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Credenciales inválidas");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Credenciales inválidas", "Credenciales inválidas");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
         } catch (IOException e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                     "Error al intentar iniciar sesión");
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }*/
+        }
     }
 
     public Usuarios getUsuario() {
@@ -120,4 +117,3 @@ public class InicioController implements Serializable{
     }
 
 }
-

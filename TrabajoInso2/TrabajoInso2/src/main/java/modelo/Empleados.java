@@ -33,7 +33,7 @@ public class Empleados implements Serializable{
     private int idempleado;
 
     @ManyToOne
-    @JoinColumn(name = "Usuarios_idUsuario", referencedColumnName = "idUsuario")
+    @JoinColumn(name = "Usuarios_idUsuario")
     private Usuarios usuario;
 
     @Column(name = "fechaContratacion", nullable = false)
