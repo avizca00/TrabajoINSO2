@@ -62,7 +62,6 @@ public class RegistroController implements Serializable {
         sucursal = new Sucursales();
         sucursales = new ArrayList<>();
         sucursales = sucursalEJB.findAll();
-        System.out.println(sucursales);
     }
 
     public Clientes getCliente() {
@@ -219,7 +218,6 @@ public class RegistroController implements Serializable {
     }
 
     public void registrar() {
-        System.out.println(this.confirmPassword + "--" + usuario.getContrasenia());
         if (!usuario.getContrasenia().equals(confirmPassword)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
             return;

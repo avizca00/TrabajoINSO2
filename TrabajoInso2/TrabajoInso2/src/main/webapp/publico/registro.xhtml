@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <title>Registro</title>
         <h:outputStylesheet library="css" name="registro.css"/>
     </h:head>
 
@@ -57,7 +58,7 @@
                         <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
                         <f:selectItems value="#{registroController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
                     </p:selectOneMenu>
-                    <p:message for="sucursal" style="color: red" />
+                    <h:message for="sucursal" style="color: red" />
 
                     <h:outputLabel for="password" value="Contraseña:" />
                     <h:inputSecret id="password" styleClass="input-text" required="true" value="#{registroController.usuario.contrasenia}"/>
