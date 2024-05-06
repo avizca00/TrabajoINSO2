@@ -51,15 +51,15 @@
                     <h:dataTable value="#{cuentaController.cuentas}" var="cuenta" styleClass="table">
                         <h:column>
                             <f:facet name="header">Saldo</f:facet>
-                                #{cuenta.saldo}
+                                #{cuenta.saldo}€
                         </h:column>
                         <h:column>
                             <f:facet name="header">Interés</f:facet>
-                                #{cuenta.tasaInteres}
+                                #{cuenta.tasaInteres}%
                         </h:column>
                         <h:column>
                             <f:facet name="header">Límite de Transacción</f:facet>
-                                #{cuenta.limiteTransaccion}
+                                #{cuenta.limiteTransaccion}€ 
                         </h:column>
                         <h:column>
                             <f:facet name="header">Tipo de Cuenta</f:facet>

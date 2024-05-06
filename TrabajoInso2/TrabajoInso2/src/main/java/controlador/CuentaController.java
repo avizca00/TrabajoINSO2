@@ -51,8 +51,9 @@ public class CuentaController implements Serializable {
         cliente = new Clientes();
         clienteCuenta = new ClientesCuentas();
         //cliente = (Clientes) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cliente");
-        cliente = clie.encuentraPorIDUsuario(12);
+        cliente = clie.encuentraPorIDUsuario(1);
         cuentas = new ArrayList<>();
+        cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
     }
 
     public Cuentas getCuenta() {
@@ -188,6 +189,7 @@ public class CuentaController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Info: Su cuenta ha sido creada y asociada correctamente.",
                         "Su cuenta ha sido creada y asociada correctamente."));
+                cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         e.toString(),
