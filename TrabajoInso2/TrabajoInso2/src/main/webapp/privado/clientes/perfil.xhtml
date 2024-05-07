@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Perfil de Usuario</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background-color: #fff;
+                padding: 40px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+                color: #333;
+                font-size: 24px;
+            }
+
+            .input-text {
+                width: 100%;
+                padding: 12px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            .update-button,
+            .delete-button {
+                background-color: #ff6666;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                width: 48%;
+                padding: 12px;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+            .update-button:hover,
+            .delete-button:hover {
+                background-color: #e65c5c;
+                /* Rojo más oscuro en hover */
+            }
+        </style>
+        <script>
+            function confirmLogout(event) {
+                event.preventDefault();
+                PF('confirmDialog').show();
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1>Perfil de Usuario</h1>
+            <h:form>
+                <p:messages id="mess" globalOnly="true"/>
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="nombre" value="Nombre:" />
+                    <h:inputText id="nombre" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.nombre}"/>
+                    <h:message for="nombre" style="color: red" />
+
+                    <h:outputLabel for="apellido" value="Apellido:" />
+                    <h:inputText id="apellido" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.apellido}"/>
+                    <h:message for="apellido" style="color: red" />
+
+                    <h:outputLabel for="dni" value="Dni:" />
+                    <h:inputText id="dni" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.dniUsuario}"/>
+                    <h:message for="dni" style="color: red" />
+
+                    <h:outputLabel for="userName" value="Nombre de Usuario:" />
+                    <h:inputText id="userName" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.userName}"/>
+                    <h:message for="userName" style="color: red" />
+
+                    <h:outputLabel for="email" value="Email:" />
+                    <h:inputText id="email" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.email}"/>
+                    <h:message for="email" style="color: red" />
+
+                    <h:outputLabel for="telefono" value="Telefono:" />
+                    <h:inputText id="telefono" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.telefono}"/>
+                    <h:message for="telefono" style="color: red" />
+
+                    <h:outputLabel for="direccion" value="Direccion:" />
+                    <h:inputText id="direccion" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.direccion}"/>
+                    <h:message for="direccion" style="color: red" />
+
+                    <p:outputLabel for="sucursal" value="Selecciona una sucursal:" />
+                    <p:selectOneMenu id="sucursal" value="#{perfilController.cuentaSeleccionada.idsucursal}">
+                        <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                        <f:selectItems value="#{perfilController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
+                    </p:selectOneMenu>
+                    <h:message for="sucursal" style="color: red" />
+
+                    <h:outputLabel for="password" value="Contraseña:" />
+                    <h:inputText id="password" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.contrasenia}"/>
+                    <h:message for="password" style="color: red" />
+                </h:panelGrid>
+                <h:commandButton value="Actualizar" action="#{perfilController.actualizar()}" styleClass="update-button" />
+                <h:commandButton value="Borrar Perfil" action="#{perfilController.eliminar()}" styleClass="delete-button" />
+            </h:form>
+        </div>
+    </h:body>
+
+</html>
