@@ -256,4 +256,8 @@ public class RegistroController implements Serializable {
 
     }
 
+    public void redirect() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+    }
+
 }

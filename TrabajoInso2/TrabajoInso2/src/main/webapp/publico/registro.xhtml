@@ -11,8 +11,6 @@
     </h:head>
 
     <h:body>
-
-
         <div class="container">
             <h1>Registro</h1>
             <h:form>
@@ -69,7 +67,8 @@
                     <h:message for="confirm-password" style="color: red" />
                 </h:panelGrid>
                 <h:commandButton value="Registrarse" action="#{registroController.registrar()}" styleClass="register-button"/>
-                <p:commandLink action="./index?faces-redirect=true" styleClass="register-link">¿Ya tienes una cuenta? ¡Inicia Sesión!</p:commandLink>
+                <p:commandLink action="index?faces-redirect=true" styleClass="register-link">¿Ya tienes una cuenta? ¡Inicia Sesión!</p:commandLink>
+                <p:commandButton action="#{registroController.redirect()}" value="¿No tienes una cuenta? ¡Regístrate!" styleClass="login-button" />
             </h:form>
         </div>
 

@@ -116,4 +116,15 @@ public class InicioController implements Serializable {
         this.empleadoEJB = empleadoEJB;
     }
 
+    public void redirect() {
+        try {
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/publico/registro.xhtml");
+        } catch (IOException e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                    "Error al intentar redirigir a la página de registro");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
 }

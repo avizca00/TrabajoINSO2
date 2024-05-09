@@ -20,8 +20,7 @@
                 </h:panelGrid>
                 <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="login-button" />
             </h:form>
-            <p:commandLink action="privado/clientes/perfil?faces-redirect=true" styleClass="register-link">¿No tienes una cuenta? ¡Regístrate!</p:commandLink>
-            <p:commandLink action="publico/registro?faces-redirect=true" styleClass="register-link">¿No tienes una cuenta? ¡Regístrate!</p:commandLink>
+            <p:commandButton action="#{inicioController.redirect()}" value="hola" styleClass="login-button" />
         </div>
     </h:body>
 
