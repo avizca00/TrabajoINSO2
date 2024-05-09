@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Home</title>
+        <script type="text/javascript">
+            function confirmLogout() {
+                print("");
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <div class="card">
+            <h:form>
+                <p:growl id="messages"/>
+
+                <p:menubar>
+                    <p:menuitem value="Home" action="#{menuController.redirectHome()}" icon="pi pi-fw pi-home"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Cuentas" action="#{menuController.redirectCuentas()}" icon="pi pi-fw pi-wallet"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Transferencias" action="#{menuController.redirectTransferencias()}" icon="pi pi-fw pi-euro"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Prestamos" action="#{menuController.redirectPrestamos()}" icon="pi pi-fw pi-"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Recibos Domiciliarios" action="#{menuController.redirectRecibos()}" icon="pi pi-fw pi-book"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Tarjetas de Credito" action="#{menuController.redirectTarjetas()}" icon="pi pi-fw pi-credit-card"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Perfil" action="#{menuController.redirectPerfil()}" icon="pi pi-fw pi-user"/>
+                    <p:divider layout="vertical"/>
+
+                    <f:facet name="options">
+                        <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" onclick="PF('confirmLogoutDialog').show();" />
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
+
+        <p:confirmDialog header="Confirmar cierre de sesión" message="¿Estás seguro de que quieres cerrar la sesión?" widgetVar="confirmLogoutDialog">
+            <p:button value="No" onclick="PF('confirmLogoutDialog').hide();" />
+            <p:button value="Sí" onclick="confirmLogout();" />
+        </p:confirmDialog>
+    </h:body>
+</html>

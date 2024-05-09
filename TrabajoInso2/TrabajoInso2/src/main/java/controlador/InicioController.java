@@ -53,8 +53,10 @@ public class InicioController implements Serializable {
                 cliente = clienteEJB.encuentraPorIDUsuario(usuarioAutenticado.getId());
                 empleado = empleadoEJB.encuentraPorIDUsuario(usuarioAutenticado.getId());
                 if (cliente != null) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/privado/clientes/home.xhtml");
                 } else {
+                    //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleado", empleado);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("pagina_empleado.xhtml");
                 }
             } else {

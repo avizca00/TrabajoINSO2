@@ -4,33 +4,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Home</title>
+        <script type="text/javascript">
+            function confirmLogout() {
+                print("");
+            }
+        </script>
     </h:head>
     <h:body>
-        <div class="card">
-            <h:form>
-                <p:growl id="messages"/>
 
-                <p:menubar>
-                    <p:menuitem value="Home" icon="pi pi-fw pi-home"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Cuentas" icon="pi pi-fw pi-wallet"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Transferencias" icon="pi pi-fw pi-euro"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Prestamos" icon="pi pi-fw pi-"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Recibos Domiciliarios" icon="pi pi-fw pi-book"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Tarjetas de Credito" icon="pi pi-fw pi-credit-card"/>
-                    <p:divider layout="vertical"/>
-                    <p:menuitem value="Perfil" icon="pi pi-fw pi-user"/>
-                    <p:divider layout="vertical"/>
-
-                    <f:facet name="options">
-                        <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
-                    </f:facet>
-                </p:menubar>
-            </h:form>
-        </div>
+        <ui:include src="menu.xhtml"/>
+        Meter info
     </h:body>
 </html>

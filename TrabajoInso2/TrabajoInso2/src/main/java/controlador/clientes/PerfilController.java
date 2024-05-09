@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador;
+package controlador.clientes;
 
 import EJB.ClientesFacadeLocal;
 import EJB.SucursalesFacadeLocal;
@@ -40,14 +40,14 @@ public class PerfilController implements Serializable {
 
     @EJB
     private UsuariosFacadeLocal usuarioEJB;
-    
+
     @EJB
     private SucursalesFacadeLocal sucursalEJB;
 
     @PostConstruct
     public void init() {
         cliente = new Clientes();
-        cliente = clienteEJB.find(2);
+        cliente = (Clientes) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cliente");
         sucursales = new ArrayList<>();
         cuentaSeleccionada = new Sucursales();
         cuentaSeleccionada = cliente.getUsuario().getSucursal();

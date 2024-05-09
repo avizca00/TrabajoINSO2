@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controlador;
+package controlador.clientes;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -50,8 +50,7 @@ public class CuentaController implements Serializable {
         cuenta = new Cuentas();
         cliente = new Clientes();
         clienteCuenta = new ClientesCuentas();
-        //cliente = (Clientes) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cliente");
-        cliente = clie.encuentraPorIDUsuario(1);
+        cliente = (Clientes) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cliente");
         cuentas = new ArrayList<>();
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
     }
