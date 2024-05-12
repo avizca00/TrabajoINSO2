@@ -7,7 +7,6 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-
 import modelo.Cuentas;
 import modelo.Tarjetas_De_Credito;
 
@@ -32,6 +31,6 @@ public interface Tarjetas_De_CreditoFacadeLocal {
 
     int count();
 
-    List<Tarjetas_De_Credito> encuentraTarejetaPorCuenta(List<Cuentas> cuentas);
+    public List<Tarjetas_De_Credito> encuentraTarejetaPorCuenta(List<Cuentas> cuentas);
     
 }

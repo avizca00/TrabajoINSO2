@@ -30,6 +30,6 @@ public interface ClientesFacadeLocal {
 
     int count();
 
-    public Clientes encuentraPorIDUsuario(int id);
+    public Clientes encuentraPorIDUsuario(int idusuario);
     
 }

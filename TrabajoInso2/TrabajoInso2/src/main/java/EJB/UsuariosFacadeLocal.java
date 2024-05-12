@@ -30,10 +30,10 @@ public interface UsuariosFacadeLocal {
 
     int count();
 
-    public boolean existeUsuarioPorUsername(String userName);
+    public Usuarios encuentraUsuarioPorUsernameAndPassword(String userName, String contrasenia);
 
     public boolean existeUsuarioPorDNI(String dniUsuario);
 
-    public Usuarios encuentraUsuarioPorUsernameAndPassword(String userName, String contrasenia);
+    public boolean existeUsuarioPorUsername(String userName);
     
 }

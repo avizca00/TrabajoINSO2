@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,91 +38,60 @@ public class Clientes implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
 
-    /**
-     * Obtiene el ID del cliente.
-     * 
-     * @return el ID del cliente
-     */
-    public int getId() {
+    public int getIdcliente() {
         return idcliente;
     }
 
-    /**
-     * Establece el ID del cliente.
-     * 
-     * @param id el ID del cliente
-     */
-    public void setId(int id) {
-        this.idcliente = id;
+    public void setIdcliente(int idcliente) {
+        this.idcliente = idcliente;
     }
 
-    /**
-     * Obtiene el usuario asociado al cliente.
-     * 
-     * @return el usuario asociado al cliente
-     */
     public Usuarios getUsuario() {
         return usuario;
     }
 
-    /**
-     * Establece el usuario asociado al cliente.
-     * 
-     * @param usuario el usuario asociado al cliente
-     */
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     * Obtiene la fecha de alta del cliente.
-     * 
-     * @return la fecha de alta del cliente
-     */
     public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    /**
-     * Establece la fecha de alta del cliente.
-     * 
-     * @param fechaAlta la fecha de alta del cliente
-     */
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idcliente;
-        result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-        result = prime * result + ((fechaAlta == null) ? 0 : fechaAlta.hashCode());
-        return result;
+        int hash = 7;
+        hash = 29 * hash + this.idcliente;
+        hash = 29 * hash + Objects.hashCode(this.usuario);
+        hash = 29 * hash + Objects.hashCode(this.fechaAlta);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Clientes other = (Clientes) obj;
-        if (idcliente != other.idcliente)
+        }
+        final Clientes other = (Clientes) obj;
+        if (this.idcliente != other.idcliente) {
             return false;
-        if (usuario == null) {
-            if (other.usuario != null)
-                return false;
-        } else if (!usuario.equals(other.usuario))
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
-        if (fechaAlta == null) {
-            if (other.fechaAlta != null)
-                return false;
-        } else if (!fechaAlta.equals(other.fechaAlta))
+        }
+        if (!Objects.equals(this.fechaAlta, other.fechaAlta)) {
             return false;
+        }
         return true;
     }
 

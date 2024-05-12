@@ -8,6 +8,7 @@ package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,12 +49,12 @@ public class Transferencias implements Serializable {
     @Column(name = "concepto", nullable = false, length = 200)
     private String concepto;
 
-    public int getId() {
+    public int getIdtransferencias() {
         return idtransferencias;
     }
 
-    public void setId(int id) {
-        this.idtransferencias = id;
+    public void setIdtransferencias(int idtransferencias) {
+        this.idtransferencias = idtransferencias;
     }
 
     public Cuentas getCuentaPagador() {
@@ -98,55 +99,48 @@ public class Transferencias implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idtransferencias;
-        result = prime * result + ((cuentaPagador == null) ? 0 : cuentaPagador.hashCode());
-        result = prime * result + ((cuentaBeneficiario == null) ? 0 : cuentaBeneficiario.hashCode());
-        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-        result = prime * result + ((monto == null) ? 0 : monto.hashCode());
-        result = prime * result + ((concepto == null) ? 0 : concepto.hashCode());
-        return result;
+        int hash = 7;
+        hash = 19 * hash + this.idtransferencias;
+        hash = 19 * hash + Objects.hashCode(this.cuentaPagador);
+        hash = 19 * hash + Objects.hashCode(this.cuentaBeneficiario);
+        hash = 19 * hash + Objects.hashCode(this.fecha);
+        hash = 19 * hash + Objects.hashCode(this.monto);
+        hash = 19 * hash + Objects.hashCode(this.concepto);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Transferencias other = (Transferencias) obj;
-        if (idtransferencias != other.idtransferencias)
+        }
+        final Transferencias other = (Transferencias) obj;
+        if (this.idtransferencias != other.idtransferencias) {
             return false;
-        if (cuentaPagador == null) {
-            if (other.cuentaPagador != null)
-                return false;
-        } else if (!cuentaPagador.equals(other.cuentaPagador))
+        }
+        if (!Objects.equals(this.concepto, other.concepto)) {
             return false;
-        if (cuentaBeneficiario == null) {
-            if (other.cuentaBeneficiario != null)
-                return false;
-        } else if (!cuentaBeneficiario.equals(other.cuentaBeneficiario))
+        }
+        if (!Objects.equals(this.cuentaPagador, other.cuentaPagador)) {
             return false;
-        if (fecha == null) {
-            if (other.fecha != null)
-                return false;
-        } else if (!fecha.equals(other.fecha))
+        }
+        if (!Objects.equals(this.cuentaBeneficiario, other.cuentaBeneficiario)) {
             return false;
-        if (monto == null) {
-            if (other.monto != null)
-                return false;
-        } else if (!monto.equals(other.monto))
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
             return false;
-        if (concepto == null) {
-            if (other.concepto != null)
-                return false;
-        } else if (!concepto.equals(other.concepto))
+        }
+        if (!Objects.equals(this.monto, other.monto)) {
             return false;
+        }
         return true;
     }
 
-    // Getters and setters
+    
 }

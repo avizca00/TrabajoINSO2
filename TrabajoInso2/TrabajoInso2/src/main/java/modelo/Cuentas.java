@@ -50,6 +50,9 @@ public class Cuentas implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaUltimaTransaccion;
 
+    @Column(name = "nombre", nullable = false, length = 45)
+    private String nombre;
+
     public int getId() {
         return idcuenta;
     }
@@ -106,6 +109,14 @@ public class Cuentas implements Serializable{
         this.fechaUltimaTransaccion = fechaUltimaTransaccion;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -117,6 +128,7 @@ public class Cuentas implements Serializable{
         result = prime * result + ((tasaInteres == null) ? 0 : tasaInteres.hashCode());
         result = prime * result + ((limiteTransaccion == null) ? 0 : limiteTransaccion.hashCode());
         result = prime * result + ((fechaUltimaTransaccion == null) ? 0 : fechaUltimaTransaccion.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         return result;
     }
 
@@ -160,6 +172,11 @@ public class Cuentas implements Serializable{
             if (other.fechaUltimaTransaccion != null)
                 return false;
         } else if (!fechaUltimaTransaccion.equals(other.fechaUltimaTransaccion))
+            return false;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
             return false;
         return true;
     }

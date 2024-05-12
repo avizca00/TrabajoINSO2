@@ -30,39 +30,6 @@ public class CuentasPromociones implements Serializable{
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuentas;
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + Objects.hashCode(this.idCuentasPromociones);
-        hash = 17 * hash + Objects.hashCode(this.promociones);
-        hash = 17 * hash + Objects.hashCode(this.cuentas);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CuentasPromociones other = (CuentasPromociones) obj;
-        if (!Objects.equals(this.idCuentasPromociones, other.idCuentasPromociones)) {
-            return false;
-        }
-        if (!Objects.equals(this.promociones, other.promociones)) {
-            return false;
-        }
-        if (!Objects.equals(this.cuentas, other.cuentas)) {
-            return false;
-        }
-        return true;
-    }
-
     public int getIdCuentasPromociones() {
         return idCuentasPromociones;
     }
@@ -86,5 +53,39 @@ public class CuentasPromociones implements Serializable{
     public void setCuentas(Cuentas cuentas) {
         this.cuentas = cuentas;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.idCuentasPromociones;
+        hash = 23 * hash + Objects.hashCode(this.promociones);
+        hash = 23 * hash + Objects.hashCode(this.cuentas);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CuentasPromociones other = (CuentasPromociones) obj;
+        if (this.idCuentasPromociones != other.idCuentasPromociones) {
+            return false;
+        }
+        if (!Objects.equals(this.promociones, other.promociones)) {
+            return false;
+        }
+        if (!Objects.equals(this.cuentas, other.cuentas)) {
+            return false;
+        }
+        return true;
+    }
+
     
 }

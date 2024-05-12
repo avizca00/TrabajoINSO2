@@ -7,7 +7,6 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-
 import modelo.Clientes;
 import modelo.ClientesCuentas;
 import modelo.Cuentas;
@@ -33,6 +32,6 @@ public interface ClientesCuentasFacadeLocal {
 
     int count();
 
-    List<Cuentas> cuentasPorCliente(Clientes cliente);
+    public List<Cuentas> cuentasPorCliente(Clientes cliente);
     
 }

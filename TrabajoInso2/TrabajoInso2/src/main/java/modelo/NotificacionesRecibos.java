@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,12 +37,12 @@ public class NotificacionesRecibos implements Serializable {
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
 
-    public int getId() {
+    public int getIdnotificacionesrecibos() {
         return idnotificacionesrecibos;
     }
 
-    public void setId(int id) {
-        this.idnotificacionesrecibos = id;
+    public void setIdnotificacionesrecibos(int idnotificacionesrecibos) {
+        this.idnotificacionesrecibos = idnotificacionesrecibos;
     }
 
     public RecibosDomiciliarios getReciboDomiciliario() {
@@ -70,38 +71,38 @@ public class NotificacionesRecibos implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idnotificacionesrecibos;
-        result = prime * result + ((reciboDomiciliario == null) ? 0 : reciboDomiciliario.hashCode());
-        result = prime * result + pagoRealizado;
-        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        return result;
+        int hash = 5;
+        hash = 79 * hash + this.idnotificacionesrecibos;
+        hash = 79 * hash + Objects.hashCode(this.reciboDomiciliario);
+        hash = 79 * hash + this.pagoRealizado;
+        hash = 79 * hash + Objects.hashCode(this.descripcion);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        NotificacionesRecibos other = (NotificacionesRecibos) obj;
-        if (idnotificacionesrecibos != other.idnotificacionesrecibos)
+        }
+        final NotificacionesRecibos other = (NotificacionesRecibos) obj;
+        if (this.idnotificacionesrecibos != other.idnotificacionesrecibos) {
             return false;
-        if (reciboDomiciliario == null) {
-            if (other.reciboDomiciliario != null)
-                return false;
-        } else if (!reciboDomiciliario.equals(other.reciboDomiciliario))
+        }
+        if (this.pagoRealizado != other.pagoRealizado) {
             return false;
-        if (pagoRealizado != other.pagoRealizado)
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
+        }
+        if (!Objects.equals(this.reciboDomiciliario, other.reciboDomiciliario)) {
             return false;
+        }
         return true;
     }
 

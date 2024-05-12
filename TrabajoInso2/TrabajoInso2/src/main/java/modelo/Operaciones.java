@@ -8,6 +8,7 @@ package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,12 +50,12 @@ public class Operaciones implements Serializable{
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuenta;
 
-    public int getId() {
+    public int getIdoperacion() {
         return idoperacion;
     }
 
-    public void setId(int id) {
-        this.idoperacion = id;
+    public void setIdoperacion(int idoperacion) {
+        this.idoperacion = idoperacion;
     }
 
     public Date getFecha() {
@@ -99,50 +100,46 @@ public class Operaciones implements Serializable{
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idoperacion;
-        result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-        result = prime * result + ((importe == null) ? 0 : importe.hashCode());
-        result = prime * result + ((tipoOperacion == null) ? 0 : tipoOperacion.hashCode());
-        result = prime * result + estado;
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        return result;
+        int hash = 3;
+        hash = 67 * hash + this.idoperacion;
+        hash = 67 * hash + Objects.hashCode(this.fecha);
+        hash = 67 * hash + Objects.hashCode(this.importe);
+        hash = 67 * hash + Objects.hashCode(this.tipoOperacion);
+        hash = 67 * hash + this.estado;
+        hash = 67 * hash + Objects.hashCode(this.cuenta);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Operaciones other = (Operaciones) obj;
-        if (idoperacion != other.idoperacion)
+        }
+        final Operaciones other = (Operaciones) obj;
+        if (this.idoperacion != other.idoperacion) {
             return false;
-        if (fecha == null) {
-            if (other.fecha != null)
-                return false;
-        } else if (!fecha.equals(other.fecha))
+        }
+        if (this.estado != other.estado) {
             return false;
-        if (importe == null) {
-            if (other.importe != null)
-                return false;
-        } else if (!importe.equals(other.importe))
+        }
+        if (!Objects.equals(this.tipoOperacion, other.tipoOperacion)) {
             return false;
-        if (tipoOperacion == null) {
-            if (other.tipoOperacion != null)
-                return false;
-        } else if (!tipoOperacion.equals(other.tipoOperacion))
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
             return false;
-        if (estado != other.estado)
+        }
+        if (!Objects.equals(this.importe, other.importe)) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
+        }
         return true;
     }
 

@@ -16,6 +16,10 @@
                 <p:fieldset legend="Creación de nueva cuenta">
                     <p:messages id="mess" globalOnly="true"/>
                     <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:inputText id="nombre" styleClass="input-text" required="true" value="#{cuentaController.cuenta.nombre}"/>
+                        <h:message for="nombre" style="color: red" />
+
                         <h:outputLabel value="Tipo de Cuenta:" for="tipo" styleClass="output-text"/>
                         <p:selectOneMenu id="tipo" value="#{cuentaController.cuenta.tipoCuenta}" required="true" styleClass="input-text">
                             <f:selectItem itemLabel="Corriente" itemValue="Corriente" />
@@ -50,6 +54,10 @@
             <p:fieldset legend="Tus Cuentas Bancarias">
                 <div class="table-container">
                     <h:dataTable value="#{cuentaController.cuentas}" var="cuenta" styleClass="table">
+                        <h:column>
+                            <f:facet name="header">Nombre</f:facet>
+                                #{cuenta.nombre}
+                        </h:column>
                         <h:column>
                             <f:facet name="header">Saldo</f:facet>
                             #{cuenta.saldo}€

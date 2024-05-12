@@ -30,6 +30,6 @@ public interface EmpleadosFacadeLocal {
 
     int count();
 
-    public Empleados encuentraPorIDUsuario(int id);
+    public Empleados encuentraPorIDUsuario(int idusuario);
     
 }

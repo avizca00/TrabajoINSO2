@@ -16,6 +16,10 @@
                 <p:fieldset legend="Creación de nueva tarjeta bancaria">
                     <p:messages id="mess" globalOnly="true"/>
                     <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:inputText id="nombre" styleClass="input-text" required="true" value="#{tarjetaController.tarjeta.nombre}"/>
+                        <h:message for="nombre" style="color: red" />
+
                         <h:outputLabel value="Tipo de Tarjeta:" for="tipo" styleClass="output-text"/>
                         <p:selectOneMenu id="tipo" value="#{tarjetaController.tarjeta.tipoTarjeta}" required="true" styleClass="input-text">
                             <f:selectItem itemLabel="Debito" itemValue="Debito" />
@@ -33,7 +37,7 @@
                         <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
                         <p:selectOneMenu id="cuenta" value="#{tarjetaController.cuenta.id}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
-                            <f:selectItems value="#{tarjetaController.cuentas}" var="cuenta" itemLabel="#{cuenta.tipoCuenta}" itemValue="#{cuenta.id}" />
+                            <f:selectItems value="#{tarjetaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.id}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
                     </h:panelGrid>
@@ -44,6 +48,15 @@
                 <p:fieldset legend="Tus Tarjetas Bancarias">
                     <div class="table-container">
                         <h:dataTable value="#{tarjetaController.tarjetas}" var="tarjeta" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Nombre</f:facet>
+                                    #{tarjeta.nombre}
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Cuenta Asociada</f:facet>
+                                    #{tarjeta.cuenta.nombre}
+                            </h:column>
                             <h:column>
                                 <f:facet name="header">Tipo de Tarjeta</f:facet>
                                     #{tarjeta.tipoTarjeta}

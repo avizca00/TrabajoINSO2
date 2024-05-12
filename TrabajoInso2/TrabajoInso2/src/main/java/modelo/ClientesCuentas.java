@@ -30,12 +30,36 @@ public class ClientesCuentas implements Serializable {
     })
     private Clientes clientes;
 
+    public int getIdClientesCuentas() {
+        return idClientesCuentas;
+    }
+
+    public void setIdClientesCuentas(int idClientesCuentas) {
+        this.idClientesCuentas = idClientesCuentas;
+    }
+
+    public Cuentas getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Cuentas cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    public Clientes getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(Clientes clientes) {
+        this.clientes = clientes;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.idClientesCuentas);
-        hash = 19 * hash + Objects.hashCode(this.cuentas);
-        hash = 19 * hash + Objects.hashCode(this.clientes);
+        int hash = 3;
+        hash = 11 * hash + this.idClientesCuentas;
+        hash = 11 * hash + Objects.hashCode(this.cuentas);
+        hash = 11 * hash + Objects.hashCode(this.clientes);
         return hash;
     }
 
@@ -51,7 +75,7 @@ public class ClientesCuentas implements Serializable {
             return false;
         }
         final ClientesCuentas other = (ClientesCuentas) obj;
-        if (!Objects.equals(this.idClientesCuentas, other.idClientesCuentas)) {
+        if (this.idClientesCuentas != other.idClientesCuentas) {
             return false;
         }
         if (!Objects.equals(this.cuentas, other.cuentas)) {
@@ -63,27 +87,4 @@ public class ClientesCuentas implements Serializable {
         return true;
     }
 
-    public void setIdClientesCuentas(Integer idClientesCuentas) {
-        this.idClientesCuentas = idClientesCuentas;
-    }
-
-    public void setCuentas(Cuentas cuentas) {
-        this.cuentas = cuentas;
-    }
-
-    public void setClientes(Clientes clientes) {
-        this.clientes = clientes;
-    }
-
-    public Integer getIdClientesCuentas() {
-        return idClientesCuentas;
-    }
-
-    public Cuentas getCuentas() {
-        return cuentas;
-    }
-
-    public Clientes getClientes() {
-        return clientes;
-    }
 }

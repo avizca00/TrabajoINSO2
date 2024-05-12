@@ -51,6 +51,9 @@ public class Tarjetas_De_Credito implements Serializable {
     @Column(name = "saldoDisponible", precision = 15, scale = 2)
     private BigDecimal saldoDisponible;
 
+    @Column(name = "nombre", nullable = false, length = 45)
+    private String nombre;
+
     public int getId() {
         return idtarjetascredito;
     }
@@ -107,6 +110,14 @@ public class Tarjetas_De_Credito implements Serializable {
         this.saldoDisponible = saldoDisponible;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -118,6 +129,7 @@ public class Tarjetas_De_Credito implements Serializable {
         result = prime * result + ((fechaVencimiento == null) ? 0 : fechaVencimiento.hashCode());
         result = prime * result + ((CVV == null) ? 0 : CVV.hashCode());
         result = prime * result + ((saldoDisponible == null) ? 0 : saldoDisponible.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         return result;
     }
 
@@ -162,9 +174,13 @@ public class Tarjetas_De_Credito implements Serializable {
                 return false;
         } else if (!saldoDisponible.equals(other.saldoDisponible))
             return false;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
+            return false;
         return true;
     }
 
-    
 
 }

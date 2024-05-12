@@ -78,17 +78,15 @@ public class Sucursales implements Serializable{
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
-    
-    // Add any additional methods or annotations as needed
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + this.idsucursal;
-        hash = 23 * hash + Objects.hashCode(this.nombre);
-        hash = 23 * hash + Objects.hashCode(this.ubicacion);
-        hash = 23 * hash + Objects.hashCode(this.telefono);
-        hash = 23 * hash + Objects.hashCode(this.correoElectronico);
+        int hash = 5;
+        hash = 37 * hash + this.idsucursal;
+        hash = 37 * hash + Objects.hashCode(this.nombre);
+        hash = 37 * hash + Objects.hashCode(this.ubicacion);
+        hash = 37 * hash + Objects.hashCode(this.telefono);
+        hash = 37 * hash + Objects.hashCode(this.correoElectronico);
         return hash;
     }
 
@@ -121,4 +119,5 @@ public class Sucursales implements Serializable{
         }
         return true;
     }
+
 }

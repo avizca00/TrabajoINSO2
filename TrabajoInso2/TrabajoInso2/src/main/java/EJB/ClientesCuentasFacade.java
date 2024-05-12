@@ -7,7 +7,6 @@ package EJB;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,7 +39,7 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
         List<Cuentas> cuentasCliente = new ArrayList<>();
         Query query = em.createQuery(
                 "SELECT cc.cuentas FROM ClientesCuentas cc WHERE cc.clientes.idcliente = :cliente");
-        query.setParameter("cliente", cliente.getId());
+        query.setParameter("cliente", cliente.getIdcliente());
 
         // Ejecutar la consulta y obtener el resultado
         query.getResultList();
@@ -49,5 +48,5 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
 
         return query.getResultList();
     }
-
+    
 }

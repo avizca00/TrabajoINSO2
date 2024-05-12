@@ -32,22 +32,6 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
     }
 
     @Override
-    public boolean existeUsuarioPorUsername(String username) {
-        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.userName = :username");
-        q.setParameter("username", username);
-        List<Usuarios> usuarios = q.getResultList();
-        return !usuarios.isEmpty();
-    }
-
-    @Override
-    public boolean existeUsuarioPorDNI(String dni) {
-        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.dniUsuario = :dni");
-        q.setParameter("dni", dni);
-        List<Usuarios> usuarios = q.getResultList();
-        return !usuarios.isEmpty();
-    }
-
-    @Override
     public Usuarios encuentraUsuarioPorUsernameAndPassword(String userName, String contrasenia) {
         Query query = em.createQuery("SELECT u FROM Usuarios u WHERE u.userName = :username AND u.contrasenia = :password");
         query.setParameter("username", userName);
@@ -58,6 +42,22 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         } catch (Exception e) {
             return null; // Usuario no encontrado
         }
+    }
+
+    @Override
+    public boolean existeUsuarioPorDNI(String dniUsuario) {
+        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.dniUsuario = :dni");
+        q.setParameter("dni", dniUsuario);
+        List<Usuarios> usuarios = q.getResultList();
+        return !usuarios.isEmpty();
+    }
+
+    @Override
+    public boolean existeUsuarioPorUsername(String userName) {
+        Query q = em.createQuery("SELECT u FROM Usuarios u WHERE u.userName = :username");
+        q.setParameter("username", userName);
+        List<Usuarios> usuarios = q.getResultList();
+        return !usuarios.isEmpty();
     }
 
 }

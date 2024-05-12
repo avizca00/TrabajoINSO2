@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,85 +41,60 @@ public class Empleados implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date fechaContratacion;
 
-    /**
-     * Obtiene el ID del empleado.
-     * @return El ID del empleado.
-     */
-    public int getId() {
+    public int getIdempleado() {
         return idempleado;
     }
 
-    /**
-     * Establece el ID del empleado.
-     * @param id El ID del empleado.
-     */
-    public void setId(int id) {
-        this.idempleado = id;
+    public void setIdempleado(int idempleado) {
+        this.idempleado = idempleado;
     }
 
-    /**
-     * Obtiene el usuario asociado al empleado.
-     * @return El usuario asociado al empleado.
-     */
     public Usuarios getUsuario() {
         return usuario;
     }
 
-    /**
-     * Establece el usuario asociado al empleado.
-     * @param usuario El usuario asociado al empleado.
-     */
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     * Obtiene la fecha de contratación del empleado.
-     * @return La fecha de contratación del empleado.
-     */
     public Date getFechaContratacion() {
         return fechaContratacion;
     }
 
-    /**
-     * Establece la fecha de contratación del empleado.
-     * @param fechaContratacion La fecha de contratación del empleado.
-     */
     public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idempleado;
-        result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-        result = prime * result + ((fechaContratacion == null) ? 0 : fechaContratacion.hashCode());
-        return result;
+        int hash = 7;
+        hash = 53 * hash + this.idempleado;
+        hash = 53 * hash + Objects.hashCode(this.usuario);
+        hash = 53 * hash + Objects.hashCode(this.fechaContratacion);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Empleados other = (Empleados) obj;
-        if (idempleado != other.idempleado)
+        }
+        final Empleados other = (Empleados) obj;
+        if (this.idempleado != other.idempleado) {
             return false;
-        if (usuario == null) {
-            if (other.usuario != null)
-                return false;
-        } else if (!usuario.equals(other.usuario))
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
             return false;
-        if (fechaContratacion == null) {
-            if (other.fechaContratacion != null)
-                return false;
-        } else if (!fechaContratacion.equals(other.fechaContratacion))
+        }
+        if (!Objects.equals(this.fechaContratacion, other.fechaContratacion)) {
             return false;
+        }
         return true;
     }
 

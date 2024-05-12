@@ -61,12 +61,12 @@ public class Usuarios implements Serializable {
     @JoinColumn(name = "Sucursales_idSucursal")
     private Sucursales sucursal;
 
-    public int getId() {
+    public int getIdusuario() {
         return idusuario;
     }
 
-    public void setId(int id) {
-        this.idusuario = id;
+    public void setIdusuario(int idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getDniUsuario() {
@@ -109,20 +109,20 @@ public class Usuarios implements Serializable {
         this.contrasenia = contrasenia;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getTelefono() {
         return telefono;
     }
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDireccion() {
@@ -144,16 +144,16 @@ public class Usuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.idusuario;
-        hash = 23 * hash + Objects.hashCode(this.dniUsuario);
-        hash = 23 * hash + Objects.hashCode(this.nombre);
-        hash = 23 * hash + Objects.hashCode(this.apellido);
-        hash = 23 * hash + Objects.hashCode(this.userName);
-        hash = 23 * hash + Objects.hashCode(this.contrasenia);
-        hash = 23 * hash + Objects.hashCode(this.telefono);
-        hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + Objects.hashCode(this.direccion);
-        hash = 23 * hash + Objects.hashCode(this.sucursal);
+        hash = 67 * hash + this.idusuario;
+        hash = 67 * hash + Objects.hashCode(this.dniUsuario);
+        hash = 67 * hash + Objects.hashCode(this.nombre);
+        hash = 67 * hash + Objects.hashCode(this.apellido);
+        hash = 67 * hash + Objects.hashCode(this.userName);
+        hash = 67 * hash + Objects.hashCode(this.contrasenia);
+        hash = 67 * hash + Objects.hashCode(this.telefono);
+        hash = 67 * hash + Objects.hashCode(this.email);
+        hash = 67 * hash + Objects.hashCode(this.direccion);
+        hash = 67 * hash + Objects.hashCode(this.sucursal);
         return hash;
     }
 
@@ -202,4 +202,5 @@ public class Usuarios implements Serializable {
         return true;
     }
 
+   
 }

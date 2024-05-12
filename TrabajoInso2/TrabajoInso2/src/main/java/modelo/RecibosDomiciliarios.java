@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,12 +50,12 @@ public class RecibosDomiciliarios implements Serializable {
     @Column(name = "entidadPersona", nullable = false, length = 255)
     private String entidadPersona;
 
-    public int getId() {
+    public int getIdrecibosdomiciliarios() {
         return idrecibosdomiciliarios;
     }
 
-    public void setId(int id) {
-        this.idrecibosdomiciliarios = id;
+    public void setIdrecibosdomiciliarios(int idrecibosdomiciliarios) {
+        this.idrecibosdomiciliarios = idrecibosdomiciliarios;
     }
 
     public Cuentas getCuenta() {
@@ -107,56 +108,50 @@ public class RecibosDomiciliarios implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idrecibosdomiciliarios;
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        result = prime * result + ((importe == null) ? 0 : importe.hashCode());
-        result = prime * result + ((fechaEmision == null) ? 0 : fechaEmision.hashCode());
-        result = prime * result + ((fechaVencimiento == null) ? 0 : fechaVencimiento.hashCode());
-        result = prime * result + estado;
-        result = prime * result + ((entidadPersona == null) ? 0 : entidadPersona.hashCode());
-        return result;
+        int hash = 7;
+        hash = 47 * hash + this.idrecibosdomiciliarios;
+        hash = 47 * hash + Objects.hashCode(this.cuenta);
+        hash = 47 * hash + Objects.hashCode(this.importe);
+        hash = 47 * hash + Objects.hashCode(this.fechaEmision);
+        hash = 47 * hash + Objects.hashCode(this.fechaVencimiento);
+        hash = 47 * hash + this.estado;
+        hash = 47 * hash + Objects.hashCode(this.entidadPersona);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        RecibosDomiciliarios other = (RecibosDomiciliarios) obj;
-        if (idrecibosdomiciliarios != other.idrecibosdomiciliarios)
+        }
+        final RecibosDomiciliarios other = (RecibosDomiciliarios) obj;
+        if (this.idrecibosdomiciliarios != other.idrecibosdomiciliarios) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (this.estado != other.estado) {
             return false;
-        if (importe == null) {
-            if (other.importe != null)
-                return false;
-        } else if (!importe.equals(other.importe))
+        }
+        if (!Objects.equals(this.importe, other.importe)) {
             return false;
-        if (fechaEmision == null) {
-            if (other.fechaEmision != null)
-                return false;
-        } else if (!fechaEmision.equals(other.fechaEmision))
+        }
+        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
             return false;
-        if (fechaVencimiento == null) {
-            if (other.fechaVencimiento != null)
-                return false;
-        } else if (!fechaVencimiento.equals(other.fechaVencimiento))
+        }
+        if (!Objects.equals(this.entidadPersona, other.entidadPersona)) {
             return false;
-        if (estado != other.estado)
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
-        if (entidadPersona == null) {
-            if (other.entidadPersona != null)
-                return false;
-        } else if (!entidadPersona.equals(other.entidadPersona))
+        }
+        if (!Objects.equals(this.fechaEmision, other.fechaEmision)) {
             return false;
+        }
         return true;
     }
 

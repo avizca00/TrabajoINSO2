@@ -50,6 +50,9 @@ public class Prestamos implements Serializable{
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuenta;
 
+    @Column(name = "nombre", nullable = false, length = 45)
+    private String nombre;
+
     public int getId() {
         return idprestamo;
     }
@@ -114,6 +117,14 @@ public class Prestamos implements Serializable{
         this.cuenta = cuenta;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -126,6 +137,7 @@ public class Prestamos implements Serializable{
         result = prime * result + ((tasaInteres == null) ? 0 : tasaInteres.hashCode());
         result = prime * result + ((montoPrestamo == null) ? 0 : montoPrestamo.hashCode());
         result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         return result;
     }
 
@@ -168,6 +180,11 @@ public class Prestamos implements Serializable{
             if (other.cuenta != null)
                 return false;
         } else if (!cuenta.equals(other.cuenta))
+            return false;
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
             return false;
         return true;
     }

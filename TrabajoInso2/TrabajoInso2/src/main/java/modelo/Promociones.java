@@ -8,6 +8,7 @@ package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,12 +44,12 @@ public class Promociones implements Serializable{
     @Column(name = "descuento", nullable = false, precision = 5, scale = 2)
     private BigDecimal descuento;
 
-    public int getId() {
+    public int getIdpromocion() {
         return idpromocion;
     }
 
-    public void setId(int id) {
-        this.idpromocion = id;
+    public void setIdpromocion(int idpromocion) {
+        this.idpromocion = idpromocion;
     }
 
     public String getDescripcion() {
@@ -85,48 +86,44 @@ public class Promociones implements Serializable{
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idpromocion;
-        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
-        result = prime * result + ((fechaFin == null) ? 0 : fechaFin.hashCode());
-        result = prime * result + ((descuento == null) ? 0 : descuento.hashCode());
-        return result;
+        int hash = 3;
+        hash = 83 * hash + this.idpromocion;
+        hash = 83 * hash + Objects.hashCode(this.descripcion);
+        hash = 83 * hash + Objects.hashCode(this.fechaInicio);
+        hash = 83 * hash + Objects.hashCode(this.fechaFin);
+        hash = 83 * hash + Objects.hashCode(this.descuento);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Promociones other = (Promociones) obj;
-        if (idpromocion != other.idpromocion)
+        }
+        final Promociones other = (Promociones) obj;
+        if (this.idpromocion != other.idpromocion) {
             return false;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
-        if (fechaInicio == null) {
-            if (other.fechaInicio != null)
-                return false;
-        } else if (!fechaInicio.equals(other.fechaInicio))
+        }
+        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
             return false;
-        if (fechaFin == null) {
-            if (other.fechaFin != null)
-                return false;
-        } else if (!fechaFin.equals(other.fechaFin))
+        }
+        if (!Objects.equals(this.fechaFin, other.fechaFin)) {
             return false;
-        if (descuento == null) {
-            if (other.descuento != null)
-                return false;
-        } else if (!descuento.equals(other.descuento))
+        }
+        if (!Objects.equals(this.descuento, other.descuento)) {
             return false;
+        }
         return true;
     }
+
 
 }

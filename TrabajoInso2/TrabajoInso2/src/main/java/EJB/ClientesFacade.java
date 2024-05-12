@@ -32,9 +32,9 @@ public class ClientesFacade extends AbstractFacade<Clientes> implements Clientes
     }
 
     @Override
-    public Clientes encuentraPorIDUsuario(int id) {
+    public Clientes encuentraPorIDUsuario(int idusuario) {
         Query query = em.createQuery("SELECT c FROM Clientes c WHERE c.usuario.idusuario = :idUsuario");
-        query.setParameter("idUsuario", id);
+        query.setParameter("idUsuario", idusuario);
         try {
             return (Clientes) query.getSingleResult();
         } catch (NoResultException e) {
