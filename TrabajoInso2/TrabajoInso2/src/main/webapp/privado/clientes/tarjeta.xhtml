@@ -4,7 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
-        <title>Cuentas Bancarias</title>
+        <title>Tarjetas Bancarias</title>
         <h:outputStylesheet library="css" name="cuenta.css"/>
     </h:head>
 
@@ -44,52 +44,72 @@
                     <h:commandButton value="Crear Cuenta" action="#{tarjetaController.crearTarjeta()}" styleClass="register-button" />
                 </p:fieldset>
             </h:form>
-            <h:form>
-                <p:fieldset legend="Tus Tarjetas Bancarias">
-                    <div class="table-container">
-                        <h:dataTable value="#{tarjetaController.tarjetas}" var="tarjeta" styleClass="table">
-                            <h:column>
-                                <f:facet name="header">Nombre</f:facet>
-                                    #{tarjeta.nombre}
-                            </h:column>
-                            
-                            <h:column>
-                                <f:facet name="header">Cuenta Asociada</f:facet>
-                                    #{tarjeta.cuenta.nombre}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Tipo de Tarjeta</f:facet>
-                                    #{tarjeta.tipoTarjeta}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Número de tarjeta</f:facet>
-                                    #{tarjeta.numeroTarjeta}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Fecha de Vencimiento</f:facet>
-                                    #{tarjeta.fechaVencimiento}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">CVV</f:facet>
-                                    #{tarjeta.CVV}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Saldo Disponible</f:facet>
-                                #{tarjeta.saldoDisponible}€
-                            </h:column>
+            <p:fieldset legend="Tus Tarjetas Bancarias">
+                <div class="table-container">
+                    <h:dataTable value="#{tarjetaController.tarjetas}" var="tarjeta" styleClass="table">
+                        <h:column>
+                            <f:facet name="header">Nombre</f:facet>
+                                #{tarjeta.nombre}
+                        </h:column>
 
-                            <h:column>
-                                <f:facet name="">Acción 1</f:facet>
-                                <p:commandButton value="Modificar" action="#{tarjetaController.editarTarjeta(tarjeta)}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="">Acción 2</f:facet>
-                                <p:commandButton value="Eliminar" action="#{tarjetaController.eliminarTarjeta(tarjeta)}" />
-                            </h:column>
-                        </h:dataTable>
-                    </div>
-                </p:fieldset>
-            </h:form>
+                        <h:column>
+                            <f:facet name="header">Cuenta Asociada</f:facet>
+                                #{tarjeta.cuenta.nombre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Tipo de Tarjeta</f:facet>
+                                #{tarjeta.tipoTarjeta}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Número de tarjeta</f:facet>
+                                #{tarjeta.numeroTarjeta}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Fecha de Vencimiento</f:facet>
+                                #{tarjeta.fechaVencimiento}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">CVV</f:facet>
+                                #{tarjeta.CVV}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Saldo Disponible</f:facet>
+                            #{tarjeta.saldoDisponible}€
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="">Acción 1</f:facet>
+                            <p:commandButton update="false" onclick="PF('modificarTarjetaDialog').show();" ajax="false" value="Modificar" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="">Acción 2</f:facet>
+                            <p:commandButton ajax="false" value="Eliminar" action="#{tarjetaController.eliminarTarjeta(tarjeta)}" />
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </p:fieldset>
+        </div>
+        <div>
+            <!-- Pop-up para modificar la tarjeta -->
+            <p:dialog header="Modificar Tarjeta" widgetVar="modificarTarjetaDialog" modal="true" resizable="false">
+                <h:form id="modificarTarjetaForm">
+                    <!-- Campos del formulario para modificar la tarjeta -->
+                    <h:outputLabel value="Nombre:" for="nombre" />
+                    <h:inputText id="nombreF" styleClass="input-text" value="#{tarjetaController.tarjeta.nombre}" />
+
+                    <h:outputLabel value="Tipo de Tarjeta:" for="tipo" />
+                    <p:selectOneMenu id="tipoF" value="#{tarjetaController.tarjeta.tipoTarjeta}">
+                        <f:selectItem itemLabel="Debito" itemValue="Debito" />
+                        <f:selectItem itemLabel="Credito" itemValue="Credito" />
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Saldo Disponible:" for="saldo" />
+                    <h:inputText id="saldoF" value="#{tarjetaController.tarjeta.saldoDisponible}" />
+
+                    <p:commandButton value="Confirmar" oncomplete="PF('modificarTarjetaDialog').hide()" />
+                </h:form>
+            </p:dialog>
+
         </div>
 
     </h:body>

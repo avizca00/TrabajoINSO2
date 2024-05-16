@@ -278,4 +278,10 @@ public class TarjetaController implements Serializable {
         // tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
     }
 
+    public void seleccionaTarjeta(Tarjetas_De_Credito tarjeta) {
+        this.tarjeta = tarjeta;
+
+        System.out.println("Tarjeta: " + tarjeta.getNombre());
+    }
+
 }
