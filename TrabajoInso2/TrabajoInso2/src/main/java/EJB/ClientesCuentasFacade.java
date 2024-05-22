@@ -43,8 +43,6 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
 
         // Ejecutar la consulta y obtener el resultado
         query.getResultList();
-        
-        System.out.println(query.getResultList().size());
 
         return query.getResultList();
     }

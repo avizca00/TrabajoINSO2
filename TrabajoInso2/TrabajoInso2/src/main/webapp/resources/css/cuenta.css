@@ -96,3 +96,19 @@ h3 {
     background-color: #ddd;
 }
 
+.modificar-tarjeta-grid {
+    width: 100%;
+    margin: auto;
+}
+
+.confirm-button {
+    margin-top: 10px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.cancel-button {
+    margin-top: 10px;
+    background-color: #f44336; /* Red */
+    color: white;
+}
