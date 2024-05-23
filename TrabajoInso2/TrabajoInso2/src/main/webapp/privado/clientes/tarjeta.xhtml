@@ -5,7 +5,7 @@
 
     <h:head>
         <title>Tarjetas Bancarias</title>
-        <h:outputStylesheet library="css" name="cuenta.css"/>
+        <h:outputStylesheet library="css" name="tarjeta.css"/>
     </h:head>
 
     <h:body>
@@ -41,7 +41,7 @@
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
                     </h:panelGrid>
-                    <h:commandButton value="Crear Cuenta" action="#{tarjetaController.crearTarjeta()}" styleClass="register-button" />
+                    <h:commandButton value="Crear Tarjeta" action="#{tarjetaController.crearTarjeta()}" styleClass="register-button" />
                 </p:fieldset>
             </h:form>
             <h:form id="tarjetasForm">

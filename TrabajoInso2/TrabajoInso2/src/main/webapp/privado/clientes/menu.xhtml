@@ -13,14 +13,14 @@
     <h:body>
         <div class="card">
             <h:form>
-                <p:growl id="messages"/>
-
                 <p:menubar>
                     <p:menuitem value="Home" action="#{menuController.redirectHome()}" icon="pi pi-fw pi-home"/>
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Cuentas" action="#{menuController.redirectCuentas()}" icon="pi pi-fw pi-wallet"/>
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Transferencias" action="#{menuController.redirectTransferencias()}" icon="pi pi-fw pi-euro"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Operaciones" action="#{menuController.redirectOperaciones()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Prestamos" action="#{menuController.redirectPrestamos()}" icon="pi pi-fw pi-"/>
                     <p:divider layout="vertical"/>

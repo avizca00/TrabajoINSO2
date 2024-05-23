@@ -7,6 +7,7 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
+import modelo.Cuentas;
 import modelo.Operaciones;
 
 /**
@@ -29,5 +30,7 @@ public interface OperacionesFacadeLocal {
     List<Operaciones> findRange(int[] range);
 
     int count();
+
+    List<Operaciones> operacionesPorCuenta(List<Cuentas> cuentas);
     
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Operaciones Bancarias</title>
+        <h:outputStylesheet library="css" name="operacion.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div class="container">
+            <h2>Operaciones</h2>
+            <h:form id="crearTarjetaForm">
+                <p:messages id="mess" globalOnly="true"/>
+                <p:fieldset legend="Operación">
+                    <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel value="Operación a realizar:" for="tipo" styleClass="output-text"/>
+                        <p:selectOneMenu id="tipo" value="#{operacionController.operacion.tipoOperacion}" required="true" styleClass="input-text">
+                            <f:selectItem itemLabel="Ingreso" itemValue="Ingreso" />
+                            <f:selectItem itemLabel="Retirada" itemValue="Retirada" />
+                        </p:selectOneMenu>
+                        <h:message for="tipo" style="color: red" />
+
+                        <h:outputLabel value="Importe de la Transacción:" for="saldo" styleClass="output-text"/>
+                        <h:inputText id="saldo" value="#{operacionController.operacion.importe}" required="true" styleClass="input-text">
+                            <f:convertNumber integerOnly="true" />
+                            <f:validator validatorId="javax.faces.DoubleRange" />
+                        </h:inputText>
+                        <h:message for="saldo" style="color: red" />
+
+                        <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
+                        <p:selectOneMenu id="cuenta" value="#{operacionController.cuenta.id}">
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItems value="#{operacionController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.id}" />
+                        </p:selectOneMenu>
+                        <h:message for="cuenta" style="color: red" />
+                    </h:panelGrid>
+                    <h:commandButton value="Realizar Operación" action="#{operacionController.creaOperacion()}" styleClass="register-button" />
+                </p:fieldset>
+            </h:form>
+            <h:form id="tarjetasForm">
+                <p:fieldset legend="Historial de Ingresos / Retiradas">
+                    <div class="table-container">
+                        <h:dataTable id="tarjetasTable" value="#{operacionController.operaciones}" var="operacion">
+                            <h:column>
+                                <f:facet name="header">Fecha</f:facet>
+                                    #{operacion.fecha}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Tipo de Operación</f:facet>
+                                    #{operacion.tipoOperacion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Importe de Operación</f:facet>
+                                #{operacion.importe}€
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Cuenta</f:facet>
+                                    #{operacion.cuenta.nombre}
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+        </div>
+
+    </h:body>
+
+</html>

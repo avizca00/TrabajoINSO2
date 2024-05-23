@@ -29,7 +29,6 @@ public class MenuController implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("aaa");
     }
 
     public void redirectHome() {
@@ -100,6 +99,15 @@ public class MenuController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             FacesContext.getCurrentInstance().getExternalContext()
                     .redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void redirectOperaciones() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/clientes/operacion.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
