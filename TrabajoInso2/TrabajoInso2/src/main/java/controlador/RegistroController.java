@@ -253,7 +253,11 @@ public class RegistroController implements Serializable {
         }
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: Su "+rol+" ha sido registrado exitosamente", "El nombre de usuario ya está en uso."));
-
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/index.xhtml");
+        }catch(IOException e){
+            
+        }
     }
 
     public void redirect() throws IOException {

@@ -11,8 +11,8 @@ body {
 }
         
 .container {
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 10%;
+    width: 80%;
     height: 95%;
     box-sizing: border-box;
     overflow-y: auto; 

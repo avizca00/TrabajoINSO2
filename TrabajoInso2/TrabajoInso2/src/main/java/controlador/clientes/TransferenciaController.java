@@ -285,11 +285,11 @@ public class TransferenciaController implements Serializable {
                                     + cuentaOrigen.getLimiteTransaccion() + "€",
                             "El importe de la transferencia supera el límite de transacción de su cuenta. Límite actual: "
                                     + cuentaOrigen.getLimiteTransaccion() + "€"));
-        } else {
+        } else {            
             cuentaOrigen.setSaldo(cuentaOrigen.getSaldo().subtract(transferencia.getMonto()));
             cuentaDestino.setSaldo(cuentaDestino.getSaldo().add(transferencia.getMonto()));
 
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            Date timestamp = new Date();
             cuentaOrigen.setFechaUltimaTransaccion(timestamp);
             cuentaDestino.setFechaUltimaTransaccion(timestamp);
 
