@@ -72,10 +72,10 @@ public class NotificacionesRecibos implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.idnotificacionesrecibos;
-        hash = 53 * hash + Objects.hashCode(this.reciboDomiciliario);
-        hash = 53 * hash + this.pagoRealizado;
-        hash = 53 * hash + Objects.hashCode(this.descripcion);
+        hash = 41 * hash + this.idnotificacionesrecibos;
+        hash = 41 * hash + Objects.hashCode(this.reciboDomiciliario);
+        hash = 41 * hash + this.pagoRealizado;
+        hash = 41 * hash + Objects.hashCode(this.descripcion);
         return hash;
     }
 
