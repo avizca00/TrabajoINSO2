@@ -108,14 +108,14 @@ public class RecibosDomiciliarios implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.idrecibosdomiciliarios;
-        hash = 47 * hash + Objects.hashCode(this.cuenta);
-        hash = 47 * hash + Objects.hashCode(this.importe);
-        hash = 47 * hash + Objects.hashCode(this.fechaEmision);
-        hash = 47 * hash + Objects.hashCode(this.fechaVencimiento);
-        hash = 47 * hash + this.estado;
-        hash = 47 * hash + Objects.hashCode(this.entidadPersona);
+        int hash = 5;
+        hash = 37 * hash + this.idrecibosdomiciliarios;
+        hash = 37 * hash + Objects.hashCode(this.cuenta);
+        hash = 37 * hash + Objects.hashCode(this.importe);
+        hash = 37 * hash + Objects.hashCode(this.fechaEmision);
+        hash = 37 * hash + Objects.hashCode(this.fechaVencimiento);
+        hash = 37 * hash + this.estado;
+        hash = 37 * hash + Objects.hashCode(this.entidadPersona);
         return hash;
     }
 
@@ -155,4 +155,5 @@ public class RecibosDomiciliarios implements Serializable {
         return true;
     }
 
+   
 }

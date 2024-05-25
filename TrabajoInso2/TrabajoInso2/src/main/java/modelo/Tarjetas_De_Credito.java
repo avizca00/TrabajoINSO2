@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,12 +55,12 @@ public class Tarjetas_De_Credito implements Serializable {
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
-    public int getId() {
+    public int getIdtarjetascredito() {
         return idtarjetascredito;
     }
 
-    public void setId(int id) {
-        this.idtarjetascredito = id;
+    public void setIdtarjetascredito(int idtarjetascredito) {
+        this.idtarjetascredito = idtarjetascredito;
     }
 
     public Cuentas getCuenta() {
@@ -98,8 +99,8 @@ public class Tarjetas_De_Credito implements Serializable {
         return CVV;
     }
 
-    public void setCVV(String cVV) {
-        CVV = cVV;
+    public void setCVV(String CVV) {
+        this.CVV = CVV;
     }
 
     public BigDecimal getSaldoDisponible() {
@@ -120,67 +121,56 @@ public class Tarjetas_De_Credito implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idtarjetascredito;
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        result = prime * result + ((numeroTarjeta == null) ? 0 : numeroTarjeta.hashCode());
-        result = prime * result + ((tipoTarjeta == null) ? 0 : tipoTarjeta.hashCode());
-        result = prime * result + ((fechaVencimiento == null) ? 0 : fechaVencimiento.hashCode());
-        result = prime * result + ((CVV == null) ? 0 : CVV.hashCode());
-        result = prime * result + ((saldoDisponible == null) ? 0 : saldoDisponible.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        return result;
+        int hash = 7;
+        hash = 31 * hash + this.idtarjetascredito;
+        hash = 31 * hash + Objects.hashCode(this.cuenta);
+        hash = 31 * hash + Objects.hashCode(this.numeroTarjeta);
+        hash = 31 * hash + Objects.hashCode(this.tipoTarjeta);
+        hash = 31 * hash + Objects.hashCode(this.fechaVencimiento);
+        hash = 31 * hash + Objects.hashCode(this.CVV);
+        hash = 31 * hash + Objects.hashCode(this.saldoDisponible);
+        hash = 31 * hash + Objects.hashCode(this.nombre);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Tarjetas_De_Credito other = (Tarjetas_De_Credito) obj;
-        if (idtarjetascredito != other.idtarjetascredito)
+        }
+        final Tarjetas_De_Credito other = (Tarjetas_De_Credito) obj;
+        if (this.idtarjetascredito != other.idtarjetascredito) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (!Objects.equals(this.numeroTarjeta, other.numeroTarjeta)) {
             return false;
-        if (numeroTarjeta == null) {
-            if (other.numeroTarjeta != null)
-                return false;
-        } else if (!numeroTarjeta.equals(other.numeroTarjeta))
+        }
+        if (!Objects.equals(this.tipoTarjeta, other.tipoTarjeta)) {
             return false;
-        if (tipoTarjeta == null) {
-            if (other.tipoTarjeta != null)
-                return false;
-        } else if (!tipoTarjeta.equals(other.tipoTarjeta))
+        }
+        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
             return false;
-        if (fechaVencimiento == null) {
-            if (other.fechaVencimiento != null)
-                return false;
-        } else if (!fechaVencimiento.equals(other.fechaVencimiento))
+        }
+        if (!Objects.equals(this.CVV, other.CVV)) {
             return false;
-        if (CVV == null) {
-            if (other.CVV != null)
-                return false;
-        } else if (!CVV.equals(other.CVV))
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
-        if (saldoDisponible == null) {
-            if (other.saldoDisponible != null)
-                return false;
-        } else if (!saldoDisponible.equals(other.saldoDisponible))
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
+        }
+        if (!Objects.equals(this.saldoDisponible, other.saldoDisponible)) {
             return false;
+        }
         return true;
     }
 
-
+    
 }

@@ -87,11 +87,11 @@ public class Promociones implements Serializable{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + this.idpromocion;
-        hash = 83 * hash + Objects.hashCode(this.descripcion);
-        hash = 83 * hash + Objects.hashCode(this.fechaInicio);
-        hash = 83 * hash + Objects.hashCode(this.fechaFin);
-        hash = 83 * hash + Objects.hashCode(this.descuento);
+        hash = 67 * hash + this.idpromocion;
+        hash = 67 * hash + Objects.hashCode(this.descripcion);
+        hash = 67 * hash + Objects.hashCode(this.fechaInicio);
+        hash = 67 * hash + Objects.hashCode(this.fechaFin);
+        hash = 67 * hash + Objects.hashCode(this.descuento);
         return hash;
     }
 
@@ -125,5 +125,5 @@ public class Promociones implements Serializable{
         return true;
     }
 
-
+    
 }

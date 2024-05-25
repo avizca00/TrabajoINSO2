@@ -155,7 +155,7 @@ public class TarjetaController implements Serializable {
 
     public void setTarjetaModElim(Tarjetas_De_Credito tarjetaModElim) {
         this.tarjetaModElim = tarjetaModElim;
-        System.out.println(this.tarjetaModElim.getId());
+        System.out.println(this.tarjetaModElim.getIdtarjetascredito());
     }
 
     @Override

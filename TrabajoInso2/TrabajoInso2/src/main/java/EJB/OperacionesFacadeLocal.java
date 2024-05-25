@@ -31,6 +31,6 @@ public interface OperacionesFacadeLocal {
 
     int count();
 
-    List<Operaciones> operacionesPorCuenta(List<Cuentas> cuentas);
+    public List<Operaciones> operacionesPorCuenta(List<Cuentas> cuentas);
     
 }

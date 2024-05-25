@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +32,9 @@ public class Cuentas implements Serializable{
 
     @Column(name = "tipoCuenta", nullable = false, length = 45)
     private String tipoCuenta;
+    
+    @Column(name = "IBAN", unique = true, nullable = false, length = 45)
+    private String IBAN;
 
     @Column(name = "saldo", nullable = false, precision = 15, scale = 2)
     private BigDecimal saldo;
@@ -53,12 +56,12 @@ public class Cuentas implements Serializable{
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
-    public int getId() {
+    public int getIdcuenta() {
         return idcuenta;
     }
 
-    public void setId(int id) {
-        this.idcuenta = id;
+    public void setIdcuenta(int idcuenta) {
+        this.idcuenta = idcuenta;
     }
 
     public String getTipoCuenta() {
@@ -67,6 +70,14 @@ public class Cuentas implements Serializable{
 
     public void setTipoCuenta(String tipoCuenta) {
         this.tipoCuenta = tipoCuenta;
+    }
+
+    public String getIBAN() {
+        return IBAN;
+    }
+
+    public void setIBAN(String IBAN) {
+        this.IBAN = IBAN;
     }
 
     public BigDecimal getSaldo() {
@@ -119,65 +130,58 @@ public class Cuentas implements Serializable{
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idcuenta;
-        result = prime * result + ((tipoCuenta == null) ? 0 : tipoCuenta.hashCode());
-        result = prime * result + ((saldo == null) ? 0 : saldo.hashCode());
-        result = prime * result + ((fechaApertura == null) ? 0 : fechaApertura.hashCode());
-        result = prime * result + ((tasaInteres == null) ? 0 : tasaInteres.hashCode());
-        result = prime * result + ((limiteTransaccion == null) ? 0 : limiteTransaccion.hashCode());
-        result = prime * result + ((fechaUltimaTransaccion == null) ? 0 : fechaUltimaTransaccion.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        return result;
+        int hash = 5;
+        hash = 47 * hash + this.idcuenta;
+        hash = 47 * hash + Objects.hashCode(this.tipoCuenta);
+        hash = 47 * hash + Objects.hashCode(this.IBAN);
+        hash = 47 * hash + Objects.hashCode(this.saldo);
+        hash = 47 * hash + Objects.hashCode(this.fechaApertura);
+        hash = 47 * hash + Objects.hashCode(this.tasaInteres);
+        hash = 47 * hash + Objects.hashCode(this.limiteTransaccion);
+        hash = 47 * hash + Objects.hashCode(this.fechaUltimaTransaccion);
+        hash = 47 * hash + Objects.hashCode(this.nombre);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Cuentas other = (Cuentas) obj;
-        if (idcuenta != other.idcuenta)
+        }
+        final Cuentas other = (Cuentas) obj;
+        if (this.idcuenta != other.idcuenta) {
             return false;
-        if (tipoCuenta == null) {
-            if (other.tipoCuenta != null)
-                return false;
-        } else if (!tipoCuenta.equals(other.tipoCuenta))
+        }
+        if (!Objects.equals(this.tipoCuenta, other.tipoCuenta)) {
             return false;
-        if (saldo == null) {
-            if (other.saldo != null)
-                return false;
-        } else if (!saldo.equals(other.saldo))
+        }
+        if (!Objects.equals(this.IBAN, other.IBAN)) {
             return false;
-        if (fechaApertura == null) {
-            if (other.fechaApertura != null)
-                return false;
-        } else if (!fechaApertura.equals(other.fechaApertura))
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
-        if (tasaInteres == null) {
-            if (other.tasaInteres != null)
-                return false;
-        } else if (!tasaInteres.equals(other.tasaInteres))
+        }
+        if (!Objects.equals(this.saldo, other.saldo)) {
             return false;
-        if (limiteTransaccion == null) {
-            if (other.limiteTransaccion != null)
-                return false;
-        } else if (!limiteTransaccion.equals(other.limiteTransaccion))
+        }
+        if (!Objects.equals(this.fechaApertura, other.fechaApertura)) {
             return false;
-        if (fechaUltimaTransaccion == null) {
-            if (other.fechaUltimaTransaccion != null)
-                return false;
-        } else if (!fechaUltimaTransaccion.equals(other.fechaUltimaTransaccion))
+        }
+        if (!Objects.equals(this.tasaInteres, other.tasaInteres)) {
             return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
+        }
+        if (!Objects.equals(this.limiteTransaccion, other.limiteTransaccion)) {
             return false;
+        }
+        if (!Objects.equals(this.fechaUltimaTransaccion, other.fechaUltimaTransaccion)) {
+            return false;
+        }
         return true;
     }
 

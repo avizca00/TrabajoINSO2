@@ -17,17 +17,17 @@
                 <p:fieldset legend="Transferencia">
                     <h:panelGrid columns="3" width="100%">
                         <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
-                        <p:selectOneMenu id="cuenta" value="#{transferenciaController.cuentaOrigen.id}">
+                        <p:selectOneMenu id="cuenta" value="#{transferenciaController.cuentaOrigen.idcuenta}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
-                            <f:selectItems value="#{transferenciaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.id}" />
+                            <f:selectItems value="#{transferenciaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
                         
-                        <h:outputLabel for="cDest" value="Número de Cuenta Bancaria Beneficiario:" />
-                        <h:inputText id="cDest" styleClass="input-text" required="true" value="#{transferenciaController.cuentaDestino}"/>
+                        <h:outputLabel for="cDest" value="IBAN de Cuenta Beneficiario:" />
+                        <h:inputText id="cDest" styleClass="input-text" required="true" value="#{transferenciaController.cuentaDestino.IBAN}"/>
                         <h:message for="cDest" style="color: red" />
 
-                        <h:outputLabel value="Importe de la Transferencia:" for="saldo" styleClass="output-text"/>
+                        <h:outputLabel value="Importe de la Transferencia:" for="saldo"/>
                         <h:inputText id="saldo" value="#{transferenciaController.transferencia.monto}" required="true" styleClass="input-text">
                             <f:convertNumber integerOnly="true" />
                             <f:validator validatorId="javax.faces.DoubleRange" />
@@ -52,13 +52,13 @@
                             </h:column>
 
                             <h:column>
-                                <f:facet name="header">Tipo de Operación</f:facet>
-                                    #{transferencia.cuentaBeneficiario}
+                                <f:facet name="header">Beneficiario</f:facet>
+                                    #{transferencia.cuentaBeneficiario.IBAN}
                             </h:column>
 
                             <h:column>
-                                <f:facet name="header">Cuenta</f:facet>
-                                    #{transferencia.cuentaPagador}
+                                <f:facet name="header">Pagador</f:facet>
+                                    #{transferencia.cuentaPagador.IBAN}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Importe de Transferencia</f:facet>

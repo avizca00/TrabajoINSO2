@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,12 +54,12 @@ public class Prestamos implements Serializable{
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
-    public int getId() {
+    public int getIdprestamo() {
         return idprestamo;
     }
 
-    public void setId(int id) {
-        this.idprestamo = id;
+    public void setIdprestamo(int idprestamo) {
+        this.idprestamo = idprestamo;
     }
 
     public Empleados getEmpleado() {
@@ -127,65 +128,58 @@ public class Prestamos implements Serializable{
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + idprestamo;
-        result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
-        result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
-        result = prime * result + estado;
-        result = prime * result + plazoMeses;
-        result = prime * result + ((tasaInteres == null) ? 0 : tasaInteres.hashCode());
-        result = prime * result + ((montoPrestamo == null) ? 0 : montoPrestamo.hashCode());
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        return result;
+        int hash = 3;
+        hash = 89 * hash + this.idprestamo;
+        hash = 89 * hash + Objects.hashCode(this.empleado);
+        hash = 89 * hash + Objects.hashCode(this.fechaInicio);
+        hash = 89 * hash + this.estado;
+        hash = 89 * hash + this.plazoMeses;
+        hash = 89 * hash + Objects.hashCode(this.tasaInteres);
+        hash = 89 * hash + Objects.hashCode(this.montoPrestamo);
+        hash = 89 * hash + Objects.hashCode(this.cuenta);
+        hash = 89 * hash + Objects.hashCode(this.nombre);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        Prestamos other = (Prestamos) obj;
-        if (idprestamo != other.idprestamo)
+        }
+        final Prestamos other = (Prestamos) obj;
+        if (this.idprestamo != other.idprestamo) {
             return false;
-        if (empleado == null) {
-            if (other.empleado != null)
-                return false;
-        } else if (!empleado.equals(other.empleado))
+        }
+        if (this.estado != other.estado) {
             return false;
-        if (fechaInicio == null) {
-            if (other.fechaInicio != null)
-                return false;
-        } else if (!fechaInicio.equals(other.fechaInicio))
+        }
+        if (this.plazoMeses != other.plazoMeses) {
             return false;
-        if (estado != other.estado)
+        }
+        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
             return false;
-        if (plazoMeses != other.plazoMeses)
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
-        if (tasaInteres == null) {
-            if (other.tasaInteres != null)
-                return false;
-        } else if (!tasaInteres.equals(other.tasaInteres))
+        }
+        if (!Objects.equals(this.empleado, other.empleado)) {
             return false;
-        if (montoPrestamo == null) {
-            if (other.montoPrestamo != null)
-                return false;
-        } else if (!montoPrestamo.equals(other.montoPrestamo))
+        }
+        if (!Objects.equals(this.tasaInteres, other.tasaInteres)) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (!Objects.equals(this.montoPrestamo, other.montoPrestamo)) {
             return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
+        }
         return true;
     }
 

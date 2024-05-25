@@ -38,6 +38,5 @@ public class OperacionesFacade extends AbstractFacade<Operaciones> implements Op
                 .setParameter("cuentas", cuentas)
                 .getResultList();
     }
-
     
 }

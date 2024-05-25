@@ -224,7 +224,7 @@ public class OperacionController implements Serializable {
     }
 
     public void creaOperacion() {
-        setCuenta(cuentaEJB.find(cuenta.getId()));
+        setCuenta(cuentaEJB.find(cuenta.getIdcuenta()));
 
         if(operacion.getTipoOperacion().equals("Retirada")){
             if(operacion.getImporte().compareTo(cuenta.getSaldo()) == 1){
