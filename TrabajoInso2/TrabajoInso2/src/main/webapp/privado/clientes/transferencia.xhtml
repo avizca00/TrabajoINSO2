@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Transferencias Bancarias</title>
+        <h:outputStylesheet library="css" name="operacion.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menu.xhtml"/>
+        <div class="container">
+            <h2>Transferencias</h2>
+            <h:form id="crearTrasnferenciaForm">
+                <p:messages id="mess" globalOnly="true"/>
+                <p:fieldset legend="Transferencia">
+                    <h:panelGrid columns="3" width="100%">
+                        <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
+                        <p:selectOneMenu id="cuenta" value="#{transferenciaController.cuentaOrigen.id}">
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItems value="#{transferenciaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.id}" />
+                        </p:selectOneMenu>
+                        <h:message for="cuenta" style="color: red" />
+                        
+                        <h:outputLabel for="cDest" value="Número de Cuenta Bancaria Beneficiario:" />
+                        <h:inputText id="cDest" styleClass="input-text" required="true" value="#{transferenciaController.cuentaDestino}"/>
+                        <h:message for="cDest" style="color: red" />
+
+                        <h:outputLabel value="Importe de la Transferencia:" for="saldo" styleClass="output-text"/>
+                        <h:inputText id="saldo" value="#{transferenciaController.transferencia.monto}" required="true" styleClass="input-text">
+                            <f:convertNumber integerOnly="true" />
+                            <f:validator validatorId="javax.faces.DoubleRange" />
+                        </h:inputText>
+                        <h:message for="saldo" style="color: red" />
+
+                        <h:outputLabel for="concepto" value="Concepto:" />
+                        <h:inputText id="concepto" styleClass="input-text" required="true" value="#{transferenciaController.transferencia.concepto}"/>
+                        <h:message for="concepto" style="color: red" />
+
+                    </h:panelGrid>
+                    <h:commandButton value="Realizar Transferencia" action="#{transferenciaController.realizarTransferencia()}" styleClass="register-button" />
+                </p:fieldset>
+            </h:form>
+            <h:form id="transfForm">
+                <p:fieldset legend="Historial de Transferencias">
+                    <div class="table-container">
+                        <h:dataTable id="transfTable" value="#{transferenciaController.transferencias}" var="transferencia">
+                            <h:column>
+                                <f:facet name="header">Fecha</f:facet>
+                                    #{transferencia.fecha}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Tipo de Operación</f:facet>
+                                    #{transferencia.cuentaBeneficiario}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Cuenta</f:facet>
+                                    #{transferencia.cuentaPagador}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Importe de Transferencia</f:facet>
+                                #{transferencia.monto}€
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Concepto</f:facet>
+                                    #{transferencia.concepto}
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+        </div>
+
+    </h:body>
+
+</html>
