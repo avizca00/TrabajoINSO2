@@ -18,6 +18,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import EJB.RecibosDomiciliariosFacadeLocal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import modelo.Clientes;
@@ -270,6 +271,8 @@ public class ReciboController implements Serializable {
         int a = recibo.getImporte().compareTo(BigDecimal.ZERO);
         cuenta = cuentaEJB.find(cuenta.getIdcuenta());
 
+        System.out.println("Fecha de vencimiento: " + recibo.getFechaVencimiento());
+
         if (a == -1 || a == 0) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -290,11 +293,6 @@ public class ReciboController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "No se ha seleccionado una cuenta. Seleccione una cuenta",
                             "No se ha seleccionado una cuenta. Seleccione una cuenta"));
-        } else if (notificacion.getDescripcion() == null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "No se ha introducido una descripción. Introduzca una descripción",
-                            "No se ha introducido una descripción. Introduzca una descripción"));
         } else {
             try {
                 recibo.setCuenta(cuenta);
@@ -309,6 +307,14 @@ public class ReciboController implements Serializable {
                 try {
                     notificacion.setPagoRealizado(1);
                     notificacion.setReciboDomiciliario(recibo);
+                    notificacion.setFecha(fechDate);
+                    
+                    Calendar calendar = Calendar.getInstance();
+                    System.out.println(fechDate.toString());
+                    calendar.setTime(notificacion.getFecha());
+                    int month = calendar.get(Calendar.MONTH);
+                    
+                    notificacion.setDescripcion("La notificacion del mes " + month + " está en estado pendiente");
                     notificacionEJB.create(notificacion);
                 } catch (Exception e) {
                     FacesContext.getCurrentInstance().addMessage(null,
@@ -316,6 +322,7 @@ public class ReciboController implements Serializable {
                                     "Error al crear la notificación",
                                     "Error al crear la notificación"));
                 }
+                recibos = reciboEJB.recibosPorCuenta(cuentas);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -324,5 +331,20 @@ public class ReciboController implements Serializable {
             }
         }
     }
+
+    public void pagarRecibo(NotificacionesRecibos notificacion) {
+        notificacion.setPagoRealizado(0);
+        notificacionEJB.edit(notificacion);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Recibo pagado con éxito",
+                        "Recibo pagado con éxito"));
+    }
+
+    public void cargarNotificaciones(RecibosDomiciliarios recibo) {
+        //notificaciones = notificacionEJB.notificacionesPorRecibo(recibo);
+    }
+    
+    
 
 }

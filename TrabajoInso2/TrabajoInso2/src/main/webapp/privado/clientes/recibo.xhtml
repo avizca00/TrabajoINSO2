@@ -6,6 +6,7 @@
     <h:head>
         <title>Recibos Domiciliarios</title>
         <h:outputStylesheet library="css" name="operacion.css"/>
+        <h:outputScript library="js" name="calendario.js"/>
     </h:head>
 
     <h:body>
@@ -29,19 +30,15 @@
                             <f:validator validatorId="javax.faces.DoubleRange" />
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
-                        
+
                         <h:outputLabel for="cDest" value="Entidad/Persona Beneficiaria:" />
                         <h:inputText id="cDest" styleClass="input-text" required="true" value="#{reciboController.recibo.entidadPersona}"/>
                         <h:message for="cDest" style="color: red" />
-                        
-                        <h:outputLabel for="desc" value="Descripción del Pago:" />
-                        <h:inputText id="desc" styleClass="input-text" required="true" value="#{reciboController.notificacion.descripcion}"/>
-                        <h:message for="desc" style="color: red" />
 
                         <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" />
-                        <p:calendar id="fechaVencimiento" value="#{reciboController.recibo.fechaVencimiento}" required="true"/>
+                        <p:calendar id="fechaVencimiento" value="#{reciboController.recibo.fechaVencimiento}" locale="es" required="true"/>
                         <h:message for="fechaVencimiento" style="color: red" />
-                        
+
                     </h:panelGrid>
                     <h:commandButton value="Realizar Operación" action="#{reciboController.creaRecibo()}" styleClass="register-button" />
                 </p:fieldset>
@@ -67,15 +64,43 @@
                                 <f:facet name="header">Fecha Emisión</f:facet>
                                     #{recibo.fechaEmision}
                             </h:column>
-                            
+
                             <h:column>
                                 <f:facet name="header">Fecha Vencimiento</f:facet>
                                     #{recibo.fechaVencimiento}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="">Acción 2</f:facet>
+                                <p:commandButton action="#{reciboController.cargarNotificaciones(recibo)}" value="Ver Notificaciones" oncomplete="PF('notificacionesDialog').show()" update=":notificacionesForm:notificacionesTable"/>
                             </h:column>
                         </h:dataTable>
                     </div>
                 </p:fieldset>
             </h:form>
+            <h:form id="notificacionesForm">
+                <p:dialog header="Notificaciones de Recibo" widgetVar="notificacionesDialog" modal="true" width="600">
+                    <h:dataTable id="notificacionesTable" var="notificacion">
+                        <h:column>
+                            <f:facet name="header">Descripción</f:facet>
+                                #{notificacion.descripcion}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Fecha de Notificación</f:facet>
+                                #{notificacion.fechaNotificacion}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Pago Realizado</f:facet>
+                                #{notificacion.pagoRealizado == 0 ? 'Sí' : 'No'}
+                        </h:column>
+                        
+                        <h:column>
+                                <f:facet name="">Acción 2</f:facet>
+                                <p:commandButton action="#{reciboController.pagarRecibo(notificacion)}" value="Pagar" update=":notificacionesForm:notificacionesTable"/>
+                            </h:column>
+                    </h:dataTable>
+                </p:dialog>
+            </h:form>
+
         </div>
 
     </h:body>

@@ -8,6 +8,7 @@ package EJB;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.NotificacionesRecibos;
+import modelo.RecibosDomiciliarios;
 
 /**
  *
@@ -29,5 +30,7 @@ public interface NotificacionesRecibosFacadeLocal {
     List<NotificacionesRecibos> findRange(int[] range);
 
     int count();
+
+    List<NotificacionesRecibos> notificacionesPorRecibo(RecibosDomiciliarios recibo);
     
 }
