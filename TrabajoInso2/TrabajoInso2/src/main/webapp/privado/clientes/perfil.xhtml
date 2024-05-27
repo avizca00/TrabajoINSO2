@@ -9,10 +9,10 @@
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
+        <p:messages id="mess" globalOnly="true"/>
         <div class="container">
             <h1>Perfil de Usuario</h1>
             <h:form>
-                <p:messages id="mess" globalOnly="true"/>
                 <h:panelGrid columns="3">
                     <h:outputLabel for="nombre" styleClass="output-Label" value="Nombre:" />
                     <h:inputText id="nombre" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.nombre}"/>

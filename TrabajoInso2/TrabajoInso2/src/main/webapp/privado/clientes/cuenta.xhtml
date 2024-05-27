@@ -10,11 +10,12 @@
 
     <h:body>
         <ui:include src="menu.xhtml"/>
+        <p:messages id="mess" globalOnly="true"/>
         <div class="container">
             <h2>Tus Cuentas Bancarias</h2>
             <h:form >
                 <p:fieldset legend="Creación de nueva cuenta">
-                    <p:messages id="mess" globalOnly="true"/>
+                    
                     <h:panelGrid columns="3" width="100%">
                         <h:outputLabel for="nombre" value="Nombre:" />
                         <h:inputText id="nombre" styleClass="input-text" required="true" value="#{cuentaController.cuenta.nombre}"/>

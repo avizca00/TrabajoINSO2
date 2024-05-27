@@ -10,11 +10,11 @@
 
     <h:body>
         <ui:include src="menu.xhtml"/>
+        <p:messages id="mess" globalOnly="true"/>
         <div class="container">
             <h2>Tus Tarjetas Bancarias</h2>
-            <h:form id="crearTarjetaForm">
+            <h:form id="crearTarjetaForm">    
                 <p:fieldset legend="Creación de nueva tarjeta bancaria">
-                    <p:messages id="mess" globalOnly="true"/>
                     <h:panelGrid columns="3" width="100%">
                         <h:outputLabel for="nombre" value="Nombre:" />
                         <h:inputText id="nombre" styleClass="input-text" required="true" value="#{tarjetaController.tarjeta.nombre}"/>
@@ -100,13 +100,13 @@
                         <h:outputLabel value=""/>
                         <h:outputLabel value="Nombre:" for="nombreF" />
                         <h:inputText id="nombreF" styleClass="input-text" value="#{tarjetaController.tarjetaModElim.nombre}" />
-                        
+
                         <h:outputLabel value="Tipo de Tarjeta:" for="tipoF" />
                         <p:selectOneMenu id="tipoF" value="#{tarjetaController.tarjetaModElim.tipoTarjeta}">
                             <f:selectItem itemLabel="Debito" itemValue="Debito" />
                             <f:selectItem itemLabel="Credito" itemValue="Credito" />
                         </p:selectOneMenu>
-                        
+
                         <h:outputLabel value="Saldo Disponible:" for="saldoF" />
                         <h:inputText id="saldoF" value="#{tarjetaController.tarjetaModElim.saldoDisponible}" />
 

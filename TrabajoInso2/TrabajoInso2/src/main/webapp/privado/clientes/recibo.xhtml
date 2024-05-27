@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <title>Recibos Domiciliarios</title>
-        <h:outputStylesheet library="css" name="operacion.css"/>
-        <h:outputScript library="js" name="calendario.js"/>
+        <h:outputStylesheet library="css" name="recibo.css" />
+        <h:outputScript library="js" name="calendario.js" />
     </h:head>
 
     <h:body>
-        <ui:include src="menu.xhtml"/>
+        <ui:include src="menu.xhtml" />
+        <p:messages id="mess" globalOnly="true" />
         <div class="container">
             <h2>Recibos</h2>
-            <h:form id="crearTarjetaForm">
-                <p:messages id="mess" globalOnly="true"/>
+            <h:form id="crearReciboForm">
                 <p:fieldset legend="Creación de Recibo Domiciliado">
                     <h:panelGrid columns="3" width="100%">
                         <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
                         <p:selectOneMenu id="cuenta" value="#{reciboController.cuenta.idcuenta}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
-                            <f:selectItems value="#{reciboController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
+                            <f:selectItems value="#{reciboController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}"
+                                           itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
 
-                        <h:outputLabel value="Importe del Recibo:" for="saldo" styleClass="output-text"/>
-                        <h:inputText id="saldo" value="#{reciboController.recibo.importe}" required="true" styleClass="input-text">
+                        <h:outputLabel value="Importe del Recibo:" for="saldo" styleClass="output-text" />
+                        <h:inputText id="saldo" value="#{reciboController.recibo.importe}" required="true"
+                                     styleClass="input-text">
                             <f:convertNumber integerOnly="true" />
                             <f:validator validatorId="javax.faces.DoubleRange" />
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
 
                         <h:outputLabel for="cDest" value="Entidad/Persona Beneficiaria:" />
-                        <h:inputText id="cDest" styleClass="input-text" required="true" value="#{reciboController.recibo.entidadPersona}"/>
+                        <h:inputText id="cDest" styleClass="input-text" required="true"
+                                     value="#{reciboController.recibo.entidadPersona}" />
                         <h:message for="cDest" style="color: red" />
 
                         <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" />
-                        <p:calendar id="fechaVencimiento" value="#{reciboController.recibo.fechaVencimiento}" locale="es" required="true"/>
+                        <p:calendar id="fechaVencimiento" value="#{reciboController.recibo.fechaVencimiento}" locale="es"
+                                    required="true" />
                         <h:message for="fechaVencimiento" style="color: red" />
 
                     </h:panelGrid>
-                    <h:commandButton value="Realizar Operación" action="#{reciboController.creaRecibo()}" styleClass="register-button" />
+                    <h:commandButton value="Realizar Operación" action="#{reciboController.creaRecibo()}"
+                                     styleClass="register-button" />
                 </p:fieldset>
             </h:form>
-            <h:form id="tarjetasForm">
+            <h:form id="recibosForm">
                 <p:fieldset legend="Recibos Domicilirios en sus Cuentas">
                     <div class="table-container">
-                        <h:dataTable id="tarjetasTable" value="#{reciboController.recibos}" var="recibo">
+                        <h:dataTable id="recibosTable" value="#{reciboController.recibos}" var="recibo">
                             <h:column>
                                 <f:facet name="header">Entidad/Persona Beneficiaria</f:facet>
                                     #{recibo.entidadPersona}
@@ -71,36 +75,51 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="">Acción 2</f:facet>
-                                <p:commandButton action="#{reciboController.cargarNotificaciones(recibo)}" value="Ver Notificaciones" oncomplete="PF('notificacionesDialog').show()" update=":notificacionesForm:notificacionesTable"/>
+                                <p:commandButton action="#{reciboController.cargarNotificaciones(recibo)}"
+                                                 value="Ver Notificaciones" oncomplete="PF('notificacionesDialog').show()"
+                                                 update=":notificacionesForm:notificacionesTable" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="">Acción 2</f:facet>
+                                <p:commandButton oncomplete="PF('confirmDialog').show()" action="#{reciboController.setRecibo(recibo)}" value="Eliminar"
+                                                 update="formEliminar" />
                             </h:column>
                         </h:dataTable>
                     </div>
                 </p:fieldset>
             </h:form>
             <h:form id="notificacionesForm">
-                <p:dialog header="Notificaciones de Recibo" widgetVar="notificacionesDialog" modal="true" width="600">
-                    <h:dataTable id="notificacionesTable" var="notificacion">
-                        <h:column>
-                            <f:facet name="header">Descripción</f:facet>
-                                #{notificacion.descripcion}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Fecha de Notificación</f:facet>
-                                #{notificacion.fechaNotificacion}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Pago Realizado</f:facet>
-                                #{notificacion.pagoRealizado == 0 ? 'Sí' : 'No'}
-                        </h:column>
-                        
-                        <h:column>
-                                <f:facet name="">Acción 2</f:facet>
-                                <p:commandButton action="#{reciboController.pagarRecibo(notificacion)}" value="Pagar" update=":notificacionesForm:notificacionesTable"/>
-                            </h:column>
-                    </h:dataTable>
+                <p:dialog header="Notificaciones de Recibo" widgetVar="notificacionesDialog" modal="true" width="800">
+                    <p:messages id="mess" globalOnly="true" />
+                    <p:dataTable value="#{reciboController.notificaciones}" var="notificacion" id="notificacionesTable"
+                                 styleClass="notificaciones-table"
+                                 rowStyleClass="#{notificacion.pagoRealizado == 1 ? 'pago-realizado' : 'pago-pendiente'}">
+                        <p:column headerText="Descripción">
+                            #{notificacion.descripcion}
+                        </p:column>
+                        <p:column headerText="Fecha de Notificación">
+                            #{notificacion.fecha}
+                        </p:column>
+                        <p:column headerText="Pago Realizado">
+                            #{notificacion.pagoRealizado == 1 ? 'Pagado' : 'Pendiente'}
+                        </p:column>
+                        <p:column headerText="Acción">
+                            <p:commandButton action="#{reciboController.pagarRecibo(notificacion)}" value="Pagar"
+                                             update=":notificacionesForm:notificacionesTable" styleClass="pagar-button"
+                                             rendered="#{notificacion.pagoRealizado != 1}" />
+                        </p:column>
+                    </p:dataTable>
                 </p:dialog>
             </h:form>
-
+        </div>
+        <div>
+            <!-- Dialogo de confirmacion de eliminacion -->
+            <p:confirmDialog header="Confirmar Eliminación" message="¿Está seguro de que desea eliminar este recibo?" severity="alert" widgetVar="confirmDialog">
+                <h:form id="formEliminar">
+                    <p:commandButton value="Sí" action="#{reciboController.eliminarRecibo()}" oncomplete="PF('confirmDialog').hide();" update=":recibosForm:recibosTable" />
+                    <p:commandButton value="No" onclick="PF('confirmDialog').hide()" type="button" />
+                </h:form>
+            </p:confirmDialog>
         </div>
 
     </h:body>
