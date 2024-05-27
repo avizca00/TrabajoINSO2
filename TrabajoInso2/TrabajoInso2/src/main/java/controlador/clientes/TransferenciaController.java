@@ -20,7 +20,6 @@ import EJB.ClientesCuentasFacadeLocal;
 import EJB.CuentasFacadeLocal;
 import EJB.TransferenciasFacadeLocal;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import modelo.Clientes;
 import modelo.ClientesCuentas;
 import modelo.Cuentas;

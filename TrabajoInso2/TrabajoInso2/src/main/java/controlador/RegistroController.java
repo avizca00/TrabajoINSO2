@@ -237,7 +237,7 @@ public class RegistroController implements Serializable {
 
         Sucursales s = new Sucursales();
         s = sucursalEJB.find(sucursal.getIdsucursal());
-        usuario.setSucursal(sucursal);
+        usuario.setSucursal(s);
         usuarioEJB.create(usuario);
         Date date = new Date();
 
@@ -258,10 +258,6 @@ public class RegistroController implements Serializable {
         }catch(IOException e){
             
         }
-    }
-
-    public void redirect() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
     }
 
 }

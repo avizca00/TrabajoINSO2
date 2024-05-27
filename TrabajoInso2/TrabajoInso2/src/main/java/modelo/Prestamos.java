@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,12 +32,9 @@ public class Prestamos implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idprestamo;
 
-    @ManyToOne
-    @JoinColumn(name = "Empleados_idEmpleado")
-    private Empleados empleado;
-
-    @Column(name = "fechaInicio", nullable = false, length = 45)
-    private String fechaInicio;
+    @Column(name = "fechaInicio", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
 
     @Column(name = "estado", nullable = false)
     private int estado;
@@ -51,6 +52,13 @@ public class Prestamos implements Serializable{
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuenta;
 
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "Empleados_idEmpleado"),
+            @JoinColumn(name = "Empleados_Usuarios_idUsuario")
+    })
+    private Empleados empleado;
+
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
@@ -62,19 +70,11 @@ public class Prestamos implements Serializable{
         this.idprestamo = idprestamo;
     }
 
-    public Empleados getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleados empleado) {
-        this.empleado = empleado;
-    }
-
-    public String getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
@@ -118,6 +118,14 @@ public class Prestamos implements Serializable{
         this.cuenta = cuenta;
     }
 
+    public Empleados getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleados empleado) {
+        this.empleado = empleado;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -128,60 +136,68 @@ public class Prestamos implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + this.idprestamo;
-        hash = 89 * hash + Objects.hashCode(this.empleado);
-        hash = 89 * hash + Objects.hashCode(this.fechaInicio);
-        hash = 89 * hash + this.estado;
-        hash = 89 * hash + this.plazoMeses;
-        hash = 89 * hash + Objects.hashCode(this.tasaInteres);
-        hash = 89 * hash + Objects.hashCode(this.montoPrestamo);
-        hash = 89 * hash + Objects.hashCode(this.cuenta);
-        hash = 89 * hash + Objects.hashCode(this.nombre);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + idprestamo;
+        result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
+        result = prime * result + estado;
+        result = prime * result + plazoMeses;
+        result = prime * result + ((tasaInteres == null) ? 0 : tasaInteres.hashCode());
+        result = prime * result + ((montoPrestamo == null) ? 0 : montoPrestamo.hashCode());
+        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
+        result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
+        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null) {
+        if (obj == null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
             return false;
-        }
-        final Prestamos other = (Prestamos) obj;
-        if (this.idprestamo != other.idprestamo) {
+        Prestamos other = (Prestamos) obj;
+        if (idprestamo != other.idprestamo)
             return false;
-        }
-        if (this.estado != other.estado) {
+        if (fechaInicio == null) {
+            if (other.fechaInicio != null)
+                return false;
+        } else if (!fechaInicio.equals(other.fechaInicio))
             return false;
-        }
-        if (this.plazoMeses != other.plazoMeses) {
+        if (estado != other.estado)
             return false;
-        }
-        if (!Objects.equals(this.fechaInicio, other.fechaInicio)) {
+        if (plazoMeses != other.plazoMeses)
             return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
+        if (tasaInteres == null) {
+            if (other.tasaInteres != null)
+                return false;
+        } else if (!tasaInteres.equals(other.tasaInteres))
             return false;
-        }
-        if (!Objects.equals(this.empleado, other.empleado)) {
+        if (montoPrestamo == null) {
+            if (other.montoPrestamo != null)
+                return false;
+        } else if (!montoPrestamo.equals(other.montoPrestamo))
             return false;
-        }
-        if (!Objects.equals(this.tasaInteres, other.tasaInteres)) {
+        if (cuenta == null) {
+            if (other.cuenta != null)
+                return false;
+        } else if (!cuenta.equals(other.cuenta))
             return false;
-        }
-        if (!Objects.equals(this.montoPrestamo, other.montoPrestamo)) {
+        if (empleado == null) {
+            if (other.empleado != null)
+                return false;
+        } else if (!empleado.equals(other.empleado))
             return false;
-        }
-        if (!Objects.equals(this.cuenta, other.cuenta)) {
+        if (nombre == null) {
+            if (other.nombre != null)
+                return false;
+        } else if (!nombre.equals(other.nombre))
             return false;
-        }
         return true;
     }
 
+    
     
 }

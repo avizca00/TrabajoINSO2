@@ -100,10 +100,14 @@
                         <p:column headerText="Fecha de Notificación">
                             #{notificacion.fecha}
                         </p:column>
+
+                        <p:column headerText="Importe del Recibo">
+                            #{notificacion.reciboDomiciliario.importe}€
+                        </p:column>
                         <p:column headerText="Pago Realizado">
                             #{notificacion.pagoRealizado == 1 ? 'Pagado' : 'Pendiente'}
                         </p:column>
-                        <p:column headerText="Acción">
+                        <p:column headerText="">
                             <p:commandButton action="#{reciboController.pagarRecibo(notificacion)}" value="Pagar"
                                              update=":notificacionesForm:notificacionesTable" styleClass="pagar-button"
                                              rendered="#{notificacion.pagoRealizado != 1}" />
