@@ -10,10 +10,10 @@
 
     <h:body>
         <ui:include src="menu.xhtml"/>
-        <p:messages id="mess" globalOnly="true"/>
         <div class="container">
             <h2>Operaciones</h2>
             <h:form id="crearTarjetaForm">
+                <p:messages id="mess" globalOnly="true"/>
                 <p:fieldset legend="Operación">
                     <h:panelGrid columns="3" width="100%">
                         <h:outputLabel value="Operación a realizar:" for="tipo" styleClass="output-text"/>
