@@ -10,6 +10,9 @@ import EJB.CuentasFacadeLocal;
 import EJB.NotificacionesRecibosFacadeLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -305,16 +308,17 @@ public class ReciboController implements Serializable {
                                 "Recibo creado con éxito",
                                 "Recibo creado con éxito"));
                 try {
-                    notificacion.setPagoRealizado(1);
+                    notificacion.setPagoRealizado(0);
                     notificacion.setReciboDomiciliario(recibo);
                     notificacion.setFecha(fechDate);
-                    
+
                     Calendar calendar = Calendar.getInstance();
-                    System.out.println(fechDate.toString());
+
                     calendar.setTime(notificacion.getFecha());
-                    int month = calendar.get(Calendar.MONTH);
-                    
-                    notificacion.setDescripcion("La notificacion del mes " + month + " está en estado pendiente");
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    String monthName = new DateFormatSymbols().getMonths()[month - 1];
+
+                    notificacion.setDescripcion("El recibo del mes " + monthName + " está en estado pendiente");
                     notificacionEJB.create(notificacion);
                 } catch (Exception e) {
                     FacesContext.getCurrentInstance().addMessage(null,
@@ -333,18 +337,64 @@ public class ReciboController implements Serializable {
     }
 
     public void pagarRecibo(NotificacionesRecibos notificacion) {
-        notificacion.setPagoRealizado(0);
-        notificacionEJB.edit(notificacion);
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Recibo pagado con éxito",
-                        "Recibo pagado con éxito"));
+        Cuentas c = cuentaEJB.find(notificacion.getReciboDomiciliario().getCuenta().getIdcuenta());
+        if (notificacion.getReciboDomiciliario().getFechaVencimiento().before(new Date())) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "El recibo está vencido. No se puede realizar el pago",
+                            "El recibo está vencido. No se puede realizar el pago"));
+        } else if (c.getSaldo().compareTo(notificacion.getReciboDomiciliario().getImporte()) == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Saldo insuficiente. No se puede realizar el pago",
+                            "Saldo insuficiente. No se puede realizar el pago"));
+        } else {
+            notificacion.setPagoRealizado(1);
+
+            notificacion.setFecha(new Date());
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.setTime(notificacion.getFecha());
+            int month = calendar.get(Calendar.MONTH) + 1;
+            String monthName = new DateFormatSymbols().getMonths()[month - 1];
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaPago = dateFormat.format(new Date());
+            notificacion.setDescripcion("El recibo del mes " + monthName + " ha sido pagado a fecha de: " + fechaPago);
+
+            c.setSaldo(c.getSaldo().subtract(notificacion.getReciboDomiciliario().getImporte()));
+            cuentaEJB.edit(c);
+            notificacionEJB.edit(notificacion);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Recibo pagado con éxito",
+                            "Recibo pagado con éxito"));
+        }
+
+    }
+
+    public void eliminarRecibo() {
+        try {
+            notificaciones = notificacionEJB.notificacionesPorRecibo(recibo);
+            notificaciones.forEach((n) -> {
+                notificacionEJB.remove(n);
+            });
+            reciboEJB.remove(recibo);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Recibo eliminado con éxito",
+                            "Recibo eliminado con éxito"));
+            recibos = reciboEJB.recibosPorCuenta(cuentas);
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error al eliminar el recibo",
+                            "Error al eliminar el recibo"));
+        }
     }
 
     public void cargarNotificaciones(RecibosDomiciliarios recibo) {
-        //notificaciones = notificacionEJB.notificacionesPorRecibo(recibo);
+        notificaciones = notificacionEJB.notificacionesPorRecibo(recibo);
     }
-    
-    
 
 }

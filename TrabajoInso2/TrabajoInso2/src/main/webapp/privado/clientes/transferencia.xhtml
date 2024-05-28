@@ -10,10 +10,11 @@
 
     <h:body>
         <ui:include src="menu.xhtml"/>
+        <p:messages id="mess" globalOnly="true"/>
         <div class="container">
             <h2>Transferencias</h2>
             <h:form id="crearTrasnferenciaForm">
-                <p:messages id="mess" globalOnly="true"/>
+                
                 <p:fieldset legend="Transferencia">
                     <h:panelGrid columns="3" width="100%">
                         <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />

@@ -33,7 +33,9 @@ public class NotificacionesRecibosFacade extends AbstractFacade<NotificacionesRe
 
     @Override
     public List<NotificacionesRecibos> notificacionesPorRecibo(RecibosDomiciliarios recibo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String jpql = "SELECT t FROM NotificacionesRecibos t WHERE t.reciboDomiciliario = :recibo";
+        return em.createQuery(jpql, NotificacionesRecibos.class).setParameter("recibo", recibo)
+                .getResultList();
     }
     
 }

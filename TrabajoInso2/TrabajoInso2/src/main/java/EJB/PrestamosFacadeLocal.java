@@ -7,6 +7,7 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
+import modelo.Cuentas;
 import modelo.Prestamos;
 
 /**
@@ -29,5 +30,7 @@ public interface PrestamosFacadeLocal {
     List<Prestamos> findRange(int[] range);
 
     int count();
+
+    public List<Prestamos> prestamosPorCuenta(List<Cuentas> cuentas);
     
 }
