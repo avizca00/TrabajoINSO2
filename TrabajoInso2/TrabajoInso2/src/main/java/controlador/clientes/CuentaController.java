@@ -16,6 +16,7 @@ import javax.inject.Named;
 import EJB.ClientesCuentasFacadeLocal;
 import EJB.ClientesFacadeLocal;
 import EJB.CuentasFacadeLocal;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,31 +175,40 @@ public class CuentaController implements Serializable {
     }
 
     public void crearCuenta() {
-        try {
-            Date date = new Date();
-            cuenta.setFechaApertura(date);
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            cuenta.setFechaUltimaTransaccion(timestamp);
-            creaIBANEspAleatorio();
-            cuentaEJB.create(cuenta);
+        int a = cuenta.getSaldo().compareTo(BigDecimal.ZERO);
+        if (a == -1 || a == 0) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "El saldo de la cuenta no puede ser 0 o negativo. Introduzca un saldo válido",
+                            "El saldo de la cuenta no puede ser 0 o negativo. Introduzca un saldo válido"));
+
+        } else {
             try {
-                clienteCuenta = new ClientesCuentas();
-                clienteCuenta.setClientes(cliente);
-                clienteCuenta.setCuentas(cuenta);
-                clienteCuentaEJB.create(clienteCuenta);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Info: Su cuenta ha sido creada y asociada correctamente.",
-                        "Su cuenta ha sido creada y asociada correctamente."));
-                cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
+                Date date = new Date();
+                cuenta.setFechaApertura(date);
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                cuenta.setFechaUltimaTransaccion(timestamp);
+                creaIBANEspAleatorio();
+                cuentaEJB.create(cuenta);
+                try {
+                    clienteCuenta = new ClientesCuentas();
+                    clienteCuenta.setClientes(cliente);
+                    clienteCuenta.setCuentas(cuenta);
+                    clienteCuentaEJB.create(clienteCuenta);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Info: Su cuenta ha sido creada y asociada correctamente.",
+                            "Su cuenta ha sido creada y asociada correctamente."));
+                    cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
+                } catch (Exception e) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            e.toString(),
+                            e.toString()));
+                }
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         e.toString(),
                         e.toString()));
             }
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    e.toString(),
-                    e.toString()));
         }
     }
 

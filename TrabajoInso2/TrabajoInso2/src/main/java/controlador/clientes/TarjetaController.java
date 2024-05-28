@@ -17,6 +17,7 @@ import EJB.ClientesFacadeLocal;
 import EJB.CuentasFacadeLocal;
 import EJB.Tarjetas_De_CreditoFacadeLocal;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -221,20 +222,30 @@ public class TarjetaController implements Serializable {
     }
 
     public void crearTarjeta() {
-        try {
-            creaCVVAleatorio();
-            creaNumeroTarjetaAleatorio();
-            tarjeta.setFechaVencimiento("Hoy");
-            tarjeta.setCuenta(cuenta);
-            tarjetaEJB.create(tarjeta);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente.",
-                    "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente."));
-            tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    e.toString(),
-                    e.toString()));
+
+        int a = tarjeta.getSaldoDisponible().compareTo(BigDecimal.ZERO);
+        if (a == -1 || a == 0) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "El saldo de la tarjeta no puede ser 0 o negativo. Introduzca un saldo válido",
+                            "El saldo de la tarjeta no puede ser 0 o negativo. Introduzca un saldo válido"));
+
+        } else {
+            try {
+                creaCVVAleatorio();
+                creaNumeroTarjetaAleatorio();
+                tarjeta.setFechaVencimiento("Hoy");
+                tarjeta.setCuenta(cuenta);
+                tarjetaEJB.create(tarjeta);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente.",
+                        "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente."));
+                tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        e.toString(),
+                        e.toString()));
+            }
         }
     }
 

@@ -23,17 +23,21 @@
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Perfil" action="#{menuController.redirectPerfil()}" icon="pi pi-fw pi-user"/>
                     <p:divider layout="vertical"/>
+                    
+                    <p:menuitem value="#{menuController.getError()}"/>
 
                     <f:facet name="options">
                         <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" onclick="PF('confirmLogoutDialog').show();" />
                     </f:facet>
                 </p:menubar>
             </h:form>
+            
         </div>
 
         <p:confirmDialog header="Confirmar cierre de sesión" message="¿Estás seguro de que quieres cerrar la sesión?" widgetVar="confirmLogoutDialog">
             <p:commandButton value="Sí" action="#{menuController.redirectLogout()}" />
             <p:commandButton value="No" onclick="PF('confirmLogoutDialog').hide()" type="button" />
         </p:confirmDialog>
+        
     </h:body>
 </html>

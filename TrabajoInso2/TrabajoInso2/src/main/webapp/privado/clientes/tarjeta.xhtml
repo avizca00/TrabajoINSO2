@@ -34,6 +34,11 @@
                             <f:validator validatorId="javax.faces.DoubleRange" />
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
+                        
+                         <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" />
+                        <p:calendar id="fechaVencimiento" value="#{tarjetaController.tarjeta.fechaVencimiento}" locale="es"
+                                    required="true" />
+                        <h:message for="fechaVencimiento" style="color: red" />
 
                         <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
                         <p:selectOneMenu id="cuenta" value="#{tarjetaController.cuenta.idcuenta}">
