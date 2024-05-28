@@ -234,7 +234,6 @@ public class TarjetaController implements Serializable {
             try {
                 creaCVVAleatorio();
                 creaNumeroTarjetaAleatorio();
-                tarjeta.setFechaVencimiento("Hoy");
                 tarjeta.setCuenta(cuenta);
                 tarjetaEJB.create(tarjeta);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
