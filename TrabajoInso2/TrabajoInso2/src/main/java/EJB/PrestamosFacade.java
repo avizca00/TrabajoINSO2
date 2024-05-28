@@ -5,11 +5,9 @@
  */
 package EJB;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import modelo.Cuentas;
 import modelo.Prestamos;
 
 /**
@@ -29,14 +27,6 @@ public class PrestamosFacade extends AbstractFacade<Prestamos> implements Presta
 
     public PrestamosFacade() {
         super(Prestamos.class);
-    }
-
-    @Override
-    public List<Prestamos> prestamosPorCuenta(List<Cuentas> cuentas) {
-        String jpql = "SELECT t FROM Prestamos t WHERE t.cuenta IN :cuentas";
-        return em.createQuery(jpql, Prestamos.class)
-                .setParameter("cuentas", cuentas)
-                .getResultList();
     }
     
 }
