@@ -17,6 +17,7 @@ import EJB.ClientesFacadeLocal;
 import EJB.CuentasFacadeLocal;
 import EJB.Tarjetas_De_CreditoFacadeLocal;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Clientes;
@@ -31,7 +32,9 @@ import modelo.Tarjetas_De_Credito;
 @Named
 @ViewScoped
 public class TarjetaController implements Serializable {
+
     private Tarjetas_De_Credito tarjeta;
+    private Tarjetas_De_Credito tarjetaModElim;
     private List<Tarjetas_De_Credito> tarjetas;
     private Clientes cliente;
     private ClientesCuentas clienteCuenta;
@@ -60,6 +63,7 @@ public class TarjetaController implements Serializable {
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         tarjeta = new Tarjetas_De_Credito();
         tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
+        tarjetaModElim = new Tarjetas_De_Credito();
     }
 
     public Tarjetas_De_Credito getTarjeta() {
@@ -142,82 +146,77 @@ public class TarjetaController implements Serializable {
         this.clienteCuentaEJB = clienteCuentaEJB;
     }
 
+    public Tarjetas_De_Credito getTarjetaModElim() {
+        return tarjetaModElim;
+    }
+
+    public void setTarjetaModElim(Tarjetas_De_Credito tarjetaModElim) {
+        this.tarjetaModElim = tarjetaModElim;
+        System.out.println(this.tarjetaModElim.getIdtarjetascredito());
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((tarjeta == null) ? 0 : tarjeta.hashCode());
-        result = prime * result + ((tarjetas == null) ? 0 : tarjetas.hashCode());
-        result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
-        result = prime * result + ((clienteCuenta == null) ? 0 : clienteCuenta.hashCode());
-        result = prime * result + ((cuentas == null) ? 0 : cuentas.hashCode());
-        result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
-        result = prime * result + ((tarjetaEJB == null) ? 0 : tarjetaEJB.hashCode());
-        result = prime * result + ((cuentaEJB == null) ? 0 : cuentaEJB.hashCode());
-        result = prime * result + ((clie == null) ? 0 : clie.hashCode());
-        result = prime * result + ((clienteCuentaEJB == null) ? 0 : clienteCuentaEJB.hashCode());
-        return result;
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.tarjeta);
+        hash = 89 * hash + Objects.hashCode(this.tarjetaModElim);
+        hash = 89 * hash + Objects.hashCode(this.tarjetas);
+        hash = 89 * hash + Objects.hashCode(this.cliente);
+        hash = 89 * hash + Objects.hashCode(this.clienteCuenta);
+        hash = 89 * hash + Objects.hashCode(this.cuentas);
+        hash = 89 * hash + Objects.hashCode(this.cuenta);
+        hash = 89 * hash + Objects.hashCode(this.tarjetaEJB);
+        hash = 89 * hash + Objects.hashCode(this.cuentaEJB);
+        hash = 89 * hash + Objects.hashCode(this.clie);
+        hash = 89 * hash + Objects.hashCode(this.clienteCuentaEJB);
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        TarjetaController other = (TarjetaController) obj;
-        if (tarjeta == null) {
-            if (other.tarjeta != null)
-                return false;
-        } else if (!tarjeta.equals(other.tarjeta))
+        }
+        final TarjetaController other = (TarjetaController) obj;
+        if (!Objects.equals(this.tarjeta, other.tarjeta)) {
             return false;
-        if (tarjetas == null) {
-            if (other.tarjetas != null)
-                return false;
-        } else if (!tarjetas.equals(other.tarjetas))
+        }
+        if (!Objects.equals(this.tarjetaModElim, other.tarjetaModElim)) {
             return false;
-        if (cliente == null) {
-            if (other.cliente != null)
-                return false;
-        } else if (!cliente.equals(other.cliente))
+        }
+        if (!Objects.equals(this.tarjetas, other.tarjetas)) {
             return false;
-        if (clienteCuenta == null) {
-            if (other.clienteCuenta != null)
-                return false;
-        } else if (!clienteCuenta.equals(other.clienteCuenta))
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
-        if (cuentas == null) {
-            if (other.cuentas != null)
-                return false;
-        } else if (!cuentas.equals(other.cuentas))
+        }
+        if (!Objects.equals(this.clienteCuenta, other.clienteCuenta)) {
             return false;
-        if (cuenta == null) {
-            if (other.cuenta != null)
-                return false;
-        } else if (!cuenta.equals(other.cuenta))
+        }
+        if (!Objects.equals(this.cuentas, other.cuentas)) {
             return false;
-        if (tarjetaEJB == null) {
-            if (other.tarjetaEJB != null)
-                return false;
-        } else if (!tarjetaEJB.equals(other.tarjetaEJB))
+        }
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
-        if (cuentaEJB == null) {
-            if (other.cuentaEJB != null)
-                return false;
-        } else if (!cuentaEJB.equals(other.cuentaEJB))
+        }
+        if (!Objects.equals(this.tarjetaEJB, other.tarjetaEJB)) {
             return false;
-        if (clie == null) {
-            if (other.clie != null)
-                return false;
-        } else if (!clie.equals(other.clie))
+        }
+        if (!Objects.equals(this.cuentaEJB, other.cuentaEJB)) {
             return false;
-        if (clienteCuentaEJB == null) {
-            if (other.clienteCuentaEJB != null)
-                return false;
-        } else if (!clienteCuentaEJB.equals(other.clienteCuentaEJB))
+        }
+        if (!Objects.equals(this.clie, other.clie)) {
             return false;
+        }
+        if (!Objects.equals(this.clienteCuentaEJB, other.clienteCuentaEJB)) {
+            return false;
+        }
         return true;
     }
 
@@ -256,12 +255,9 @@ public class TarjetaController implements Serializable {
     }
 
     // Implementar
-
-    public void eliminarTarjeta(Tarjetas_De_Credito tarjeta) {
-
-        System.out.println("Tarjeta: " + tarjeta);
+    public void eliminarTarjeta() {
         try {
-            tarjetaEJB.remove(tarjeta);
+            tarjetaEJB.remove(tarjetaModElim);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido eliminada correctamente.",
                     "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido eliminada correctamente."));
@@ -273,15 +269,18 @@ public class TarjetaController implements Serializable {
         }
     }
 
-    public void editarTarjeta(Tarjetas_De_Credito tarjeta) {
-        tarjetaEJB.edit(tarjeta);
-        // tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
-    }
-
-    public void seleccionaTarjeta(Tarjetas_De_Credito tarjeta) {
-        this.tarjeta = tarjeta;
-
-        System.out.println("Tarjeta: " + tarjeta.getNombre());
+    public void editarTarjeta() {
+        try {
+            tarjetaEJB.edit(tarjetaModElim);
+            tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido modificada correctamente.",
+                    "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido modificada correctamente."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    e.toString(),
+                    e.toString()));
+        }
     }
 
 }

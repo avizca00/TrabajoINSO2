@@ -99,13 +99,13 @@ public class Transferencias implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + this.idtransferencias;
-        hash = 19 * hash + Objects.hashCode(this.cuentaPagador);
-        hash = 19 * hash + Objects.hashCode(this.cuentaBeneficiario);
-        hash = 19 * hash + Objects.hashCode(this.fecha);
-        hash = 19 * hash + Objects.hashCode(this.monto);
-        hash = 19 * hash + Objects.hashCode(this.concepto);
+        int hash = 3;
+        hash = 97 * hash + this.idtransferencias;
+        hash = 97 * hash + Objects.hashCode(this.cuentaPagador);
+        hash = 97 * hash + Objects.hashCode(this.cuentaBeneficiario);
+        hash = 97 * hash + Objects.hashCode(this.fecha);
+        hash = 97 * hash + Objects.hashCode(this.monto);
+        hash = 97 * hash + Objects.hashCode(this.concepto);
         return hash;
     }
 

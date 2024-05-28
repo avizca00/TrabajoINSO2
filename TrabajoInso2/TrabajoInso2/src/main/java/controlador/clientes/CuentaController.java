@@ -179,6 +179,7 @@ public class CuentaController implements Serializable {
             cuenta.setFechaApertura(date);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             cuenta.setFechaUltimaTransaccion(timestamp);
+            creaIBANEspAleatorio();
             cuentaEJB.create(cuenta);
             try {
                 clienteCuenta = new ClientesCuentas();
@@ -194,6 +195,20 @@ public class CuentaController implements Serializable {
                         e.toString(),
                         e.toString()));
             }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    e.toString(),
+                    e.toString()));
+        }
+    }
+
+    public void creaIBANEspAleatorio() {
+        try {
+            String iban = "ES";
+            for (int i = 0; i < 22; i++) {
+                iban += (int) (Math.random() * 10);
+            }
+            cuenta.setIBAN(iban);
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     e.toString(),

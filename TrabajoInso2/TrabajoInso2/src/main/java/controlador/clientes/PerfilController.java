@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Objects;
 import modelo.Clientes;
 import modelo.Sucursales;
-import modelo.Usuarios;
 
 /**
  *
@@ -151,8 +150,6 @@ public class PerfilController implements Serializable {
         try {
             cuentaSeleccionada = sucursalEJB.find(cuentaSeleccionada.getIdsucursal());
             cliente.getUsuario().setSucursal(cuentaSeleccionada);
-            System.out.println(cliente.getUsuario().getSucursal().getIdsucursal());
-            System.out.println(cliente.getUsuario().getSucursal().getNombre());
             usuarioEJB.edit(cliente.getUsuario());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Los datos de su perfil han sido actualizados correctamente",

@@ -11,8 +11,8 @@ body {
 }
         
 .container {
-    margin-left: 10%;
-    width: 80%;
+    margin-left: 20%;
+    width: 60%;
     height: 95%;
     box-sizing: border-box;
     overflow-y: auto; 
@@ -70,8 +70,6 @@ h1 {
 .delete-button:hover {
     background-color: #e65c5c;
 }
-
-
 
 
 .output-text {
@@ -141,18 +139,25 @@ h3 {
 }
 
 .modificar-tarjeta-grid {
-    width: 100%;
-    margin: auto;
+    width: 60%;
+    margin-left:20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-items: center;
 }
 
-.confirm-button {
-    margin-top: 10px;
-    background-color: #4CAF50; /* Green */
-    color: white;
+.modificar-tarjeta-grid h:panelGroup {
+    grid-column: span 2;
+    text-align: right;
 }
 
+.confirm-button,
 .cancel-button {
-    margin-top: 10px;
-    background-color: #f44336; /* Red */
-    color: white;
+    margin-left: 10px;
+}
+
+.input-text {
+    width: 100%;
 }

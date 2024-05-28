@@ -41,5 +41,5 @@ public class ClientesFacade extends AbstractFacade<Clientes> implements Clientes
             return null; // Cliente no encontrado
         }
     }
-
+    
 }

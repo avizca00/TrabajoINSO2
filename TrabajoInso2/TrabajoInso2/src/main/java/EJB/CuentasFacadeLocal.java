@@ -29,5 +29,7 @@ public interface CuentasFacadeLocal {
     List<Cuentas> findRange(int[] range);
 
     int count();
+
+    public Cuentas encuentraCuentaPorIBAN(String iban);
     
 }

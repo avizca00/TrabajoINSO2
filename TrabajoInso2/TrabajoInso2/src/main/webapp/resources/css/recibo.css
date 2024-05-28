@@ -11,9 +11,9 @@ body {
 }
         
 .container {
-    margin-left: 10%;
-    width: 80%;
-    height: 95%;
+    margin-left: 20%;
+    width: 60%;
+    height: 100%;
     box-sizing: border-box;
     overflow-y: auto; 
     border: 1px solid #000;
@@ -70,8 +70,6 @@ h1 {
 .delete-button:hover {
     background-color: #e65c5c;
 }
-
-
 
 
 .output-text {
@@ -155,4 +153,39 @@ h3 {
     margin-top: 10px;
     background-color: #f44336; /* Red */
     color: white;
+}
+.notificaciones-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+    text-align: left;
+}
+.notificaciones-table th, .notificaciones-table td {
+    padding: 12px 15px;
+}
+.table-header {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+.pago-realizado {
+    background-color: #d4edda; /* Light green */
+    color: #155724;
+}
+.pago-pendiente {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24;
+}
+.pagar-button {
+    background-color: #009879;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.pagar-button:hover {
+    background-color: #007f63;
 }

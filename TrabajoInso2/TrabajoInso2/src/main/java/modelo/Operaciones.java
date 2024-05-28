@@ -31,7 +31,7 @@ public class Operaciones implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idoperacion;
+    private int idoperaciones;
 
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,12 +50,12 @@ public class Operaciones implements Serializable{
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuenta;
 
-    public int getIdoperacion() {
-        return idoperacion;
+    public int getIdoperaciones() {
+        return idoperaciones;
     }
 
-    public void setIdoperacion(int idoperacion) {
-        this.idoperacion = idoperacion;
+    public void setIdoperaciones(int idoperaciones) {
+        this.idoperaciones = idoperaciones;
     }
 
     public Date getFecha() {
@@ -100,13 +100,13 @@ public class Operaciones implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.idoperacion;
-        hash = 67 * hash + Objects.hashCode(this.fecha);
-        hash = 67 * hash + Objects.hashCode(this.importe);
-        hash = 67 * hash + Objects.hashCode(this.tipoOperacion);
-        hash = 67 * hash + this.estado;
-        hash = 67 * hash + Objects.hashCode(this.cuenta);
+        int hash = 5;
+        hash = 97 * hash + this.idoperaciones;
+        hash = 97 * hash + Objects.hashCode(this.fecha);
+        hash = 97 * hash + Objects.hashCode(this.importe);
+        hash = 97 * hash + Objects.hashCode(this.tipoOperacion);
+        hash = 97 * hash + this.estado;
+        hash = 97 * hash + Objects.hashCode(this.cuenta);
         return hash;
     }
 
@@ -122,7 +122,7 @@ public class Operaciones implements Serializable{
             return false;
         }
         final Operaciones other = (Operaciones) obj;
-        if (this.idoperacion != other.idoperacion) {
+        if (this.idoperaciones != other.idoperaciones) {
             return false;
         }
         if (this.estado != other.estado) {
@@ -143,5 +143,5 @@ public class Operaciones implements Serializable{
         return true;
     }
 
-    
+   
 }

@@ -143,17 +143,17 @@ public class Usuarios implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.idusuario;
-        hash = 67 * hash + Objects.hashCode(this.dniUsuario);
-        hash = 67 * hash + Objects.hashCode(this.nombre);
-        hash = 67 * hash + Objects.hashCode(this.apellido);
-        hash = 67 * hash + Objects.hashCode(this.userName);
-        hash = 67 * hash + Objects.hashCode(this.contrasenia);
-        hash = 67 * hash + Objects.hashCode(this.telefono);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.direccion);
-        hash = 67 * hash + Objects.hashCode(this.sucursal);
+        int hash = 3;
+        hash = 59 * hash + this.idusuario;
+        hash = 59 * hash + Objects.hashCode(this.dniUsuario);
+        hash = 59 * hash + Objects.hashCode(this.nombre);
+        hash = 59 * hash + Objects.hashCode(this.apellido);
+        hash = 59 * hash + Objects.hashCode(this.userName);
+        hash = 59 * hash + Objects.hashCode(this.contrasenia);
+        hash = 59 * hash + Objects.hashCode(this.telefono);
+        hash = 59 * hash + Objects.hashCode(this.email);
+        hash = 59 * hash + Objects.hashCode(this.direccion);
+        hash = 59 * hash + Objects.hashCode(this.sucursal);
         return hash;
     }
 
@@ -202,5 +202,5 @@ public class Usuarios implements Serializable {
         return true;
     }
 
-   
+    
 }

@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,6 +39,10 @@ public class NotificacionesRecibos implements Serializable {
 
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
+    
+    @Column(name = "fecha", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
     public int getIdnotificacionesrecibos() {
         return idnotificacionesrecibos;
@@ -69,13 +76,22 @@ public class NotificacionesRecibos implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.idnotificacionesrecibos;
-        hash = 79 * hash + Objects.hashCode(this.reciboDomiciliario);
-        hash = 79 * hash + this.pagoRealizado;
-        hash = 79 * hash + Objects.hashCode(this.descripcion);
+        int hash = 3;
+        hash = 47 * hash + this.idnotificacionesrecibos;
+        hash = 47 * hash + Objects.hashCode(this.reciboDomiciliario);
+        hash = 47 * hash + this.pagoRealizado;
+        hash = 47 * hash + Objects.hashCode(this.descripcion);
+        hash = 47 * hash + Objects.hashCode(this.fecha);
         return hash;
     }
 
@@ -103,8 +119,10 @@ public class NotificacionesRecibos implements Serializable {
         if (!Objects.equals(this.reciboDomiciliario, other.reciboDomiciliario)) {
             return false;
         }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
         return true;
     }
 
-    
 }

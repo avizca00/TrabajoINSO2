@@ -245,16 +245,18 @@ public class RegistroController implements Serializable {
             cliente.setUsuario(usuario);
             cliente.setFechaAlta(date);
             clienteEJB.create(cliente);
+            usuario = new Usuarios();
+            cliente = new Clientes();
 
         } else {
             empleado.setUsuario(usuario);
             empleado.setFechaContratacion(date);
             empleadoEJB.create(empleado);
+            usuario = new Usuarios();
+            empleado = new Empleados();
         }
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: Su "+rol+" ha sido registrado exitosamente", "El nombre de usuario ya está en uso."));
-
     }
+        
 
     public void redirect() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());

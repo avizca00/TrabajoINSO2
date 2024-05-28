@@ -5,9 +5,11 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import modelo.Cuentas;
 import modelo.Operaciones;
 
 /**
@@ -27,6 +29,14 @@ public class OperacionesFacade extends AbstractFacade<Operaciones> implements Op
 
     public OperacionesFacade() {
         super(Operaciones.class);
+    }
+
+    @Override
+    public List<Operaciones> operacionesPorCuenta(List<Cuentas> cuentas) {
+        String jpql = "SELECT p FROM Operaciones p WHERE p.cuenta IN :cuentas";
+        return em.createQuery(jpql, Operaciones.class)
+                .setParameter("cuentas", cuentas)
+                .getResultList();
     }
     
 }

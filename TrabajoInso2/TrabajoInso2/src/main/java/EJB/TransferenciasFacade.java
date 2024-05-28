@@ -5,9 +5,11 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import modelo.Cuentas;
 import modelo.Transferencias;
 
 /**
@@ -28,5 +30,13 @@ public class TransferenciasFacade extends AbstractFacade<Transferencias> impleme
     public TransferenciasFacade() {
         super(Transferencias.class);
     }
-    
+
+    @Override
+    public List<Transferencias> transferenciasPorCuenta(List<Cuentas> cuentas) {
+        String jpql = "SELECT t FROM Transferencias t WHERE t.cuentaPagador IN :cuentas OR t.cuentaBeneficiario IN :cuentas";
+        return em.createQuery(jpql, Transferencias.class)
+                .setParameter("cuentas", cuentas)
+                .getResultList();
+    }
+
 }

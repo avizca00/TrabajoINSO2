@@ -81,12 +81,12 @@ public class Sucursales implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.idsucursal;
-        hash = 37 * hash + Objects.hashCode(this.nombre);
-        hash = 37 * hash + Objects.hashCode(this.ubicacion);
-        hash = 37 * hash + Objects.hashCode(this.telefono);
-        hash = 37 * hash + Objects.hashCode(this.correoElectronico);
+        int hash = 7;
+        hash = 13 * hash + this.idsucursal;
+        hash = 13 * hash + Objects.hashCode(this.nombre);
+        hash = 13 * hash + Objects.hashCode(this.ubicacion);
+        hash = 13 * hash + Objects.hashCode(this.telefono);
+        hash = 13 * hash + Objects.hashCode(this.correoElectronico);
         return hash;
     }
 
@@ -120,4 +120,5 @@ public class Sucursales implements Serializable{
         return true;
     }
 
+    
 }

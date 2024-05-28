@@ -5,10 +5,12 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.NotificacionesRecibos;
+import modelo.RecibosDomiciliarios;
 
 /**
  *
@@ -27,6 +29,13 @@ public class NotificacionesRecibosFacade extends AbstractFacade<NotificacionesRe
 
     public NotificacionesRecibosFacade() {
         super(NotificacionesRecibos.class);
+    }
+
+    @Override
+    public List<NotificacionesRecibos> notificacionesPorRecibo(RecibosDomiciliarios recibo) {
+        String jpql = "SELECT t FROM NotificacionesRecibos t WHERE t.reciboDomiciliario = :recibo";
+        return em.createQuery(jpql, NotificacionesRecibos.class).setParameter("recibo", recibo)
+                .getResultList();
     }
     
 }

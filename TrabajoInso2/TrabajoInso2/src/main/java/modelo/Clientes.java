@@ -64,10 +64,10 @@ public class Clientes implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.idcliente;
-        hash = 29 * hash + Objects.hashCode(this.usuario);
-        hash = 29 * hash + Objects.hashCode(this.fechaAlta);
+        int hash = 5;
+        hash = 61 * hash + this.idcliente;
+        hash = 61 * hash + Objects.hashCode(this.usuario);
+        hash = 61 * hash + Objects.hashCode(this.fechaAlta);
         return hash;
     }
 
@@ -95,4 +95,5 @@ public class Clientes implements Serializable {
         return true;
     }
 
+    
 }

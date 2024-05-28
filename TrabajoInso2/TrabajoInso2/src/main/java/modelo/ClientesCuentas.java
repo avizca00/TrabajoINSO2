@@ -57,9 +57,9 @@ public class ClientesCuentas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 11 * hash + this.idClientesCuentas;
-        hash = 11 * hash + Objects.hashCode(this.cuentas);
-        hash = 11 * hash + Objects.hashCode(this.clientes);
+        hash = 17 * hash + this.idClientesCuentas;
+        hash = 17 * hash + Objects.hashCode(this.cuentas);
+        hash = 17 * hash + Objects.hashCode(this.clientes);
         return hash;
     }
 
@@ -86,5 +86,7 @@ public class ClientesCuentas implements Serializable {
         }
         return true;
     }
+
+    
 
 }

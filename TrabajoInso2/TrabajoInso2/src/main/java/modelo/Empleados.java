@@ -68,9 +68,9 @@ public class Empleados implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.idempleado;
-        hash = 53 * hash + Objects.hashCode(this.usuario);
-        hash = 53 * hash + Objects.hashCode(this.fechaContratacion);
+        hash = 79 * hash + this.idempleado;
+        hash = 79 * hash + Objects.hashCode(this.usuario);
+        hash = 79 * hash + Objects.hashCode(this.fechaContratacion);
         return hash;
     }
 

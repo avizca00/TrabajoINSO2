@@ -5,7 +5,6 @@
  */
 package EJB;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,15 +35,9 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
 
     @Override
     public List<Cuentas> cuentasPorCliente(Clientes cliente) {
-        List<Cuentas> cuentasCliente = new ArrayList<>();
         Query query = em.createQuery(
                 "SELECT cc.cuentas FROM ClientesCuentas cc WHERE cc.clientes.idcliente = :cliente");
         query.setParameter("cliente", cliente.getIdcliente());
-
-        // Ejecutar la consulta y obtener el resultado
-        query.getResultList();
-        
-        System.out.println(query.getResultList().size());
 
         return query.getResultList();
     }

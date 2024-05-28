@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "recibosDomiciliarios")
 public class RecibosDomiciliarios implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idrecibosdomiciliarios;
@@ -34,18 +36,16 @@ public class RecibosDomiciliarios implements Serializable {
     @JoinColumn(name = "Cuentas_idCuenta")
     private Cuentas cuenta;
 
-    @Column(name = "importe", nullable = false, length = 45)
-    private String importe;
+    @Column(name = "importe", precision = 15, scale = 2)
+    private BigDecimal importe;
 
     @Column(name = "fechaEmision", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaEmision;
 
-    @Column(name = "fechaVencimiento", nullable = false, length = 45)
-    private String fechaVencimiento;
-
-    @Column(name = "estado", nullable = false)
-    private int estado;
+    @Column(name = "fechaVencimiento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fechaVencimiento;
 
     @Column(name = "entidadPersona", nullable = false, length = 255)
     private String entidadPersona;
@@ -66,11 +66,11 @@ public class RecibosDomiciliarios implements Serializable {
         this.cuenta = cuenta;
     }
 
-    public String getImporte() {
+    public BigDecimal getImporte() {
         return importe;
     }
 
-    public void setImporte(String importe) {
+    public void setImporte(BigDecimal importe) {
         this.importe = importe;
     }
 
@@ -82,20 +82,12 @@ public class RecibosDomiciliarios implements Serializable {
         this.fechaEmision = fechaEmision;
     }
 
-    public String getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
     }
 
     public String getEntidadPersona() {
@@ -109,13 +101,12 @@ public class RecibosDomiciliarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.idrecibosdomiciliarios;
-        hash = 47 * hash + Objects.hashCode(this.cuenta);
-        hash = 47 * hash + Objects.hashCode(this.importe);
-        hash = 47 * hash + Objects.hashCode(this.fechaEmision);
-        hash = 47 * hash + Objects.hashCode(this.fechaVencimiento);
-        hash = 47 * hash + this.estado;
-        hash = 47 * hash + Objects.hashCode(this.entidadPersona);
+        hash = 37 * hash + this.idrecibosdomiciliarios;
+        hash = 37 * hash + Objects.hashCode(this.cuenta);
+        hash = 37 * hash + Objects.hashCode(this.importe);
+        hash = 37 * hash + Objects.hashCode(this.fechaEmision);
+        hash = 37 * hash + Objects.hashCode(this.fechaVencimiento);
+        hash = 37 * hash + Objects.hashCode(this.entidadPersona);
         return hash;
     }
 
@@ -134,22 +125,19 @@ public class RecibosDomiciliarios implements Serializable {
         if (this.idrecibosdomiciliarios != other.idrecibosdomiciliarios) {
             return false;
         }
-        if (this.estado != other.estado) {
-            return false;
-        }
-        if (!Objects.equals(this.importe, other.importe)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
-            return false;
-        }
         if (!Objects.equals(this.entidadPersona, other.entidadPersona)) {
             return false;
         }
         if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
         }
+        if (!Objects.equals(this.importe, other.importe)) {
+            return false;
+        }
         if (!Objects.equals(this.fechaEmision, other.fechaEmision)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
             return false;
         }
         return true;

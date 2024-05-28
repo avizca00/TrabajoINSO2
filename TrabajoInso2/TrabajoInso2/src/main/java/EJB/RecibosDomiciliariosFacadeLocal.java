@@ -7,6 +7,7 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
+import modelo.Cuentas;
 import modelo.RecibosDomiciliarios;
 
 /**
@@ -29,5 +30,7 @@ public interface RecibosDomiciliariosFacadeLocal {
     List<RecibosDomiciliarios> findRange(int[] range);
 
     int count();
+
+    public List<RecibosDomiciliarios> recibosPorCuenta(List<Cuentas> cuentas);
     
 }

@@ -4,23 +4,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Home</title>
-        <script type="text/javascript">
-            function confirmLogout() {
-                print("");
-            }
-        </script>
     </h:head>
     <h:body>
         <div class="card">
             <h:form>
-                <p:growl id="messages"/>
-
                 <p:menubar>
-                    <p:menuitem value="Home" action="#{menuController.redirectHome()}" icon="pi pi-fw pi-home"/>
-                    <p:divider layout="vertical"/>
                     <p:menuitem value="Cuentas" action="#{menuController.redirectCuentas()}" icon="pi pi-fw pi-wallet"/>
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Transferencias" action="#{menuController.redirectTransferencias()}" icon="pi pi-fw pi-euro"/>
+                    <p:divider layout="vertical"/>
+                    <p:menuitem value="Operaciones" action="#{menuController.redirectOperaciones()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
                     <p:menuitem value="Prestamos" action="#{menuController.redirectPrestamos()}" icon="pi pi-fw pi-"/>
                     <p:divider layout="vertical"/>
@@ -39,8 +32,8 @@
         </div>
 
         <p:confirmDialog header="Confirmar cierre de sesión" message="¿Estás seguro de que quieres cerrar la sesión?" widgetVar="confirmLogoutDialog">
-            <p:button value="No" onclick="PF('confirmLogoutDialog').hide();" />
-            <p:button value="Sí" onclick="confirmLogout();" />
+            <p:commandButton value="Sí" action="#{menuController.redirectLogout()}" />
+            <p:commandButton value="No" onclick="PF('confirmLogoutDialog').hide()" type="button" />
         </p:confirmDialog>
     </h:body>
 </html>

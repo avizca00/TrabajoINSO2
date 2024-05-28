@@ -5,9 +5,11 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Cuentas;
 
 /**
@@ -27,6 +29,18 @@ public class CuentasFacade extends AbstractFacade<Cuentas> implements CuentasFac
 
     public CuentasFacade() {
         super(Cuentas.class);
+    }
+
+    @Override
+    public Cuentas encuentraCuentaPorIBAN(String iban) {
+        Query query = em.createQuery("SELECT u FROM Cuentas u WHERE u.IBAN = :iban");
+        query.setParameter("iban", iban);
+        List<Cuentas> cuentas = query.getResultList();
+        try {
+            return cuentas.get(0);
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }
