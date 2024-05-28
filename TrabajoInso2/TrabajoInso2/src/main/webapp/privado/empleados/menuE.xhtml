@@ -4,37 +4,29 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Home</title>
-        <script type="text/javascript">
-            function confirmLogout() {
-                print("");
-            }
-        </script>
     </h:head>
     <h:body>
         <div class="card">
             <h:form>
-                <p:growl id="messages"/>
-
                 <p:menubar>
-                    <p:menuitem value="Gestión de usuarios" action="#{menuEController.redirectGestionUsuarios()}" icon="pi pi-fw pi-home"/>
+                    <p:menuitem value="Clientes" action="#{menuEController.redirectUsuarios()}" icon="pi pi-fw pi-wallet"/>
                     <p:divider layout="vertical"/>
-                    <p:menuitem value="Gestión de controlador.empleados" action="{}" icon="pi pi-fw pi-wallet"/>
+                    <p:menuitem value="Empleados" action="#{menuController.redirectTransferencias()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
-                    <p:menuitem value="Gestión de prestamos" action="{}" icon="pi pi-fw pi-euro"/>
+                    <p:menuitem value="Prestamos" action="#{menuController.redirectOperaciones()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
-                    <p:menuitem value="Gestión de cuentas" action="{}" icon="pi pi-fw pi-"/>
-                    <p:divider layout="vertical"/>
-
                     <f:facet name="options">
                         <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" onclick="PF('confirmLogoutDialog').show();" />
                     </f:facet>
                 </p:menubar>
             </h:form>
+            
         </div>
 
         <p:confirmDialog header="Confirmar cierre de sesión" message="¿Estás seguro de que quieres cerrar la sesión?" widgetVar="confirmLogoutDialog">
-            <p:button value="No" onclick="PF('confirmLogoutDialog').hide();" />
-            <p:button value="Sí" onclick="confirmLogout();" />
+            <p:commandButton value="Sí" action="#{menuEController.redirectLogout()}" />
+            <p:commandButton value="No" onclick="PF('confirmLogoutDialog').hide()" type="button" />
         </p:confirmDialog>
+        
     </h:body>
 </html>

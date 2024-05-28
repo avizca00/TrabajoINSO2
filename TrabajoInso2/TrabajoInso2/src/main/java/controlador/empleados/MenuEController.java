@@ -22,70 +22,6 @@ public class MenuEController implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("aaa");
-    }
-
-    public void redirectGestionUsuarios() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/home.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectPerfil() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/perfil.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectCuentas() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/cuenta.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectTransferencias() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/transferencia.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectPrestamos() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/prestamo.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectTarjetas() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/tarjeta.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void redirectRecibos() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/recibo.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void redirectLogout() {
@@ -93,6 +29,33 @@ public class MenuEController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             FacesContext.getCurrentInstance().getExternalContext()
                     .redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectUsuarios() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/regUsuarios.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void redirectEmpleados() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/regEmpleados.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void redirectPrestamos() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/regPrestamos.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }

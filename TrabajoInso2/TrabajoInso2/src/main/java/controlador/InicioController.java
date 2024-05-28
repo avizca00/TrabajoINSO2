@@ -57,7 +57,7 @@ public class InicioController implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/privado/clientes/cuenta.xhtml");
                 } else {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("empleado", empleado);
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/privado/empleados/menu.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/privado/empleados/regUsuarios.xhtml");
                 }
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Credenciales inválidas", "Credenciales inválidas");

@@ -247,16 +247,16 @@ public class RegistroController implements Serializable {
             clienteEJB.create(cliente);
             usuario = new Usuarios();
             cliente = new Clientes();
-
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.", "nfo: El usuario ha sido registrado correctamente."));
         } else {
             empleado.setUsuario(usuario);
             empleado.setFechaContratacion(date);
             empleadoEJB.create(empleado);
             usuario = new Usuarios();
             empleado = new Empleados();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.", "nfo: El usuario ha sido registrado correctamente."));
         }
     }
-        
 
     public void redirect() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
