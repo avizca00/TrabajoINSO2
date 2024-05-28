@@ -37,5 +37,5 @@ public class NotificacionesRecibosFacade extends AbstractFacade<NotificacionesRe
         return em.createQuery(jpql, NotificacionesRecibos.class).setParameter("recibo", recibo)
                 .getResultList();
     }
-
+    
 }

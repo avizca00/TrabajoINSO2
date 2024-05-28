@@ -30,6 +30,6 @@ public interface CuentasFacadeLocal {
 
     int count();
 
-    Cuentas encuentraCuentaPorIBAN(String iban);
+    public Cuentas encuentraCuentaPorIBAN(String iban);
     
 }

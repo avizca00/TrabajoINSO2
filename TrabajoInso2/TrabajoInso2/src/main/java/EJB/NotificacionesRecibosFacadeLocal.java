@@ -31,6 +31,6 @@ public interface NotificacionesRecibosFacadeLocal {
 
     int count();
 
-    List<NotificacionesRecibos> notificacionesPorRecibo(RecibosDomiciliarios recibo);
+    public List<NotificacionesRecibos> notificacionesPorRecibo(RecibosDomiciliarios recibo);
     
 }

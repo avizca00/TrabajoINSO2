@@ -41,5 +41,5 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
 
         return query.getResultList();
     }
-
+    
 }

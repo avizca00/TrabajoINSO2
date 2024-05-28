@@ -176,72 +176,98 @@ public class PrestamoController implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PrestamoController other = (PrestamoController) obj;
         if (cuenta == null) {
-            if (other.cuenta != null)
+            if (other.cuenta != null) {
                 return false;
-        } else if (!cuenta.equals(other.cuenta))
+            }
+        } else if (!cuenta.equals(other.cuenta)) {
             return false;
+        }
         if (prestamo == null) {
-            if (other.prestamo != null)
+            if (other.prestamo != null) {
                 return false;
-        } else if (!prestamo.equals(other.prestamo))
+            }
+        } else if (!prestamo.equals(other.prestamo)) {
             return false;
+        }
         if (prestamos == null) {
-            if (other.prestamos != null)
+            if (other.prestamos != null) {
                 return false;
-        } else if (!prestamos.equals(other.prestamos))
+            }
+        } else if (!prestamos.equals(other.prestamos)) {
             return false;
+        }
         if (cuentas == null) {
-            if (other.cuentas != null)
+            if (other.cuentas != null) {
                 return false;
-        } else if (!cuentas.equals(other.cuentas))
+            }
+        } else if (!cuentas.equals(other.cuentas)) {
             return false;
+        }
         if (empleado == null) {
-            if (other.empleado != null)
+            if (other.empleado != null) {
                 return false;
-        } else if (!empleado.equals(other.empleado))
+            }
+        } else if (!empleado.equals(other.empleado)) {
             return false;
+        }
         if (empleados == null) {
-            if (other.empleados != null)
+            if (other.empleados != null) {
                 return false;
-        } else if (!empleados.equals(other.empleados))
+            }
+        } else if (!empleados.equals(other.empleados)) {
             return false;
+        }
         if (cliente == null) {
-            if (other.cliente != null)
+            if (other.cliente != null) {
                 return false;
-        } else if (!cliente.equals(other.cliente))
+            }
+        } else if (!cliente.equals(other.cliente)) {
             return false;
+        }
         if (prestamosEJB == null) {
-            if (other.prestamosEJB != null)
+            if (other.prestamosEJB != null) {
                 return false;
-        } else if (!prestamosEJB.equals(other.prestamosEJB))
+            }
+        } else if (!prestamosEJB.equals(other.prestamosEJB)) {
             return false;
+        }
         if (cuentasEJB == null) {
-            if (other.cuentasEJB != null)
+            if (other.cuentasEJB != null) {
                 return false;
-        } else if (!cuentasEJB.equals(other.cuentasEJB))
+            }
+        } else if (!cuentasEJB.equals(other.cuentasEJB)) {
             return false;
+        }
         if (empleadosEJB == null) {
-            if (other.empleadosEJB != null)
+            if (other.empleadosEJB != null) {
                 return false;
-        } else if (!empleadosEJB.equals(other.empleadosEJB))
+            }
+        } else if (!empleadosEJB.equals(other.empleadosEJB)) {
             return false;
+        }
         if (clienteCuentaEJB == null) {
-            if (other.clienteCuentaEJB != null)
+            if (other.clienteCuentaEJB != null) {
                 return false;
-        } else if (!clienteCuentaEJB.equals(other.clienteCuentaEJB))
+            }
+        } else if (!clienteCuentaEJB.equals(other.clienteCuentaEJB)) {
             return false;
+        }
         return true;
     }
 
     public void crearPrestamo() {
+
         cuenta = cuentasEJB.find(cuenta.getIdcuenta());
         int monto = prestamo.getMontoPrestamo().compareTo(BigDecimal.ZERO);
         int interes = prestamo.getTasaInteres().compareTo(BigDecimal.ZERO);
@@ -258,23 +284,32 @@ public class PrestamoController implements Serializable {
                     "El plazo de meses no puede ser negativo o igual a 0"));
         } else {
             try {
-                prestamo.setCuenta(cuenta);
+                
                 eligeEmpleadoAleatorio();
-                System.out.println(empleado.getIdempleado());
+                
                 prestamo.setEmpleado(empleado);
+                System.out.println("sdsaksdkfask");
+                
+                prestamo.setCuenta(cuenta);
                 prestamo.setEstado(0);
                 prestamo.setFechaInicio(new Date());
+                System.out.println(prestamo.getEmpleado().getIdempleado() + "----" + empleado.getUsuario().getIdusuario());
+                
+                
+
                 prestamosEJB.create(prestamo);
-                cuenta.setSaldo(cuenta.getSaldo().add(prestamo.getMontoPrestamo()));
+                /*cuenta.setSaldo(cuenta.getSaldo().add(prestamo.getMontoPrestamo()));
                 cuentasEJB.edit(cuenta);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El préstamo se ha creado correctamente",
                                 "El préstamo se ha creado correctamente"));
-                prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
+                prestamos = prestamosEJB.prestamosPorCuenta(cuentas);*/
+                //System.out.println(empleado.getIdempleado() + "----" + empleado.getUsuario().getIdusuario());
+                
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear el préstamo",
-                                "Error al crear el préstamo"));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear el préstaamo",
+                                "Error al crear el préstamao"));
             }
         }
     }
@@ -284,9 +319,9 @@ public class PrestamoController implements Serializable {
         if (monto > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "El monto del préstamo no puede ser mayor al saldo de la cuenta. Saldo de la cuenta: "
-                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo(),
+                    + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo(),
                     "El monto del préstamo no puede ser mayor al saldo de la cuenta. Saldo de la cuenta: "
-                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo()));
+                    + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo()));
         } else {
             try {
                 BigDecimal saldo = prestamo.getCuenta().getSaldo().subtract(prestamo.getMontoPrestamo());

@@ -59,5 +59,5 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements Usuarios
         List<Usuarios> usuarios = q.getResultList();
         return !usuarios.isEmpty();
     }
-
+    
 }

@@ -237,7 +237,7 @@ public class RegistroController implements Serializable {
 
         Sucursales s = new Sucursales();
         s = sucursalEJB.find(sucursal.getIdsucursal());
-        usuario.setSucursal(s);
+        usuario.setSucursal(sucursal);
         usuarioEJB.create(usuario);
         Date date = new Date();
 
@@ -245,19 +245,21 @@ public class RegistroController implements Serializable {
             cliente.setUsuario(usuario);
             cliente.setFechaAlta(date);
             clienteEJB.create(cliente);
+            usuario = new Usuarios();
+            cliente = new Clientes();
 
         } else {
             empleado.setUsuario(usuario);
             empleado.setFechaContratacion(date);
             empleadoEJB.create(empleado);
+            usuario = new Usuarios();
+            empleado = new Empleados();
         }
+    }
+        
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: Su "+rol+" ha sido registrado exitosamente", "El nombre de usuario ya está en uso."));
-        try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/TrabajoInso2/faces/index.xhtml");
-        }catch(IOException e){
-            
-        }
+    public void redirect() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
     }
 
 }

@@ -38,5 +38,5 @@ public class TransferenciasFacade extends AbstractFacade<Transferencias> impleme
                 .setParameter("cuentas", cuentas)
                 .getResultList();
     }
-    
+
 }

@@ -7,7 +7,6 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-
 import modelo.Cuentas;
 import modelo.Transferencias;
 
@@ -32,6 +31,6 @@ public interface TransferenciasFacadeLocal {
 
     int count();
 
-    List<Transferencias> transferenciasPorCuenta(List<Cuentas> cuentas);
+    public List<Transferencias> transferenciasPorCuenta(List<Cuentas> cuentas);
     
 }
