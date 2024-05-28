@@ -65,33 +65,31 @@ public class MenuController implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         MenuController other = (MenuController) obj;
         if (clientesCuentasEJB == null) {
-            if (other.clientesCuentasEJB != null)
+            if (other.clientesCuentasEJB != null) {
                 return false;
-        } else if (!clientesCuentasEJB.equals(other.clientesCuentasEJB))
+            }
+        } else if (!clientesCuentasEJB.equals(other.clientesCuentasEJB)) {
             return false;
-        if (cuentas == null) {
-            if (other.cuentas != null)
-                return false;
-        } else if (!cuentas.equals(other.cuentas))
-            return false;
-        return true;
-    }
-
-    public void redirectHome() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("/TrabajoInso2/faces/privado/clientes/home.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        if (cuentas == null) {
+            if (other.cuentas != null) {
+                return false;
+            }
+        } else if (!cuentas.equals(other.cuentas)) {
+            return false;
+        }
+        return true;
     }
 
     public void redirectPerfil() {
