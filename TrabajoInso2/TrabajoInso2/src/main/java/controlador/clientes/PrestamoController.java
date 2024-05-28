@@ -153,8 +153,8 @@ public class PrestamoController implements Serializable {
                 prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear el préstamo: "+e.toString(),
-                                "Error al crear el préstamo: "+e.toString()));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear el préstamo: " + e.toString(),
+                                "Error al crear el préstamo: " + e.toString()));
             }
         }
     }
@@ -164,26 +164,31 @@ public class PrestamoController implements Serializable {
         if (monto > 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "El monto del préstamo no puede ser mayor al saldo de la cuenta. Saldo de la cuenta: "
-                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo(),
+                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: "
+                            + prestamo.getMontoPrestamo(),
                     "El monto del préstamo no puede ser mayor al saldo de la cuenta. Saldo de la cuenta: "
-                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: " + prestamo.getMontoPrestamo()));
+                            + prestamo.getCuenta().getSaldo() + " Monto del prestamo: "
+                            + prestamo.getMontoPrestamo()));
         } else {
             try {
                 BigDecimal saldo = prestamo.getCuenta().getSaldo().subtract(prestamo.getMontoPrestamo());
-                prestamo.getCuenta().setSaldo(saldo);
-                cuentasEJB.edit(prestamo.getCuenta());
+                cuenta = prestamo.getCuenta();
+                cuenta.setSaldo(saldo);
+                cuentasEJB.edit(cuenta);
 
                 prestamo.setEstado(1);
                 prestamosEJB.edit(prestamo);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El préstamo se ha pagado correctamente",
                                 "El préstamo se ha pagado correctamente"));
+                prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al pagar el prestamo",
                                 "Error al pagar el prestamo"));
             }
         }
+
     }
 
 }

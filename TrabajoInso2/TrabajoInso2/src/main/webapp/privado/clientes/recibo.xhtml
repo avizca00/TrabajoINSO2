@@ -90,7 +90,6 @@
             </h:form>
             <h:form id="notificacionesForm">
                 <p:dialog header="Notificaciones de Recibo" widgetVar="notificacionesDialog" modal="true" width="800">
-                    <p:messages id="mess" globalOnly="true" />
                     <p:dataTable value="#{reciboController.notificaciones}" var="notificacion" id="notificacionesTable"
                                  styleClass="notificaciones-table"
                                  rowStyleClass="#{notificacion.pagoRealizado == 1 ? 'pago-realizado' : 'pago-pendiente'}">

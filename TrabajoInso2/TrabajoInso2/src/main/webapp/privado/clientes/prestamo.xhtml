@@ -77,7 +77,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name=""></f:facet>
-                                <p:commandButton action="#{prestamoController.pagarPrestamo(prestamo)}" value="Pagar" update=":prestamosForm:prestamosTable" rendered="#{prestamo.estado != 1}"/>
+                                <p:commandButton action="#{prestamoController.pagarPrestamo(prestamo)}" value="Pagar" update="prestamosForm" rendered="#{prestamo.estado == 2}"/>
                             </h:column>
                         </h:dataTable>
                     </div>
