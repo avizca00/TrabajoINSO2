@@ -134,7 +134,7 @@ public class PrestamoController implements Serializable {
                     "El monto del préstamo no puede ser negativo", "El monto del préstamo no puede ser negativo"));
         } else if (interes < 0 || interes == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "La tasa de interes no puede ser negativa", "La tasa de interes no puede ser negativa"));
+                    "La tasa de interés no puede ser negativa", "La tasa de interés no puede ser negativa"));
         } else if (prestamo.getPlazoMeses() == 0 || prestamo.getPlazoMeses() < 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "El plazo de meses no puede ser negativo o igual a 0",
@@ -171,7 +171,8 @@ public class PrestamoController implements Serializable {
                             + prestamo.getMontoPrestamo()));
         } else {
             try {
-                BigDecimal saldo = prestamo.getCuenta().getSaldo().subtract(prestamo.getMontoPrestamo());
+                BigDecimal saldo = prestamo.getCuenta().getSaldo().subtract(prestamo.getMontoPrestamo().add(prestamo
+                        .getMontoPrestamo().multiply(prestamo.getTasaInteres().divide(BigDecimal.valueOf(100)))));
                 cuenta = prestamo.getCuenta();
                 cuenta.setSaldo(saldo);
                 cuentasEJB.edit(cuenta);
@@ -184,8 +185,8 @@ public class PrestamoController implements Serializable {
                 prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al pagar el prestamo",
-                                "Error al pagar el prestamo"));
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al pagar el préstamo",
+                                "Error al pagar el préstamo"));
             }
         }
 
