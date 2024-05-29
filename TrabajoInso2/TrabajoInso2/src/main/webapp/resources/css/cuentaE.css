@@ -1,0 +1,85 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    width: 100%;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.container {
+    margin: 30px auto;
+    width: auto; /* Cambiado a auto */
+    max-width: 95%; /* Máximo 95% del ancho del viewport */
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+}
+
+.container h2 {
+    font-size: 28px;
+    color: #007bff; /* Color del título */
+    margin: 20px 0;
+    font-weight: 300;
+}
+
+.input-text,
+.select-one-menu {
+    width: calc(100% - 24px); /* Ancho menos el padding vertical */
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.table-container {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto; /* Añade barra de desplazamiento horizontal si es necesario */
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table-container tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-container tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.output-label,
+.output-text {
+    font-size: 18px;
+    margin: 10px 0;
+}
