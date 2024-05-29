@@ -24,10 +24,7 @@ public class ClientesCuentas implements Serializable {
     private Cuentas cuentas;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "Clientes_idCliente"),
-            @JoinColumn(name = "Clientes_Usuarios_idUsuario")
-    })
+    @JoinColumn(name = "Clientes_idCliente")
     private Clientes clientes;
 
     public int getIdClientesCuentas() {
@@ -86,7 +83,5 @@ public class ClientesCuentas implements Serializable {
         }
         return true;
     }
-
-    
 
 }

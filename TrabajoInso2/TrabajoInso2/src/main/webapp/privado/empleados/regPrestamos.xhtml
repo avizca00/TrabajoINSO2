@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Registro de Clientes</title>
+        <h:outputStylesheet library="css" name="cuenta.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menuE.xhtml"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
+        <div class="container">
+            <h2>Préstamos Pendientes de Aceptación</h2>
+            <h:form id="prestamosForm">
+                <p:fieldset legend="Tabla de Préstamos">
+                    <div class="table-container">
+                        <h:dataTable id="prestamosTable" value="#{regPrestamosController.prestamos}" var="prestamo" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Id del Préstamo</f:facet>
+                                    #{prestamo.idprestamo}
+                            </h:column>                            
+                            <h:column>
+                                <f:facet name="header">IBAN de la Cuenta</f:facet>
+                                    #{prestamo.cuenta.IBAN}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Nombre</f:facet>
+                                    #{prestamo.nombre}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha de Inicio</f:facet>
+                                    #{prestamo.fechaInicio}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Plazo de Meses</f:facet>
+                                    #{prestamo.plazoMeses}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Monto del Préstamo</f:facet>
+                                #{prestamo.montoPrestamo}€
+                            </h:column>
+                            <h:column>
+                                <f:facet name=""></f:facet>
+                                <p:commandButton action="#{regPrestamosController.aceptarDenegarPrestamo(prestamo, 2)}" value="Aceptar" update="prestamosForm" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name=""></f:facet>
+                                <p:commandButton action="#{regPrestamosController.aceptarDenegarPrestamo(prestamo, 3)}" value="Denegar" update="prestamosForm" />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+        </div>
+    </h:body>
+
+</html>

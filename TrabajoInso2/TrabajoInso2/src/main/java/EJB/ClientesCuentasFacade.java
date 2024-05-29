@@ -36,10 +36,10 @@ public class ClientesCuentasFacade extends AbstractFacade<ClientesCuentas> imple
     @Override
     public List<Cuentas> cuentasPorCliente(Clientes cliente) {
         Query query = em.createQuery(
-                "SELECT cc.cuentas FROM ClientesCuentas cc WHERE cc.clientes.idcliente = :cliente");
-        query.setParameter("cliente", cliente.getIdcliente());
+                "SELECT cc.cuentas FROM ClientesCuentas cc WHERE cc.clientes = :cliente");
+        query.setParameter("cliente", cliente);
 
         return query.getResultList();
     }
-    
+
 }

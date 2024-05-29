@@ -145,8 +145,6 @@ public class PrestamoController implements Serializable {
                 prestamo.setEstado(0);
                 prestamo.setFechaInicio(new Date());
                 prestamosEJB.create(prestamo);
-                cuenta.setSaldo(cuenta.getSaldo().add(prestamo.getMontoPrestamo()));
-                cuentasEJB.edit(cuenta);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El préstamo se ha creado correctamente",
                                 "El préstamo se ha creado correctamente"));
