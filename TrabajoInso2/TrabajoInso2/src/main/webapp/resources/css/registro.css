@@ -1,43 +1,52 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
+    margin: 0;
+    font-size: 20px;
 }
 
 .container {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
+    margin: 30px auto;
+    width: 80%;
+    max-width: 600px; 
+    background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 100%;
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
+    font-weight: 300;
+    color: #007bff;
+    margin: 20px 0;
+    font-size: 36px; 
 }
 
-.input-text {
+.output-text, .output-label, p\\:outputLabel {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 24px; 
+    text-align: center; 
+}
+
+.input-text, .input-secret, p\\:inputText, p\\:inputSecret, .select-one-menu, p\\:selectOneMenu {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 24px; 
 }
 
-.register-button {
-    background-color: #ff6666;
+.register-button, .login-button {
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -45,19 +54,15 @@ h1 {
     padding: 12px;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 20px; 
+    margin-top: 10px;
 }
 
-.register-button:hover {
-    background-color: #e65c5c;
+.register-button:hover, .login-button:hover {
+    background-color: #0056b3;
 }
 
-.login-link {
-    color: #ff6666;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.login-link:hover {
-    text-decoration: underline;
+p\\:selectOneButton {
+    display: flex;
+    justify-content: center;
 }
