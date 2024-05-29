@@ -9,6 +9,7 @@ import EJB.ClientesFacadeLocal;
 import EJB.EmpleadosFacadeLocal;
 import EJB.SucursalesFacadeLocal;
 import EJB.UsuariosFacadeLocal;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import modelo.Usuarios;
 @Named
 @ViewScoped
 public class RegUsuariosController implements Serializable {
+
     private List<Clientes> clientes;
     private Clientes cliente;
     private Empleados empleado;
@@ -153,58 +155,79 @@ public class RegUsuariosController implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         RegUsuariosController other = (RegUsuariosController) obj;
         if (clientes == null) {
-            if (other.clientes != null)
+            if (other.clientes != null) {
                 return false;
-        } else if (!clientes.equals(other.clientes))
+            }
+        } else if (!clientes.equals(other.clientes)) {
             return false;
+        }
         if (cliente == null) {
-            if (other.cliente != null)
+            if (other.cliente != null) {
                 return false;
-        } else if (!cliente.equals(other.cliente))
+            }
+        } else if (!cliente.equals(other.cliente)) {
             return false;
+        }
         if (empleado == null) {
-            if (other.empleado != null)
+            if (other.empleado != null) {
                 return false;
-        } else if (!empleado.equals(other.empleado))
+            }
+        } else if (!empleado.equals(other.empleado)) {
             return false;
+        }
         if (sucursal == null) {
-            if (other.sucursal != null)
+            if (other.sucursal != null) {
                 return false;
-        } else if (!sucursal.equals(other.sucursal))
+            }
+        } else if (!sucursal.equals(other.sucursal)) {
             return false;
+        }
         if (sucursales == null) {
-            if (other.sucursales != null)
+            if (other.sucursales != null) {
                 return false;
-        } else if (!sucursales.equals(other.sucursales))
+            }
+        } else if (!sucursales.equals(other.sucursales)) {
             return false;
+        }
         if (sucursalEJB == null) {
-            if (other.sucursalEJB != null)
+            if (other.sucursalEJB != null) {
                 return false;
-        } else if (!sucursalEJB.equals(other.sucursalEJB))
+            }
+        } else if (!sucursalEJB.equals(other.sucursalEJB)) {
             return false;
+        }
         if (clientesEJB == null) {
-            if (other.clientesEJB != null)
+            if (other.clientesEJB != null) {
                 return false;
-        } else if (!clientesEJB.equals(other.clientesEJB))
+            }
+        } else if (!clientesEJB.equals(other.clientesEJB)) {
             return false;
+        }
         if (empleadosEJB == null) {
-            if (other.empleadosEJB != null)
+            if (other.empleadosEJB != null) {
                 return false;
-        } else if (!empleadosEJB.equals(other.empleadosEJB))
+            }
+        } else if (!empleadosEJB.equals(other.empleadosEJB)) {
             return false;
+        }
         if (usuarioEJB == null) {
-            if (other.usuarioEJB != null)
+            if (other.usuarioEJB != null) {
                 return false;
-        } else if (!usuarioEJB.equals(other.usuarioEJB))
+            }
+        } else if (!usuarioEJB.equals(other.usuarioEJB)) {
             return false;
+        }
         return true;
     }
 
@@ -255,4 +278,66 @@ public class RegUsuariosController implements Serializable {
                             "Error al eliminar el cliente"));
         }
     }
+
+    public void redirectCuentas() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/cuentaE.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectTransferencias() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/transferenciaE.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectPrestamos() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/prestamoE.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectTarjetas() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/tarjetaE.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectRecibos() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/reciboE.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void redirectOperaciones() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/operacionE.xhtml");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
