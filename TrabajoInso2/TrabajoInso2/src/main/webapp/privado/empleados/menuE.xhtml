@@ -11,22 +11,22 @@
                 <p:menubar>
                     <p:menuitem value="Clientes" action="#{menuEController.redirectUsuarios()}" icon="pi pi-fw pi-wallet"/>
                     <p:divider layout="vertical"/>
-                    <p:menuitem value="Empleados" action="#{menuController.redirectTransferencias()}" icon="pi pi-fw pi-euro"/>
+                    <p:menuitem value="Empleados" action="#{menuEController.redirectEmpleados()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
-                    <p:menuitem value="Prestamos" action="#{menuController.redirectOperaciones()}" icon="pi pi-fw pi-euro"/>
+                    <p:menuitem value="Prestamos" action="#{menuEController.redirectPrestamos()}" icon="pi pi-fw pi-euro"/>
                     <p:divider layout="vertical"/>
                     <f:facet name="options">
                         <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" onclick="PF('confirmLogoutDialog').show();" />
                     </f:facet>
                 </p:menubar>
             </h:form>
-            
+
         </div>
 
         <p:confirmDialog header="Confirmar cierre de sesión" message="¿Estás seguro de que quieres cerrar la sesión?" widgetVar="confirmLogoutDialog">
             <p:commandButton value="Sí" action="#{menuEController.redirectLogout()}" />
             <p:commandButton value="No" onclick="PF('confirmLogoutDialog').hide()" type="button" />
         </p:confirmDialog>
-        
+
     </h:body>
 </html>

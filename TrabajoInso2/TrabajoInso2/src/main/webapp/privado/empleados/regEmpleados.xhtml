@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Registro de Clientes</title>
+        <h:outputStylesheet library="css" name="cuenta.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menuE.xhtml"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
+        <div class="container">
+            <h2>Empleados Registrados</h2>
+            <h:form id="crearEmpleadoForm">
+                <p:fieldset legend="Creación de nuevo Empleado">
+                    <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{regEmpleadosController.usuario.nombre}"/>
+                        <h:message for="nombre" style="color: red"/>
+
+                        <h:outputLabel for="apellido" value="Apellido:" />
+                        <h:inputText id="apellido" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.apellido}"/>
+                        <h:message for="apellido" style="color: red"/>
+
+                        <h:outputLabel for="dni" value="Dni:" />
+                        <h:inputText id="dni" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.dniUsuario}"/>
+                        <h:message for="dni" style="color: red" />
+
+                        <h:outputLabel for="userName" value="Nombre de Usuario:" />
+                        <h:inputText id="userName" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.userName}"/>
+                        <h:message for="userName" style="color: red" />
+
+                        <h:outputLabel for="email" value="Email:" />
+                        <h:inputText id="email" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.email}"/>
+                        <h:message for="email" style="color: red" />
+
+                        <h:outputLabel for="telefono" value="Telefono:" />
+                        <h:inputText id="telefono" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.telefono}"/>
+                        <h:message for="telefono" style="color: red" />
+
+                        <h:outputLabel for="direccion" value="Direccion:" />
+                        <h:inputText id="direccion" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.direccion}"/>
+                        <h:message for="direccion" style="color: red" />
+
+                        <p:outputLabel for="sucursal" value="Selecciona una sucursal:" />
+                        <p:selectOneMenu id="sucursal" value="#{regEmpleadosController.sucursal.idsucursal}">
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
+                        </p:selectOneMenu>
+                        <h:message for="sucursal" style="color: red" />
+
+                        <h:outputLabel for="password" value="Contraseña:" />
+                        <h:inputSecret id="password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.contrasenia}"/>
+                        <h:message for="password" style="color: red" />
+                    </h:panelGrid>
+                    <h:commandButton value="Registrar Empleado" action="#{regEmpleadosController.crearEmpleado()}" styleClass="register-button"/>
+                </p:fieldset>
+            </h:form>
+            <h:form id="empleadosForm">
+                <p:fieldset legend="Tabla de Registros">
+                    <div class="table-container">
+                        <h:dataTable id="empleadosTable" value="#{regEmpleadosController.empleados}" var="empleado" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Id del Cliente</f:facet>
+                                    #{empleado.idempleado}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Nombre</f:facet>
+                                    #{empleado.usuario.nombre}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Apellidos</f:facet>
+                                    #{empleado.usuario.apellido}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">DNI</f:facet>
+                                    #{empleado.usuario.dniUsuario}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Username</f:facet>
+                                    #{empleado.usuario.userName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Contraseña</f:facet>
+                                    #{empleado.usuario.contrasenia}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Teléfono</f:facet>
+                                    #{empleado.usuario.telefono}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Email</f:facet>
+                                    #{empleado.usuario.email}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Dirección</f:facet>
+                                    #{empleado.usuario.direccion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha de Alta</f:facet>
+                                    #{empleado.fechaContratacion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Sucursal</f:facet>
+                                    #{empleado.usuario.sucursal.nombre}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Modificar" oncomplete="PF('modificarEmpleadoDialog').show()" action="#{regEmpleadosController.setEmpleadoMod(empleado)}" update="modificarEmpleadoForm"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Eliminar" oncomplete="PF('confirmDialog').show()" action="#{regEmpleadosController.setEmpleadoMod(empleadoMod)}" update="formEliminar"  />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+        </div>
+        <div>
+            <p:dialog header="Modificar Empleado" widgetVar="modificarEmpleadoDialog" modal="true" resizable="false">
+                <h:form id="modificarEmpleadoForm">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre:" for="nombreF" />
+                        <h:inputText id="nombreF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.nombre}" />
+
+                        <h:outputLabel value="Apellidos:" for="apellidoF" />
+                        <h:inputText id="apellidoF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.apellido}" />
+
+                        <h:outputLabel value="DNI:" for="dniF" />
+                        <h:inputText id="dniF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.dniUsuario}" />
+
+                        <h:outputLabel value="Contraseña:" for="contraseniaF" />
+                        <h:inputText id="contraseniaF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.contrasenia}" />
+
+                        <h:outputLabel value="Teléfono:" for="telF" />
+                        <h:inputText id="telF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.telefono}" />
+
+                        <h:outputLabel value="Email:" for="emailF" />
+                        <h:inputText id="emailF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.email}" />
+
+                        <h:outputLabel value="Dirección:" for="dirF" />
+                        <h:inputText id="dirF" styleClass="input-text" value="#{regEmpleadosController.empleadoMod.usuario.direccion}" />
+
+                        <h:outputLabel for="cuentaF" value="Selecciona una sucursal:" />
+                        <p:selectOneMenu id="cuentaF" value="#{regEmpleadosController.sucursal.idsucursal}">
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal.idsucursal}" />
+                        </p:selectOneMenu>
+                        <h:panelGroup>
+                            <p:commandButton value="Confirmar" action="#{regEmpleadosController.editarEmpleado()}" oncomplete="PF('modificarEmpleadoDialog').hide();" update=":empleadosForm:empleadosTable" styleClass="confirm-button" />
+                            <p:commandButton value="Salir" onclick="PF('modificarEmpleadoDialog').hide()" styleClass="cancel-button" />
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+        </div>
+        <div>
+            <p:confirmDialog header="Confirmar Eliminación" message="¿Está seguro de que desea eliminar este empleado?" severity="alert" widgetVar="confirmDialog">
+                <h:form id="formEliminar">
+                    <p:commandButton value="Sí" action="#{regEmpleadosController.eliminarEmpleado()}" oncomplete="PF('confirmDialog').hide();" update=":empleadosForm:empleadosTable" />
+                    <p:commandButton value="No" onclick="PF('confirmDialog').hide()" type="button" />
+                </h:form>
+            </p:confirmDialog>
+        </div>
+
+    </h:body>
+
+</html>

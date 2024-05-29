@@ -33,7 +33,6 @@ import modelo.Usuarios;
 @Named
 @ViewScoped
 public class RegUsuariosController implements Serializable {
-
     private List<Clientes> clientes;
     private Clientes cliente;
     private Empleados empleado;
@@ -211,21 +210,28 @@ public class RegUsuariosController implements Serializable {
 
     public void editarCliente() {
         try {
+            Clientes c = clientesEJB.find(cliente.getIdcliente());
             // Verificar si ya existe un usuario con el mismo DNI
-            if (usuarioEJB.existeUsuarioPorDNI(cliente.getUsuario().getDniUsuario())) {
+            if (!c.getUsuario().getDniUsuario().equals(cliente.getUsuario().getDniUsuario())
+                    && usuarioEJB.existeUsuarioPorDNI(cliente.getUsuario().getDniUsuario())) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Error: El DNI ya está en uso.", "El DNI ya está en uso."));
-            } else if (usuarioEJB.existeUsuarioPorUsername(cliente.getUsuario().getUserName())) {
+            } else if (!c.getUsuario().getUserName().equals(cliente.getUsuario().getUserName())
+                    && usuarioEJB.existeUsuarioPorUsername(cliente.getUsuario().getUserName())) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Error: El nombre de usuario ya está en uso.", "El nombre de usuario ya está en uso."));
             } else {
                 Usuarios usuario = cliente.getUsuario();
-                usuario.setSucursal(sucursal);
+                Sucursales s = sucursalEJB.find(sucursal.getIdsucursal());
+                usuario.setSucursal(s);
                 usuarioEJB.edit(usuario);
 
                 cliente.setUsuario(usuario);
                 clientesEJB.edit(cliente);
                 clientes = clientesEJB.findAll();
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "El cliente se ha editado correctamente",
+                                "El cliente se ha editado correctamente"));
             }
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,

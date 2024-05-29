@@ -14,7 +14,7 @@
         <div class="container">
             <h1>Registro</h1>
             <h:form>
-                <p:messages id="mess" globalOnly="true"/>
+                <p:messages id="mess" globalOnly="true" closable="true"/>
                 <h:panelGrid columns="3" width="100%">
                     <h:outputLabel for="nombre" value="Nombre:" />
                     <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{registroController.usuario.nombre}"/>
@@ -70,7 +70,7 @@
 
             </h:form>
             <h:form>
-                <p:commandButton action="#{registroController.redirect()}" value="¿No tienes una cuenta? ¡Regístrate!" styleClass="register-button" />
+                <p:commandButton action="#{registroController.redirect()}" value="¿Ya te has registrado? ¡Inicia sesión ya!" styleClass="register-button" />
             </h:form>
         </div>
 

@@ -10,7 +10,7 @@
 
     <h:body>
         <ui:include src="menuE.xhtml"/>
-        <p:messages id="mess" globalOnly="true"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
         <div class="container">
             <h2>Clientes Registrados</h2>
             <h:form id="clientesForm">
@@ -107,7 +107,7 @@
                         </p:selectOneMenu>
                         <h:panelGroup>
                             <p:commandButton value="Confirmar" action="#{regUsuariosController.editarCliente()}" oncomplete="PF('modificarClienteDialog').hide();" update=":clientesForm:clientesTable" styleClass="confirm-button" />
-                            <p:commandButton value="Cancelar" onclick="PF('modificarClienteDialog').hide()" styleClass="cancel-button" />
+                            <p:commandButton value="Salir" onclick="PF('modificarClienteDialog').hide()" styleClass="cancel-button" />
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:form>
