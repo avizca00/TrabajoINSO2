@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Promociones</title>
+        <h:outputStylesheet library="css" name="promocion.css"/>
+        <h:outputScript library="js" name="calendario.js" />
+    </h:head>
+
+    <h:body>
+        <ui:include src="menuE.xhtml"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
+        <div class="container">
+            <h2>Promociones</h2>
+            <h:form id="crearEmpleadoForm">
+                <p:fieldset legend="Creación de nueva promoción">
+                    <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Descripción:" styleClass="output-text"/>
+                        <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{promocionesController.promocion.descripcion}"/>
+                        <h:message for="nombre" style="color: red"/>
+
+                        <h:outputLabel for="des" value="Descuento:" styleClass="output-text"/>
+                        <h:inputText id="des" value="#{promocionesController.promocion.descuento}" required="true" styleClass="input-text">
+                            <f:convertNumber integerOnly="true" />
+                            <f:validator validatorId="javax.faces.DoubleRange" />
+                        </h:inputText>
+                        <h:message for="des" style="color: red" />
+
+                        <h:outputLabel for="fechaInicio" value="Fecha de Inicio:" styleClass="output-text"/>
+                        <p:calendar id="fechaInicio" value="#{promocionesController.promocion.fechaInicio}" locale="es"
+                                    required="true" />
+                        <h:message for="fechaInicio" style="color: red" />
+
+                        <h:outputLabel for="fechaFin" value="Fecha de Fin:" styleClass="output-text"/>
+                        <p:calendar id="fechaFin" value="#{promocionesController.promocion.fechaFin}" locale="es"
+                                    required="true" />
+                        <h:message for="fechaFin" style="color: red" />
+                    </h:panelGrid>
+                    <h:commandButton value="Crear Promoción" action="#{promocionesController.crearPromocion()}" styleClass="register-button"/>
+                </p:fieldset>
+            </h:form>
+            <h:form id="empleadosForm">
+                <p:fieldset legend="Tabla de Promociones">
+                    <div class="table-container">
+                        <h:dataTable id="empleadosTable" value="#{promocionesController.promociones}" var="promocion" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Descripcion</f:facet>
+                                    #{promocion.descripcion}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Descuento</f:facet>
+                                    #{promocion.descuento}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha de Inicio</f:facet>
+                                    #{promocion.fechaInicio}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha de Fin</f:facet>
+                                    #{promocion.fechaFin}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Modificar" oncomplete="PF('modificarEmpleadoDialog').show()" action="#{promocionesController.setPromocionMod(promocion)}" update="modificarEmpleadoForm"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <p:commandButton value="Eliminar" oncomplete="PF('confirmDialog').show()" action="#{promocionesController.setPromocion(promocion)}" update="formEliminar"  />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+        </div>
+        <div>
+            <p:dialog header="Modificar Promoción" widgetVar="modificarEmpleadoDialog" modal="true" resizable="false">
+                <h:form id="modificarEmpleadoForm">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="nombreF" value="Descripción:" styleClass="output-text"/>
+                        <h:inputText id="nombreF" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{promocionesController.promocionMod.descripcion}"/>
+
+                        <h:outputLabel for="desF" value="Descuento:" styleClass="output-text"/>
+                        <h:inputText id="desF" value="#{promocionesController.promocionMod.descuento}" required="true" styleClass="input-text">
+                            <f:convertNumber integerOnly="true" />
+                            <f:validator validatorId="javax.faces.DoubleRange" />
+                        </h:inputText>
+
+                        <h:outputLabel for="fechaInicioF" value="Fecha de Inicio:" styleClass="output-text"/>
+                        <p:calendar id="fechaInicioF" value="#{promocionesController.promocionMod.fechaInicio}" locale="es"
+                                    required="true" />
+
+                        <h:outputLabel for="fechaFinF" value="Fecha de Fin:" styleClass="output-text"/>
+                        <p:calendar id="fechaFinF" value="#{promocionesController.promocionMod.fechaFin}" locale="es"
+                                    required="true" />
+
+                        <p:commandButton value="Confirmar" action="#{promocionesController.modificarPromocion()}" oncomplete="PF('modificarEmpleadoDialog').hide();" update=":empleadosForm:empleadosTable" styleClass="confirm-button" />
+                        <p:commandButton value="Salir" onclick="PF('modificarEmpleadoDialog').hide()" styleClass="cancel-button" />
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+        </div>
+        <div>
+            <p:confirmDialog header="Confirmar Eliminación" message="¿Está seguro de que desea eliminar esta promoción?" severity="alert" widgetVar="confirmDialog">
+                <h:form id="formEliminar">
+                    <p:commandButton value="Sí" action="#{promocionesController.eliminarPromocion()}" oncomplete="PF('confirmDialog').hide();" update=":empleadosForm:empleadosTable" />
+                    <p:commandButton value="No" onclick="PF('confirmDialog').hide()" type="button" />
+                </h:form>
+            </p:confirmDialog>
+        </div>
+
+    </h:body>
+
+</html>

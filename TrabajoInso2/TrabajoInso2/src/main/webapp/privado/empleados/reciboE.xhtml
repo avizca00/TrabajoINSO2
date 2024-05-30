@@ -12,9 +12,9 @@
         <ui:include src="menuE.xhtml" />
         <p:messages id="mess" globalOnly="true" closable="true"/>
         <div class="container">
-            <h2>Recibos bancarias de #{reciboEController.cliente.usuario.nombre}</h2>
+            <h2>Recibos bancarios de #{reciboEController.cliente.usuario.nombre}</h2>
             <h:form id="recibosForm">
-                <p:fieldset legend="Recibos Domicilirios">
+                <p:fieldset legend="Recibos Domiciliarios">
                     <p:commandButton value="Atrás" action="#{reciboEController.redirectUsuarios()}"/>
                     <div class="table-container">
                         <h:dataTable id="recibosTable" value="#{reciboEController.recibos}" var="recibo">

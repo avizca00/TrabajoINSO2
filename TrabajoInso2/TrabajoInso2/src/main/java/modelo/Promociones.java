@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 public class Promociones implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idpromocion;
+    private int idpromociones;
 
     @Column(name = "descripcion", nullable = false, length = 255)
     private String descripcion;
@@ -44,12 +44,12 @@ public class Promociones implements Serializable{
     @Column(name = "descuento", nullable = false, precision = 5, scale = 2)
     private BigDecimal descuento;
 
-    public int getIdpromocion() {
-        return idpromocion;
+    public int getIdpromociones() {
+        return idpromociones;
     }
 
-    public void setIdpromocion(int idpromocion) {
-        this.idpromocion = idpromocion;
+    public void setIdpromociones(int idpromociones) {
+        this.idpromociones = idpromociones;
     }
 
     public String getDescripcion() {
@@ -86,12 +86,12 @@ public class Promociones implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.idpromocion;
-        hash = 67 * hash + Objects.hashCode(this.descripcion);
-        hash = 67 * hash + Objects.hashCode(this.fechaInicio);
-        hash = 67 * hash + Objects.hashCode(this.fechaFin);
-        hash = 67 * hash + Objects.hashCode(this.descuento);
+        int hash = 5;
+        hash = 59 * hash + this.idpromociones;
+        hash = 59 * hash + Objects.hashCode(this.descripcion);
+        hash = 59 * hash + Objects.hashCode(this.fechaInicio);
+        hash = 59 * hash + Objects.hashCode(this.fechaFin);
+        hash = 59 * hash + Objects.hashCode(this.descuento);
         return hash;
     }
 
@@ -107,7 +107,7 @@ public class Promociones implements Serializable{
             return false;
         }
         final Promociones other = (Promociones) obj;
-        if (this.idpromocion != other.idpromocion) {
+        if (this.idpromociones != other.idpromociones) {
             return false;
         }
         if (!Objects.equals(this.descripcion, other.descripcion)) {
@@ -125,5 +125,4 @@ public class Promociones implements Serializable{
         return true;
     }
 
-    
 }

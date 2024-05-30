@@ -69,4 +69,13 @@ public class MenuEController implements Serializable {
             e.printStackTrace();
         }
     }
+    
+    public void redirectPromociones() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("/TrabajoInso2/faces/privado/empleados/promociones.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

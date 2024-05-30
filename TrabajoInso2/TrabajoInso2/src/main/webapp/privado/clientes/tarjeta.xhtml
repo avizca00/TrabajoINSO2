@@ -6,6 +6,7 @@
     <h:head>
         <title>Tarjetas Bancarias</title>
         <h:outputStylesheet library="css" name="tarjeta.css"/>
+        <h:outputScript library="js" name="calendario.js" />
     </h:head>
 
     <h:body>
@@ -35,7 +36,7 @@
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
 
-                        <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" styleClass="output-text"/>
+                        <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento:" styleClass="output-text"/>
                         <p:calendar id="fechaVencimiento" value="#{tarjetaController.tarjeta.fechaVencimiento}" locale="es"
                                     required="true" />
                         <h:message for="fechaVencimiento" style="color: red" />
