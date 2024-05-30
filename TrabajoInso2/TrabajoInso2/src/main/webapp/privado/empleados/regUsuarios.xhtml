@@ -5,7 +5,7 @@
 
     <h:head>
         <title>Registro de Clientes</title>
-        <h:outputStylesheet library="css" name="cuentaE.css"/>
+        <h:outputStylesheet library="css" name="regUE.css"/>
     </h:head>
 
     <h:body>
@@ -60,7 +60,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sucursal</f:facet>
-                                    #{cliente.usuario.sucursal.nombre}
+                                    #{cliente.usuario.sucursal.ubicacion}
                             </h:column>
                             <h:column>
                                 <f:facet name="header"></f:facet>
@@ -84,36 +84,34 @@
             <p:dialog header="Modificar Cliente" widgetVar="modificarClienteDialog" modal="true" resizable="false">
                 <h:form id="modificarClienteForm">
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="Nombre:" for="nombreF" />
+                        <h:outputLabel value="Nombre:" for="nombreF" styleClass="output-text"/>
                         <h:inputText id="nombreF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.nombre}" />
 
-                        <h:outputLabel value="Apellidos:" for="apellidoF" />
+                        <h:outputLabel value="Apellidos:" for="apellidoF" styleClass="output-text"/>
                         <h:inputText id="apellidoF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.apellido}" />
 
-                        <h:outputLabel value="DNI:" for="dniF" />
+                        <h:outputLabel value="DNI:" for="dniF" styleClass="output-text"/>
                         <h:inputText id="dniF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.dniUsuario}" />
 
-                        <h:outputLabel value="Contraseña:" for="contraseniaF" />
+                        <h:outputLabel value="Contraseña:" for="contraseniaF" styleClass="output-text"/>
                         <h:inputText id="contraseniaF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.contrasenia}" />
 
-                        <h:outputLabel value="Teléfono:" for="telF" />
+                        <h:outputLabel value="Teléfono:" for="telF" styleClass="output-text"/>
                         <h:inputText id="telF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.telefono}" />
 
-                        <h:outputLabel value="Email:" for="emailF" />
+                        <h:outputLabel value="Email:" for="emailF" styleClass="output-text"/>
                         <h:inputText id="emailF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.email}" />
 
-                        <h:outputLabel value="Dirección:" for="dirF" />
+                        <h:outputLabel value="Dirección:" for="dirF" styleClass="output-text"/>
                         <h:inputText id="dirF" styleClass="input-text" value="#{regUsuariosController.cliente.usuario.direccion}" />
 
-                        <h:outputLabel for="cuentaF" value="Selecciona una sucursal:" />
+                        <h:outputLabel for="cuentaF" value="Selecciona una sucursal:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuentaF" value="#{regUsuariosController.sucursal.idsucursal}">
                             <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
                             <f:selectItems value="#{regUsuariosController.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
-                        <h:panelGroup>
-                            <p:commandButton value="Confirmar" action="#{regUsuariosController.editarCliente()}" oncomplete="PF('modificarClienteDialog').hide();" update=":clientesForm:clientesTable" styleClass="confirm-button" />
-                            <p:commandButton value="Salir" onclick="PF('modificarClienteDialog').hide()" styleClass="cancel-button" />
-                        </h:panelGroup>
+                        <p:commandButton value="Confirmar" action="#{regUsuariosController.editarCliente()}" oncomplete="PF('modificarClienteDialog').hide();" update=":clientesForm:clientesTable" styleClass="confirm-button" />
+                        <p:commandButton value="Salir" onclick="PF('modificarClienteDialog').hide()" styleClass="cancel-button" />
                     </h:panelGrid>
                 </h:form>
             </p:dialog>
@@ -131,13 +129,13 @@
         <div>
             <p:dialog header="Detalles del Cliente" widgetVar="detallesClienteDialog" modal="true" resizable="false">
                 <h:form id="detallesClienteForm">
-                    <h:panelGrid>
-                        <p:commandButton value="Cuentas" action="#{regUsuariosController.redirectCuentas()}" />
-                        <p:commandButton value="Transferencias" action="#{regUsuariosController.redirectTransferencias()}"  />
-                        <p:commandButton value="Operaciones" action="#{regUsuariosController.redirectOperaciones()}"  />
-                        <p:commandButton value="Préstamos" action="#{regUsuariosController.redirectPrestamos()}"  />
-                        <p:commandButton value="Tarjetas" action="#{regUsuariosController.redirectTarjetas()}"  />
-                        <p:commandButton value="Recibos" action="#{regUsuariosController.redirectRecibos()}"  />
+                    <h:panelGrid width="100%" columns="1">
+                        <p:commandButton value="Cuentas" action="#{regUsuariosController.redirectCuentas()}" styleClass="confirm-button" />
+                        <p:commandButton value="Transferencias" action="#{regUsuariosController.redirectTransferencias()}" styleClass="confirm-button" />
+                        <p:commandButton value="Operaciones" action="#{regUsuariosController.redirectOperaciones()}" styleClass="confirm-button" />
+                        <p:commandButton value="Préstamos" action="#{regUsuariosController.redirectPrestamos()}"  styleClass="confirm-button"/>
+                        <p:commandButton value="Tarjetas" action="#{regUsuariosController.redirectTarjetas()}"  styleClass="confirm-button"/>
+                        <p:commandButton value="Recibos" action="#{regUsuariosController.redirectRecibos()}"  styleClass="confirm-button"/>
                     </h:panelGrid>
                 </h:form>
             </p:dialog>

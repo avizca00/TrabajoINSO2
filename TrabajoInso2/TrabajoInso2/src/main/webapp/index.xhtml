@@ -18,9 +18,9 @@
                     <h:inputSecret id="password" styleClass="input-text" value="#{inicioController.usuario.contrasenia}" />
                     <h:message for="password" style="color: red" />
                 </h:panelGrid>
-                <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="login-button" />
+                <h:commandButton value="Iniciar Sesión" action="#{inicioController.login()}" styleClass="register-button" />
             </h:form>
-            <p:commandButton action="#{inicioController.redirect()}" value="¿No tienes cuenta? ¡Regístrate ya!" styleClass="login-button" />
+            <p:commandButton action="#{inicioController.redirect()}" value="¿No tienes cuenta? ¡Regístrate ya!" styleClass="register-button" />
         </div>
     </h:body>
 

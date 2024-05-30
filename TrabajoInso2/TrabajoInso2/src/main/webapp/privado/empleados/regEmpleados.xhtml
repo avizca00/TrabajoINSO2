@@ -5,7 +5,7 @@
 
     <h:head>
         <title>Registro de Clientes</title>
-        <h:outputStylesheet library="css" name="cuentaE.css"/>
+        <h:outputStylesheet library="css" name="regEE.css"/>
     </h:head>
 
     <h:body>
@@ -16,42 +16,42 @@
             <h:form id="crearEmpleadoForm">
                 <p:fieldset legend="Creación de nuevo Empleado">
                     <h:panelGrid columns="3" width="100%">
-                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
                         <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{regEmpleadosController.usuario.nombre}"/>
                         <h:message for="nombre" style="color: red"/>
 
-                        <h:outputLabel for="apellido" value="Apellido:" />
+                        <h:outputLabel for="apellido" value="Apellido:" styleClass="output-text"/>
                         <h:inputText id="apellido" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.apellido}"/>
                         <h:message for="apellido" style="color: red"/>
 
-                        <h:outputLabel for="dni" value="Dni:" />
+                        <h:outputLabel for="dni" value="Dni:" styleClass="output-text"/>
                         <h:inputText id="dni" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.dniUsuario}"/>
                         <h:message for="dni" style="color: red" />
 
-                        <h:outputLabel for="userName" value="Nombre de Usuario:" />
+                        <h:outputLabel for="userName" value="Nombre de Usuario:" styleClass="output-text"/>
                         <h:inputText id="userName" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.userName}"/>
                         <h:message for="userName" style="color: red" />
 
-                        <h:outputLabel for="email" value="Email:" />
+                        <h:outputLabel for="email" value="Email:" styleClass="output-text"/>
                         <h:inputText id="email" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.email}"/>
                         <h:message for="email" style="color: red" />
 
-                        <h:outputLabel for="telefono" value="Telefono:" />
+                        <h:outputLabel for="telefono" value="Telefono:" styleClass="output-text"/>
                         <h:inputText id="telefono" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.telefono}"/>
                         <h:message for="telefono" style="color: red" />
 
-                        <h:outputLabel for="direccion" value="Direccion:" />
+                        <h:outputLabel for="direccion" value="Direccion:" styleClass="output-text"/>
                         <h:inputText id="direccion" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.direccion}"/>
                         <h:message for="direccion" style="color: red" />
 
-                        <p:outputLabel for="sucursal" value="Selecciona una sucursal:" />
+                        <h:outputLabel for="sucursal" value="Selecciona una sucursal:" styleClass="output-text"/>
                         <p:selectOneMenu id="sucursal" value="#{regEmpleadosController.sucursal.idsucursal}">
                             <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
                             <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
                         <h:message for="sucursal" style="color: red" />
 
-                        <h:outputLabel for="password" value="Contraseña:" />
+                        <h:outputLabel for="password" value="Contraseña:" styleClass="output-text"/>
                         <h:inputSecret id="password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{regEmpleadosController.usuario.contrasenia}"/>
                         <h:message for="password" style="color: red" />
                     </h:panelGrid>
@@ -105,7 +105,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Sucursal</f:facet>
-                                    #{empleado.usuario.sucursal.nombre}
+                                    #{empleado.usuario.sucursal.ubicacion}
                             </h:column>
                             <h:column>
                                 <f:facet name="header"></f:facet>
@@ -113,7 +113,7 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header"></f:facet>
-                                <p:commandButton value="Eliminar" oncomplete="PF('confirmDialog').show()" action="#{regEmpleadosController.setEmpleadoMod(empleadoMod)}" update="formEliminar"  />
+                                <p:commandButton value="Eliminar" oncomplete="PF('confirmDialog').show()" action="#{regEmpleadosController.setEmpleadoMod(empleado)}" update="formEliminar"  />
                             </h:column>
                         </h:dataTable>
                     </div>
@@ -150,10 +150,8 @@
                             <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
                             <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
-                        <h:panelGroup>
-                            <p:commandButton value="Confirmar" action="#{regEmpleadosController.editarEmpleado()}" oncomplete="PF('modificarEmpleadoDialog').hide();" update=":empleadosForm:empleadosTable" styleClass="confirm-button" />
-                            <p:commandButton value="Salir" onclick="PF('modificarEmpleadoDialog').hide()" styleClass="cancel-button" />
-                        </h:panelGroup>
+                        <p:commandButton value="Confirmar" action="#{regEmpleadosController.editarEmpleado()}" oncomplete="PF('modificarEmpleadoDialog').hide();" update=":empleadosForm:empleadosTable" styleClass="confirm-button" />
+                        <p:commandButton value="Salir" onclick="PF('modificarEmpleadoDialog').hide()" styleClass="cancel-button" />
                     </h:panelGrid>
                 </h:form>
             </p:dialog>

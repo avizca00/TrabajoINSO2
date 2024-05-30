@@ -280,16 +280,16 @@ public class RegEmpleadosController implements Serializable {
 
     public void eliminarEmpleado() {
         try {
-            Usuarios usuario = usuarioEJB.find(empleadoMod.getUsuario().getIdusuario());
+            Usuarios u = usuarioEJB.find(empleadoMod.getUsuario().getIdusuario());
             empleadosEJB.remove(empleadoMod);
-            usuarioEJB.remove(usuario);
+            usuarioEJB.remove(u);
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "El cliente se ha eliminado correctamente",
-                            "El cliente se ha eliminado correctamente"));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "El empleado se ha eliminado correctamente",
+                            "El empleado se ha eliminado correctamente"));
             empleados = empleadosEJB.findAll();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar el cliente",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar el empleado",
                             "Error al eliminar el cliente"));
         }
     }

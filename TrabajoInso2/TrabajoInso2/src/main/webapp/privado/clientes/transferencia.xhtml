@@ -14,28 +14,28 @@
         <div class="container">
             <h2>Transferencias</h2>
             <h:form id="crearTrasnferenciaForm">
-                
+
                 <p:fieldset legend="Transferencia">
                     <h:panelGrid columns="3" width="100%">
-                        <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
+                        <h:outputLabel for="cuenta" value="Selecciona una cuenta:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{transferenciaController.cuentaOrigen.idcuenta}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
                             <f:selectItems value="#{transferenciaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
-                        
-                        <h:outputLabel for="cDest" value="IBAN de Cuenta Beneficiario:" />
+
+                        <h:outputLabel for="cDest" value="IBAN de Cuenta Beneficiario:" styleClass="output-text"/>
                         <h:inputText id="cDest" styleClass="input-text" required="true" value="#{transferenciaController.cuentaDestino.IBAN}"/>
                         <h:message for="cDest" style="color: red" />
 
-                        <h:outputLabel value="Importe de la Transferencia:" for="saldo"/>
+                        <h:outputLabel value="Importe de la Transferencia:" for="saldo" styleClass="output-text"/>
                         <h:inputText id="saldo" value="#{transferenciaController.transferencia.monto}" required="true" styleClass="input-text">
                             <f:convertNumber integerOnly="true" />
                             <f:validator validatorId="javax.faces.DoubleRange" />
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
 
-                        <h:outputLabel for="concepto" value="Concepto:" />
+                        <h:outputLabel for="concepto" value="Concepto:" styleClass="output-text"/>
                         <h:inputText id="concepto" styleClass="input-text" required="true" value="#{transferenciaController.transferencia.concepto}"/>
                         <h:message for="concepto" style="color: red" />
 

@@ -15,9 +15,9 @@
             <h2>Tus Cuentas Bancarias</h2>
             <h:form >
                 <p:fieldset legend="Creación de nueva cuenta">
-                    
+
                     <h:panelGrid columns="3" width="100%">
-                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
                         <h:inputText id="nombre" styleClass="input-text" required="true" value="#{cuentaController.cuenta.nombre}"/>
                         <h:message for="nombre" style="color: red" />
 
@@ -59,7 +59,7 @@
                             <f:facet name="header">Nombre</f:facet>
                                 #{cuenta.nombre}
                         </h:column>
-                        
+
                         <h:column>
                             <f:facet name="header">IBAN</f:facet>
                                 #{cuenta.IBAN}

@@ -20,7 +20,7 @@ body {
 .container {
     margin: 30px auto;
     width: 80%;
-    max-width: 1200px;
+    max-width: 725px;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 15px;

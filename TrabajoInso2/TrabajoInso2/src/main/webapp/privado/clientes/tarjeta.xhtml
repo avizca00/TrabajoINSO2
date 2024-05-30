@@ -15,9 +15,9 @@
             <h2>Tus Tarjetas Bancarias</h2>
             <h:form id="crearTarjetaForm">
                 <p:fieldset legend="Creación de nueva tarjeta bancaria">
-                    
+
                     <h:panelGrid columns="3" width="100%">
-                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
                         <h:inputText id="nombre" styleClass="input-text" required="true" value="#{tarjetaController.tarjeta.nombre}"/>
                         <h:message for="nombre" style="color: red" />
 
@@ -34,13 +34,13 @@
                             <f:validator validatorId="javax.faces.DoubleRange" />
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
-                        
-                         <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" />
+
+                        <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" styleClass="output-text"/>
                         <p:calendar id="fechaVencimiento" value="#{tarjetaController.tarjeta.fechaVencimiento}" locale="es"
                                     required="true" />
                         <h:message for="fechaVencimiento" style="color: red" />
 
-                        <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
+                        <h:outputLabel for="cuenta" value="Selecciona una cuenta:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{tarjetaController.cuenta.idcuenta}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
                             <f:selectItems value="#{tarjetaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
@@ -101,31 +101,26 @@
             <!-- Pop-up para modificar la tarjeta -->
             <p:dialog header="Modificar Tarjeta" widgetVar="modificarTarjetaDialog" modal="true" resizable="false">
                 <h:form id="modificarTarjetaForm">
-                    <h:panelGrid columns="2" styleClass="modificar-tarjeta-grid">
-                        <!-- Campos del formulario para modificar la tarjeta -->
-                        <h:outputLabel value="Nombre:" for="nombreF" />
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre:" for="nombreF" styleClass="output-text"/>
                         <h:inputText id="nombreF" styleClass="input-text" value="#{tarjetaController.tarjetaModElim.nombre}" />
-                        
-                        <h:outputLabel value="Tipo de Tarjeta:" for="tipoF" />
-                        <p:selectOneMenu id="tipoF" value="#{tarjetaController.tarjetaModElim.tipoTarjeta}">
+
+                        <h:outputLabel value="Tipo de Tarjeta:" for="tipoF" styleClass="output-text"/>
+                        <p:selectOneMenu id="tipoF" styleClass="input-text" value="#{tarjetaController.tarjetaModElim.tipoTarjeta}">
                             <f:selectItem itemLabel="Debito" itemValue="Debito" />
                             <f:selectItem itemLabel="Credito" itemValue="Credito" />
                         </p:selectOneMenu>
-                        
-                        <h:outputLabel value="Saldo Disponible:" for="saldoF" />
-                        <h:inputText id="saldoF" value="#{tarjetaController.tarjetaModElim.saldoDisponible}" />
 
-                        <h:outputLabel for="cuentaF" value="Selecciona una cuenta:" />
-                        <p:selectOneMenu id="cuentaF" value="#{tarjetaController.cuenta.idcuenta}">
+                        <h:outputLabel value="Saldo Disponible:" for="saldoF" styleClass="output-text"/>
+                        <h:inputText id="saldoF" styleClass="input-text" value="#{tarjetaController.tarjetaModElim.saldoDisponible}" />
+
+                        <h:outputLabel for="cuentaF" value="Selecciona una cuenta:" styleClass="output-text"/>
+                        <p:selectOneMenu id="cuentaF" styleClass="input-text" value="#{tarjetaController.cuenta.idcuenta}">
                             <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
                             <f:selectItems value="#{tarjetaController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
-
-                        <h:panelGroup />
-                        <h:panelGroup>
-                            <p:commandButton value="Confirmar" action="#{tarjetaController.editarTarjeta()}" oncomplete="PF('modificarTarjetaDialog').hide();" update=":tarjetasForm:tarjetasTable" styleClass="confirm-button" />
-                            <p:commandButton value="Cancelar" onclick="PF('modificarTarjetaDialog').hide()" styleClass="cancel-button" />
-                        </h:panelGroup>
+                        <p:commandButton value="Confirmar" action="#{tarjetaController.editarTarjeta()}" oncomplete="PF('modificarTarjetaDialog').hide();" update=":tarjetasForm:tarjetasTable" styleClass="confirm-button" />
+                        <p:commandButton value="Cancelar" onclick="PF('modificarTarjetaDialog').hide()" styleClass="cancel-button" />
                     </h:panelGrid>
                 </h:form>
             </p:dialog>

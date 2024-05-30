@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 import modelo.Clientes;
 import modelo.Sucursales;
+import modelo.Usuarios;
 
 /**
  *
@@ -149,8 +150,14 @@ public class PerfilController implements Serializable {
     public void actualizar() {
         try {
             cuentaSeleccionada = sucursalEJB.find(cuentaSeleccionada.getIdsucursal());
-            cliente.getUsuario().setSucursal(cuentaSeleccionada);
+            Usuarios usuario = cliente.getUsuario();
+            usuario.setSucursal(cuentaSeleccionada);
+            usuarioEJB.edit(usuario);
             usuarioEJB.edit(cliente.getUsuario());
+            cliente.setUsuario(usuario);
+            clienteEJB.edit(cliente);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("cliente");
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cliente", cliente);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Los datos de su perfil han sido actualizados correctamente",
                     "Datos actualizados"));
@@ -163,8 +170,12 @@ public class PerfilController implements Serializable {
 
     public void eliminar() {
         try {
+            Usuarios u = usuarioEJB.find(cliente.getUsuario().getIdusuario());
             clienteEJB.remove(cliente);
-            usuarioEJB.remove(cliente.getUsuario());
+            usuarioEJB.remove(u);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("cliente");
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     e.toString(),

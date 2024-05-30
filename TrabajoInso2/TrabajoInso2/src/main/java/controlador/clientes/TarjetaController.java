@@ -235,7 +235,8 @@ public class TarjetaController implements Serializable {
             try {
                 creaCVVAleatorio();
                 creaNumeroTarjetaAleatorio();
-                tarjeta.setCuenta(cuenta);
+                Cuentas c = cuentaEJB.find(this.cuenta.getIdcuenta());
+                tarjeta.setCuenta(c);
                 tarjetaEJB.create(tarjeta);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente.",
@@ -282,6 +283,8 @@ public class TarjetaController implements Serializable {
 
     public void editarTarjeta() {
         try {
+            Cuentas c = cuentaEJB.find(this.cuenta.getIdcuenta());
+            tarjetaModElim.setCuenta(c);
             tarjetaEJB.edit(tarjetaModElim);
             tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,

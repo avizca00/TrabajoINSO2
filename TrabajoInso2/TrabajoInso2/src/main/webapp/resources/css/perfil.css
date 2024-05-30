@@ -1,6 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .menu {
@@ -17,14 +20,12 @@ body {
 .container {
     margin: 30px auto;
     width: 80%;
-    max-width: 1200px;
+    max-width: 800px;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     padding: 30px;
     box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
 }
 
 h1, h2, h3 {
@@ -45,24 +46,23 @@ h3 {
     font-size: 24px;
 }
 
-.output-label, .output-text, p\\:outputLabel {
-    margin-left: 30%;
+.output-label, .output-text {
     width: 100%;
-    font-size: 20px;
-    align-items: center;
+    margin: 10px 0;
+    font-size: 18px;
 }
 
-.input-text, .select-one-menu, p\\:selectOneMenu {
+.input-text, .select-one-menu {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 24px;
+    font-size: 16px;
 }
 
-.select-one-menu, p\\:selectOneMenu {
+.select-one-menu {
     appearance: none;
     background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA3YmZmIiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gPHBhdGggZD0iTTEyIDE1bC00LjctNC43TDcuMyAxMS45IDlMMTIgMTQgMTUuNCAxMS45bC0uNy0uOGwtNC43IDQuN3oiLz48L3N2Zz4=') no-repeat right 12px center;
     background-size: 16px;
@@ -77,12 +77,12 @@ h3 {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 48%;
+    width: 100%;
     padding: 12px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
-    margin: 10px 1%;
+    margin: 10px 0;
 }
 
 .register-button:hover,
@@ -111,16 +111,14 @@ h3 {
 }
 
 .table-container th, .table-container td {
-    margin-left: 30%;
     padding: 12px;
     border: 1px solid #ddd;
-    text-align: center;
+    text-align: left;
 }
 
 .table-container th {
     background-color: #f8f9fa;
     font-weight: 600;
-    font-size: 20px;
 }
 
 .table-container tbody tr:nth-child(even) {
@@ -129,8 +127,4 @@ h3 {
 
 .table-container tbody tr:hover {
     background-color: #e9ecef;
-}
-
-h:column, .table-container h\\:column {
-    font-size: 20px;
 }
