@@ -60,7 +60,7 @@ public class PerfilController implements Serializable {
 
     @EJB
     private SucursalesFacadeLocal sucursalEJB;
-    
+
     @EJB
     private ClientesCuentasFacadeLocal clientesCuentasEJB;
 
@@ -223,7 +223,7 @@ public class PerfilController implements Serializable {
                     e.toString()));
         }
     }
-    
+
     private void borraTodaInfoCLiente(Clientes cliente) {
         List<Cuentas> cuentas = new ArrayList<>();
         List<Transferencias> transferencias = new ArrayList<>();
@@ -234,48 +234,50 @@ public class PerfilController implements Serializable {
         List<ClientesCuentas> clientesCuentas = new ArrayList<>();
 
         cuentas = clientesCuentasEJB.cuentasPorCliente(cliente);
-        clientesCuentas = clientesCuentasEJB.findAll()
-                .stream()
-                .filter(cc -> cc.getClientes().equals(cliente))
-                .collect(Collectors.toList());
-        transferencias = transferenciasEJB.transferenciasPorCuenta(cuentas);
-        operaciones = operacionesEJB.operacionesPorCuenta(cuentas);
-        tarjetas = tarjetasEJB.encuentraTarejetaPorCuenta(cuentas);
-        prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
-        recibos = recibosEJB.recibosPorCuenta(cuentas);
+        if (!cuentas.isEmpty()) {
+            clientesCuentas = clientesCuentasEJB.findAll()
+                    .stream()
+                    .filter(cc -> cc.getClientes().equals(cliente))
+                    .collect(Collectors.toList());
+            transferencias = transferenciasEJB.transferenciasPorCuenta(cuentas);
+            operaciones = operacionesEJB.operacionesPorCuenta(cuentas);
+            tarjetas = tarjetasEJB.encuentraTarejetaPorCuenta(cuentas);
+            prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
+            recibos = recibosEJB.recibosPorCuenta(cuentas);
 
-        for (Transferencias t : transferencias) {
-            transferenciasEJB.remove(t);
-        }
-
-        for (Operaciones o : operaciones) {
-            operacionesEJB.remove(o);
-        }
-
-        for (Tarjetas_De_Credito t : tarjetas) {
-            tarjetasEJB.remove(t);
-        }
-
-        for (Prestamos p : prestamos) {
-            prestamosEJB.remove(p);
-        }
-
-        for (RecibosDomiciliarios r : recibos) {
-            List<NotificacionesRecibos> notificacionesRecibos = new ArrayList<>();
-            notificacionesRecibos = notificacionesEJB.notificacionesPorRecibo(r);
-
-            for (NotificacionesRecibos n : notificacionesRecibos) {
-                notificacionesEJB.remove(n);
+            for (Transferencias t : transferencias) {
+                transferenciasEJB.remove(t);
             }
-            recibosEJB.remove(r);
-        }
 
-        for (ClientesCuentas cc : clientesCuentas) {
-            clientesCuentasEJB.remove(cc);
-        }
+            for (Operaciones o : operaciones) {
+                operacionesEJB.remove(o);
+            }
 
-        for (Cuentas c : cuentas) {
-            cuentasEJB.remove(c);
+            for (Tarjetas_De_Credito t : tarjetas) {
+                tarjetasEJB.remove(t);
+            }
+
+            for (Prestamos p : prestamos) {
+                prestamosEJB.remove(p);
+            }
+
+            for (RecibosDomiciliarios r : recibos) {
+                List<NotificacionesRecibos> notificacionesRecibos = new ArrayList<>();
+                notificacionesRecibos = notificacionesEJB.notificacionesPorRecibo(r);
+
+                for (NotificacionesRecibos n : notificacionesRecibos) {
+                    notificacionesEJB.remove(n);
+                }
+                recibosEJB.remove(r);
+            }
+
+            for (ClientesCuentas cc : clientesCuentas) {
+                clientesCuentasEJB.remove(cc);
+            }
+
+            for (Cuentas c : cuentas) {
+                cuentasEJB.remove(c);
+            }
         }
 
         clienteEJB.remove(cliente);

@@ -66,7 +66,10 @@ public class TarjetaEController implements Serializable {
         cuentas = new ArrayList<>();
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         tarjeta = new Tarjetas_De_Credito();
-        tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
+        tarjetas = new ArrayList<>();
+        if (!cuentas.isEmpty()){
+            tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
+        }
         tarjetaModElim = new Tarjetas_De_Credito();
     }
 

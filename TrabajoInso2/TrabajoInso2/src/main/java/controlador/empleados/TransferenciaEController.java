@@ -63,7 +63,9 @@ public class TransferenciaEController implements Serializable {
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         transferencia = new Transferencias();
         transferencias = new ArrayList<>();
-        transferencias = transferenciaEJB.transferenciasPorCuenta(cuentas);
+        if(!cuentas.isEmpty()){
+            transferencias = transferenciaEJB.transferenciasPorCuenta(cuentas);
+        }
     }
 
     public Transferencias getTransferencia() {

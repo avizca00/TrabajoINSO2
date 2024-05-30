@@ -67,7 +67,9 @@ public class ReciboEController implements Serializable {
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         recibos = new ArrayList<>();
         recibo = new RecibosDomiciliarios();
-        recibos = reciboEJB.recibosPorCuenta(cuentas);
+        if(!cuentas.isEmpty()){
+            recibos = reciboEJB.recibosPorCuenta(cuentas);
+        }
         notificacion = new NotificacionesRecibos();
         notificaciones = new ArrayList<>();
     }

@@ -59,7 +59,9 @@ public class PrestamoEController implements Serializable {
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         prestamo = new Prestamos();
         prestamos = new ArrayList<>();
-        prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
+        if (!cuentas.isEmpty()) {
+            prestamos = prestamosEJB.prestamosPorCuenta(cuentas);
+        }
     }
 
     public Cuentas getCuenta() {

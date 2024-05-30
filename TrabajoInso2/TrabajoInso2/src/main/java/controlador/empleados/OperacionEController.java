@@ -65,7 +65,9 @@ public class OperacionEController implements Serializable {
         cuentas = clienteCuentaEJB.cuentasPorCliente(cliente);
         operacion = new Operaciones();
         operaciones = new ArrayList<>();
-        operaciones = operacionEJB.operacionesPorCuenta(cuentas);
+        if (!cuentas.isEmpty()) {
+            operaciones = operacionEJB.operacionesPorCuenta(cuentas);
+        }
     }
 
     public Operaciones getOperacion() {
@@ -249,7 +251,7 @@ public class OperacionEController implements Serializable {
         }
         return true;
     }
-    
+
     public void redirectUsuarios() {
         try {
             FacesContext.getCurrentInstance().getExternalContext()
