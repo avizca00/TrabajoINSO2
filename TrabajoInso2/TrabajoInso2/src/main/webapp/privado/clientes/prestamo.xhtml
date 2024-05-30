@@ -42,7 +42,7 @@
 
                         <h:outputLabel for="cuenta" value="Selecciona una cuenta a asociar:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{prestamoController.cuenta.idcuenta}">
-                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="-1" />
                             <f:selectItems value="#{prestamoController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />

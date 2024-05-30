@@ -271,6 +271,13 @@ public class ReciboController implements Serializable {
     public void creaRecibo() {
 
         int a = recibo.getImporte().compareTo(BigDecimal.ZERO);
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         cuenta = cuentaEJB.find(cuenta.getIdcuenta());
 
         System.out.println("Fecha de vencimiento: " + recibo.getFechaVencimiento());
@@ -290,11 +297,6 @@ public class ReciboController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida",
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida"));
-        } else if (cuenta == null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
-                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
         } else {
             try {
                 recibo.setCuenta(cuenta);

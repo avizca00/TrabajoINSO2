@@ -249,6 +249,11 @@ public class RegEmpleadosController implements Serializable {
 
     public void editarEmpleado() {
         try {
+            if (sucursal.getIdsucursal() == -1) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error: Debe seleccionar una sucursal.", "Debe seleccionar una sucursal."));
+                return;
+            }
             Empleados c = empleadosEJB.find(empleadoMod.getIdempleado());
             if (!c.getUsuario().getDniUsuario().equals(empleadoMod.getUsuario().getDniUsuario())
                     && usuarioEJB.existeUsuarioPorDNI(empleadoMod.getUsuario().getDniUsuario())) {
@@ -296,6 +301,7 @@ public class RegEmpleadosController implements Serializable {
     }
 
     public void crearEmpleado() {
+        System.out.println(sucursal.getIdsucursal());
         // Verificar si ya existe un usuario con el mismo DNI
         if (usuarioEJB.existeUsuarioPorDNI(usuario.getDniUsuario())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -309,6 +315,13 @@ public class RegEmpleadosController implements Serializable {
                     "Error: El nombre de usuario ya está en uso.", "El nombre de usuario ya está en uso."));
             return;
         }
+
+        if (sucursal.getIdsucursal() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error: Debe seleccionar una sucursal.", "Debe seleccionar una sucursal."));
+            return;
+        }
+        
         Sucursales s = sucursalEJB.find(sucursal.getIdsucursal());
         usuario.setSucursal(s);
         usuarioEJB.create(usuario);

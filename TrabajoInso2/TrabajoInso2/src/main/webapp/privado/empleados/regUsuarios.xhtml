@@ -107,7 +107,7 @@
 
                         <h:outputLabel for="cuentaF" value="Selecciona una sucursal:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuentaF" value="#{regUsuariosController.sucursal.idsucursal}">
-                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="-1" />
                             <f:selectItems value="#{regUsuariosController.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
                         <p:commandButton value="Confirmar" action="#{regUsuariosController.editarCliente()}" oncomplete="PF('modificarClienteDialog').hide();" update=":clientesForm:clientesTable" styleClass="confirm-button" />

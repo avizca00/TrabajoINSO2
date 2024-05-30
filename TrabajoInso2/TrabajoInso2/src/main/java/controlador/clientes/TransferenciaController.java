@@ -247,6 +247,13 @@ public class TransferenciaController implements Serializable {
     }
 
     public void realizarTransferencia() {
+        if (cuentaOrigen.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         cuentaOrigen = cuentaEJB.find(cuentaOrigen.getIdcuenta());
         cuentaDestino = cuentaEJB.encuentraCuentaPorIBAN(cuentaDestino.getIBAN());
 
@@ -284,7 +291,7 @@ public class TransferenciaController implements Serializable {
                                     + cuentaOrigen.getLimiteTransaccion() + "€",
                             "El importe de la transferencia supera el límite de transacción de su cuenta. Límite actual: "
                                     + cuentaOrigen.getLimiteTransaccion() + "€"));
-        } else {            
+        } else {
             cuentaOrigen.setSaldo(cuentaOrigen.getSaldo().subtract(transferencia.getMonto()));
             cuentaDestino.setSaldo(cuentaDestino.getSaldo().add(transferencia.getMonto()));
 

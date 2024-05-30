@@ -261,103 +261,145 @@ public class RegUsuariosController implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         RegUsuariosController other = (RegUsuariosController) obj;
         if (clientes == null) {
-            if (other.clientes != null)
+            if (other.clientes != null) {
                 return false;
-        } else if (!clientes.equals(other.clientes))
+            }
+        } else if (!clientes.equals(other.clientes)) {
             return false;
+        }
         if (cliente == null) {
-            if (other.cliente != null)
+            if (other.cliente != null) {
                 return false;
-        } else if (!cliente.equals(other.cliente))
+            }
+        } else if (!cliente.equals(other.cliente)) {
             return false;
+        }
         if (empleado == null) {
-            if (other.empleado != null)
+            if (other.empleado != null) {
                 return false;
-        } else if (!empleado.equals(other.empleado))
+            }
+        } else if (!empleado.equals(other.empleado)) {
             return false;
+        }
         if (sucursal == null) {
-            if (other.sucursal != null)
+            if (other.sucursal != null) {
                 return false;
-        } else if (!sucursal.equals(other.sucursal))
+            }
+        } else if (!sucursal.equals(other.sucursal)) {
             return false;
+        }
         if (sucursales == null) {
-            if (other.sucursales != null)
+            if (other.sucursales != null) {
                 return false;
-        } else if (!sucursales.equals(other.sucursales))
+            }
+        } else if (!sucursales.equals(other.sucursales)) {
             return false;
+        }
         if (sucursalEJB == null) {
-            if (other.sucursalEJB != null)
+            if (other.sucursalEJB != null) {
                 return false;
-        } else if (!sucursalEJB.equals(other.sucursalEJB))
+            }
+        } else if (!sucursalEJB.equals(other.sucursalEJB)) {
             return false;
+        }
         if (clientesEJB == null) {
-            if (other.clientesEJB != null)
+            if (other.clientesEJB != null) {
                 return false;
-        } else if (!clientesEJB.equals(other.clientesEJB))
+            }
+        } else if (!clientesEJB.equals(other.clientesEJB)) {
             return false;
+        }
         if (empleadosEJB == null) {
-            if (other.empleadosEJB != null)
+            if (other.empleadosEJB != null) {
                 return false;
-        } else if (!empleadosEJB.equals(other.empleadosEJB))
+            }
+        } else if (!empleadosEJB.equals(other.empleadosEJB)) {
             return false;
+        }
         if (usuarioEJB == null) {
-            if (other.usuarioEJB != null)
+            if (other.usuarioEJB != null) {
                 return false;
-        } else if (!usuarioEJB.equals(other.usuarioEJB))
+            }
+        } else if (!usuarioEJB.equals(other.usuarioEJB)) {
             return false;
+        }
         if (clientesCuentasEJB == null) {
-            if (other.clientesCuentasEJB != null)
+            if (other.clientesCuentasEJB != null) {
                 return false;
-        } else if (!clientesCuentasEJB.equals(other.clientesCuentasEJB))
+            }
+        } else if (!clientesCuentasEJB.equals(other.clientesCuentasEJB)) {
             return false;
+        }
         if (cuentasEJB == null) {
-            if (other.cuentasEJB != null)
+            if (other.cuentasEJB != null) {
                 return false;
-        } else if (!cuentasEJB.equals(other.cuentasEJB))
+            }
+        } else if (!cuentasEJB.equals(other.cuentasEJB)) {
             return false;
+        }
         if (tarjetasEJB == null) {
-            if (other.tarjetasEJB != null)
+            if (other.tarjetasEJB != null) {
                 return false;
-        } else if (!tarjetasEJB.equals(other.tarjetasEJB))
+            }
+        } else if (!tarjetasEJB.equals(other.tarjetasEJB)) {
             return false;
+        }
         if (transferenciasEJB == null) {
-            if (other.transferenciasEJB != null)
+            if (other.transferenciasEJB != null) {
                 return false;
-        } else if (!transferenciasEJB.equals(other.transferenciasEJB))
+            }
+        } else if (!transferenciasEJB.equals(other.transferenciasEJB)) {
             return false;
+        }
         if (operacionesEJB == null) {
-            if (other.operacionesEJB != null)
+            if (other.operacionesEJB != null) {
                 return false;
-        } else if (!operacionesEJB.equals(other.operacionesEJB))
+            }
+        } else if (!operacionesEJB.equals(other.operacionesEJB)) {
             return false;
+        }
         if (prestamosEJB == null) {
-            if (other.prestamosEJB != null)
+            if (other.prestamosEJB != null) {
                 return false;
-        } else if (!prestamosEJB.equals(other.prestamosEJB))
+            }
+        } else if (!prestamosEJB.equals(other.prestamosEJB)) {
             return false;
+        }
         if (recibosEJB == null) {
-            if (other.recibosEJB != null)
+            if (other.recibosEJB != null) {
                 return false;
-        } else if (!recibosEJB.equals(other.recibosEJB))
+            }
+        } else if (!recibosEJB.equals(other.recibosEJB)) {
             return false;
+        }
         if (notificacionesEJB == null) {
-            if (other.notificacionesEJB != null)
+            if (other.notificacionesEJB != null) {
                 return false;
-        } else if (!notificacionesEJB.equals(other.notificacionesEJB))
+            }
+        } else if (!notificacionesEJB.equals(other.notificacionesEJB)) {
             return false;
+        }
         return true;
     }
 
     public void editarCliente() {
         try {
+            if (sucursal.getIdsucursal() == -1) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error: Debe seleccionar una sucursal.", "Debe seleccionar una sucursal."));
+                return;
+            }
             Clientes c = clientesEJB.find(cliente.getIdcliente());
             // Verificar si ya existe un usuario con el mismo DNI
             if (!c.getUsuario().getDniUsuario().equals(cliente.getUsuario().getDniUsuario())
@@ -376,7 +418,7 @@ public class RegUsuariosController implements Serializable {
 
                 cliente.setUsuario(usuario);
                 clientesEJB.edit(cliente);
-                
+
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El cliente se ha editado correctamente",
                                 "El cliente se ha editado correctamente"));

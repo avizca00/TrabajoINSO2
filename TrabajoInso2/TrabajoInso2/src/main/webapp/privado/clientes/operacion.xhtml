@@ -33,7 +33,7 @@
 
                         <h:outputLabel for="cuenta" value="Selecciona una cuenta:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{operacionController.cuenta.idcuenta}">
-                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="-1" />
                             <f:selectItems value="#{operacionController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />

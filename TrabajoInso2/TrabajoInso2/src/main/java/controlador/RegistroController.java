@@ -219,19 +219,28 @@ public class RegistroController implements Serializable {
 
     public void registrar() {
         if (!usuario.getContrasenia().equals(confirmPassword)) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error: Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
             return;
         }
 
         // Verificar si ya existe un usuario con el mismo DNI
         if (usuarioEJB.existeUsuarioPorDNI(usuario.getDniUsuario())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El DNI ya está en uso.", "El DNI ya está en uso."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error: El DNI ya está en uso.", "El DNI ya está en uso."));
             return;
         }
 
         // Verificar si ya existe un usuario con el mismo username
         if (usuarioEJB.existeUsuarioPorUsername(usuario.getUserName())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El nombre de usuario ya está en uso.", "El nombre de usuario ya está en uso."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error: El nombre de usuario ya está en uso.", "El nombre de usuario ya está en uso."));
+            return;
+        }
+
+        if (sucursal.getIdsucursal() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error: Debe seleccionar una sucursal.", "Debe seleccionar una sucursal."));
             return;
         }
 
@@ -247,19 +256,24 @@ public class RegistroController implements Serializable {
             clienteEJB.create(cliente);
             usuario = new Usuarios();
             cliente = new Clientes();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.", "nfo: El usuario ha sido registrado correctamente."));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.",
+                            "nfo: El usuario ha sido registrado correctamente."));
         } else {
             empleado.setUsuario(usuario);
             empleado.setFechaContratacion(date);
             empleadoEJB.create(empleado);
             usuario = new Usuarios();
             empleado = new Empleados();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.", "nfo: El usuario ha sido registrado correctamente."));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Info: El usuario ha sido registrado correctamente.",
+                            "nfo: El usuario ha sido registrado correctamente."));
         }
     }
 
     public void redirect() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
+        FacesContext.getCurrentInstance().getExternalContext()
+                .redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
     }
 
 }

@@ -223,7 +223,13 @@ public class TarjetaController implements Serializable {
     }
 
     public void crearTarjeta() {
-
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         int a = tarjeta.getSaldoDisponible().compareTo(BigDecimal.ZERO);
         if (a == -1 || a == 0) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -240,7 +246,8 @@ public class TarjetaController implements Serializable {
                 tarjetaEJB.create(tarjeta);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente.",
-                        "Info: Su tarjeta de " + tarjeta.getTipoTarjeta() + " ha sido creada y asociada correctamente."));
+                        "Info: Su tarjeta de " + tarjeta.getTipoTarjeta()
+                                + " ha sido creada y asociada correctamente."));
                 tarjetas = tarjetaEJB.encuentraTarejetaPorCuenta(cuentas);
             } catch (Exception e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -283,6 +290,13 @@ public class TarjetaController implements Serializable {
 
     public void editarTarjeta() {
         try {
+            if (cuenta.getIdcuenta() == -1) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                                "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+                return;
+            }
             Cuentas c = cuentaEJB.find(this.cuenta.getIdcuenta());
             tarjetaModElim.setCuenta(c);
             tarjetaEJB.edit(tarjetaModElim);

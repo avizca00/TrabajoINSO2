@@ -249,22 +249,29 @@ public class OperacionController implements Serializable {
     }
 
     public void creaOperacion() {
-
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         int a = operacion.getImporte().compareTo(BigDecimal.ZERO);
         if (a == -1 || a == 0) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "El importe de la operacion no puede ser 0 o negativo. Introduzca un importe válido",
                             "El importe de la operacion no puede ser 0 o negativo. Introduzca un importe válido"));
-
         } else {
             setCuenta(cuentaEJB.find(cuenta.getIdcuenta()));
 
             if (operacion.getTipoOperacion().equals("Retirada")) {
                 if (operacion.getImporte().compareTo(cuenta.getSaldo()) == 1) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: " + cuenta.getSaldo() + "€",
-                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: " + cuenta.getSaldo() + "€"));
+                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: "
+                                    + cuenta.getSaldo() + "€",
+                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: "
+                                    + cuenta.getSaldo() + "€"));
                 } else {
                     try {
                         cuenta.setSaldo(cuenta.getSaldo().subtract(operacion.getImporte()));
@@ -275,8 +282,11 @@ public class OperacionController implements Serializable {
                         operacion.setCuenta(cuenta);
                         operacionEJB.create(operacion);
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
-                                "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€"));
+                                "Info: Su operación de " + operacion.getTipoOperacion()
+                                        + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
+                                "Info: Su operación de " + operacion.getTipoOperacion()
+                                        + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()
+                                        + "€"));
                         operaciones = operacionEJB.operacionesPorCuenta(cuentas);
                     } catch (Exception e) {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -294,8 +304,10 @@ public class OperacionController implements Serializable {
                     operacion.setCuenta(cuenta);
                     operacionEJB.create(operacion);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
-                            "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€"));
+                            "Info: Su operación de " + operacion.getTipoOperacion()
+                                    + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
+                            "Info: Su operación de " + operacion.getTipoOperacion()
+                                    + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€"));
                     operaciones = operacionEJB.operacionesPorCuenta(cuentas);
                 } catch (Exception e) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,

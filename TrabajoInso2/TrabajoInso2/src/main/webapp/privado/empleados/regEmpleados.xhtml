@@ -46,7 +46,7 @@
 
                         <h:outputLabel for="sucursal" value="Selecciona una sucursal:" styleClass="output-text"/>
                         <p:selectOneMenu id="sucursal" value="#{regEmpleadosController.sucursal.idsucursal}">
-                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="-1" />
                             <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
                         <h:message for="sucursal" style="color: red" />
@@ -147,7 +147,7 @@
 
                         <h:outputLabel for="cuentaF" value="Selecciona una sucursal:" />
                         <p:selectOneMenu id="cuentaF" value="#{regEmpleadosController.sucursal.idsucursal}">
-                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="-1" />
                             <f:selectItems value="#{regEmpleadosController.sucursales}" var="sucursal" itemLabel="#{sucursal.nombre}" itemValue="#{sucursal.idsucursal}" />
                         </p:selectOneMenu>
                         <p:commandButton value="Confirmar" action="#{regEmpleadosController.editarEmpleado()}" oncomplete="PF('modificarEmpleadoDialog').hide();" update=":empleadosForm:empleadosTable" styleClass="confirm-button" />
