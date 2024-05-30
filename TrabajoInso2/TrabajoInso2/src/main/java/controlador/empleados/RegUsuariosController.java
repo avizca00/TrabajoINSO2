@@ -376,11 +376,12 @@ public class RegUsuariosController implements Serializable {
 
                 cliente.setUsuario(usuario);
                 clientesEJB.edit(cliente);
-                clientes = clientesEJB.findAll();
+                
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El cliente se ha editado correctamente",
                                 "El cliente se ha editado correctamente"));
             }
+            clientes = clientesEJB.findAll();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al editar el cliente",

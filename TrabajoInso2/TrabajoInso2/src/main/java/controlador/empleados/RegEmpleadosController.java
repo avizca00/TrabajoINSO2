@@ -266,11 +266,12 @@ public class RegEmpleadosController implements Serializable {
 
                 empleadoMod.setUsuario(usuario);
                 empleadosEJB.edit(empleadoMod);
-                empleados = empleadosEJB.findAll();
+
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El empleado se ha editado correctamente",
                                 "El empleado se ha editado correctamente"));
             }
+            empleados = empleadosEJB.findAll();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al editar el cliente",

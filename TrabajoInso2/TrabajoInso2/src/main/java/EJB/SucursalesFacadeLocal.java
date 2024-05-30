@@ -29,5 +29,13 @@ public interface SucursalesFacadeLocal {
     List<Sucursales> findRange(int[] range);
 
     int count();
+
+    public boolean existeSucursalConNombre(String nombre);
+
+    public boolean existeSucursalConDireccion(String ubicacion);
+
+    public boolean existeSucursalConTelefono(String telefono);
+
+    public boolean existeSucursalConCorreo(String correoElectronico);
     
 }
