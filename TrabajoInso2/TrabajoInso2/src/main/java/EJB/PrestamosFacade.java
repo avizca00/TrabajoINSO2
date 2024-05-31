@@ -38,5 +38,12 @@ public class PrestamosFacade extends AbstractFacade<Prestamos> implements Presta
                 .setParameter("cuentas", cuentas)
                 .getResultList();
     }
-    
+
+    @Override
+    public List<Prestamos> findPrestamosPendientes() {
+        String jpql = "SELECT t FROM Prestamos t WHERE t.estado = 0";
+        return em.createQuery(jpql, Prestamos.class)
+                .getResultList();
+    }
+
 }

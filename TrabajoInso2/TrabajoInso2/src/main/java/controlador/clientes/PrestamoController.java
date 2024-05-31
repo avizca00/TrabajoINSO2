@@ -125,6 +125,13 @@ public class PrestamoController implements Serializable {
     }
 
     public void crearPrestamo() {
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         cuenta = cuentasEJB.find(cuenta.getIdcuenta());
         int monto = prestamo.getMontoPrestamo().compareTo(BigDecimal.ZERO);
         int interes = prestamo.getTasaInteres().compareTo(BigDecimal.ZERO);
@@ -145,8 +152,6 @@ public class PrestamoController implements Serializable {
                 prestamo.setEstado(0);
                 prestamo.setFechaInicio(new Date());
                 prestamosEJB.create(prestamo);
-                cuenta.setSaldo(cuenta.getSaldo().add(prestamo.getMontoPrestamo()));
-                cuentasEJB.edit(cuenta);
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "El préstamo se ha creado correctamente",
                                 "El préstamo se ha creado correctamente"));

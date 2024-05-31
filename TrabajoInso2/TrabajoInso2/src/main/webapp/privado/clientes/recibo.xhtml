@@ -10,15 +10,15 @@
 
     <h:body>
         <ui:include src="menu.xhtml" />
-        <p:messages id="mess" globalOnly="true" />
+        <p:messages id="mess" globalOnly="true" closable="true"/>
         <div class="container">
             <h2>Recibos</h2>
             <h:form id="crearReciboForm">
                 <p:fieldset legend="Creación de Recibo Domiciliado">
                     <h:panelGrid columns="3" width="100%">
-                        <p:outputLabel for="cuenta" value="Selecciona una cuenta:" />
+                        <h:outputLabel for="cuenta" value="Selecciona una cuenta:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{reciboController.cuenta.idcuenta}">
-                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="-1" />
                             <f:selectItems value="#{reciboController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}"
                                            itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
@@ -32,12 +32,12 @@
                         </h:inputText>
                         <h:message for="saldo" style="color: red" />
 
-                        <h:outputLabel for="cDest" value="Entidad/Persona Beneficiaria:" />
+                        <h:outputLabel for="cDest" value="Entidad/Persona Beneficiaria:" styleClass="output-text"/>
                         <h:inputText id="cDest" styleClass="input-text" required="true"
                                      value="#{reciboController.recibo.entidadPersona}" />
                         <h:message for="cDest" style="color: red" />
 
-                        <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" />
+                        <h:outputLabel for="fechaVencimiento" value="Fecha de Vencimiento" styleClass="output-text"/>
                         <p:calendar id="fechaVencimiento" value="#{reciboController.recibo.fechaVencimiento}" locale="es"
                                     required="true" />
                         <h:message for="fechaVencimiento" style="color: red" />

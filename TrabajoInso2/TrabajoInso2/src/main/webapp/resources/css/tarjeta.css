@@ -1,114 +1,100 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .menu {
     width: 100%;
-    height: 5%;
-    background-color: #f4f4f4;
-    box-sizing: border-box;
-}
-        
-.container {
-    margin-left: 20%;
-    width: 60%;
-    height: 95%;
-    box-sizing: border-box;
-    overflow-y: auto; 
-    border: 1px solid #000;
-    border-radius: 15px;
-    padding: 20px;
+    height: 60px;
+    background-color: #007bff;
+    color: white;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    font-size: 18px;
 }
-        
+
+.container {
+    margin: 30px auto;
+    width: 80%;
+    max-width: 1200px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    font-weight: 300;
+    color: #007bff;
+    margin: 20px 0;
+}
+
 h1 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 40px;
+    font-size: 36px;
 }
-            
-            
-.output-Label {
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+.output-label, .output-text {
     width: 100%;
-    padding: 12px;
     margin: 10px 0;
-    font-size: 20px;
+    font-size: 18px;
 }
-           
-            
-.input-text {
+
+.input-text, .select-one-menu {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 24px;
-}
-            
-.select-One-Menu{
-    font-size: 20px;
+    font-size: 16px;
 }
 
+.select-one-menu {
+    appearance: none;
+    background: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA3YmZmIiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gPHBhdGggZD0iTTEyIDE1bC00LjctNC43TDcuMyAxMS45IDlMMTIgMTQgMTUuNCAxMS45bC0uNy0uOGwtNC43IDQuN3oiLz48L3N2Zz4=') no-repeat right 12px center;
+    background-size: 16px;
+}
+
+.register-button,
 .update-button,
-.delete-button {
-    background-color: #ff6666;
+.delete-button,
+.confirm-button,
+.cancel-button {
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 48%;
+    width: 100%;
     padding: 12px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
-}
-
-.update-button:hover,
-.delete-button:hover {
-    background-color: #e65c5c;
-}
-
-
-.output-text {
-    width: 100%;
-    padding: 12px;
     margin: 10px 0;
-    font-size: 20px;
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 24px;
-}
-
-h3 {
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 20px;
-}
-
-.register-button {
-    background-color: #ff6666;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.register-button:hover {
-    background-color: #e65c5c;
+.register-button:hover,
+.update-button:hover,
+.delete-button:hover,
+.confirm-button:hover,
+.cancel-button:hover {
+    background-color: #0056b3;
 }
 
 .login-link {
-    color: #ff6666;
+    color: #007bff;
     text-decoration: none;
     font-size: 16px;
 }
@@ -119,45 +105,26 @@ h3 {
 
 .table-container {
     margin-top: 20px;
-    border: 1px solid #ccc;
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
 }
+
 .table-container th, .table-container td {
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: left;
 }
+
 .table-container th {
-    background-color: #f2f2f2;
+    background-color: #f8f9fa;
+    font-weight: 600;
 }
+
 .table-container tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
 .table-container tbody tr:hover {
-    background-color: #ddd;
-}
-
-.modificar-tarjeta-grid {
-    width: 60%;
-    margin-left:20%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
-    justify-items: center;
-}
-
-.modificar-tarjeta-grid h:panelGroup {
-    grid-column: span 2;
-    text-align: right;
-}
-
-.confirm-button,
-.cancel-button {
-    margin-left: 10px;
-}
-
-.input-text {
-    width: 100%;
+    background-color: #e9ecef;
 }

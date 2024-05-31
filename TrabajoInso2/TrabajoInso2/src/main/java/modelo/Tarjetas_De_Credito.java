@@ -7,6 +7,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -23,12 +26,13 @@ import javax.persistence.Table;
  */
 /**
  * La clase Tarjetas_De_Credito representa una tarjeta de crédito en el sistema.
- * Contiene información como el número de tarjeta, el tipo de tarjeta, la fecha de vencimiento,
- * el CVV y el saldo disponible.
+ * Contiene información como el número de tarjeta, el tipo de tarjeta, la fecha
+ * de vencimiento, el CVV y el saldo disponible.
  */
 @Entity
 @Table(name = "tarjetasCredito")
 public class Tarjetas_De_Credito implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idtarjetascredito;
@@ -43,8 +47,9 @@ public class Tarjetas_De_Credito implements Serializable {
     @Column(name = "tipoTarjeta", nullable = false, length = 45)
     private String tipoTarjeta;
 
-    @Column(name = "fechaVencimiento", nullable = false, length = 45)
-    private String fechaVencimiento;
+    @Column(name = "fechaVencimiento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fechaVencimiento;
 
     @Column(name = "CVV", nullable = false, length = 4)
     private String CVV;
@@ -87,11 +92,11 @@ public class Tarjetas_De_Credito implements Serializable {
         this.tipoTarjeta = tipoTarjeta;
     }
 
-    public String getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
@@ -122,14 +127,14 @@ public class Tarjetas_De_Credito implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + this.idtarjetascredito;
-        hash = 31 * hash + Objects.hashCode(this.cuenta);
-        hash = 31 * hash + Objects.hashCode(this.numeroTarjeta);
-        hash = 31 * hash + Objects.hashCode(this.tipoTarjeta);
-        hash = 31 * hash + Objects.hashCode(this.fechaVencimiento);
-        hash = 31 * hash + Objects.hashCode(this.CVV);
-        hash = 31 * hash + Objects.hashCode(this.saldoDisponible);
-        hash = 31 * hash + Objects.hashCode(this.nombre);
+        hash = 59 * hash + this.idtarjetascredito;
+        hash = 59 * hash + Objects.hashCode(this.cuenta);
+        hash = 59 * hash + Objects.hashCode(this.numeroTarjeta);
+        hash = 59 * hash + Objects.hashCode(this.tipoTarjeta);
+        hash = 59 * hash + Objects.hashCode(this.fechaVencimiento);
+        hash = 59 * hash + Objects.hashCode(this.CVV);
+        hash = 59 * hash + Objects.hashCode(this.saldoDisponible);
+        hash = 59 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -154,9 +159,6 @@ public class Tarjetas_De_Credito implements Serializable {
         if (!Objects.equals(this.tipoTarjeta, other.tipoTarjeta)) {
             return false;
         }
-        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
-            return false;
-        }
         if (!Objects.equals(this.CVV, other.CVV)) {
             return false;
         }
@@ -166,11 +168,13 @@ public class Tarjetas_De_Credito implements Serializable {
         if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
         }
+        if (!Objects.equals(this.fechaVencimiento, other.fechaVencimiento)) {
+            return false;
+        }
         if (!Objects.equals(this.saldoDisponible, other.saldoDisponible)) {
             return false;
         }
         return true;
     }
 
-    
 }

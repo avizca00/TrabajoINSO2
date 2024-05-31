@@ -5,18 +5,18 @@
 
     <h:head>
         <title>Operaciones Bancarias</title>
-        <h:outputStylesheet library="css" name="operacion.css"/>
+        <h:outputStylesheet library="css" name="prestamo.css"/>
     </h:head>
 
     <h:body>
         <ui:include src="menu.xhtml"/>
-        <p:messages id="mess" globalOnly="true"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
         <div class="container">
             <h2>Prestamos</h2>
             <h:form id="crearPrestamoForm">
                 <p:fieldset legend="Creación de Préstamo">
                     <h:panelGrid columns="3" width="100%">
-                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
                         <h:inputText id="nombre" styleClass="input-text" required="true" value="#{prestamoController.prestamo.nombre}"/>
                         <h:message for="nombre" style="color: red" />
 
@@ -40,9 +40,9 @@
                         </h:inputText>
                         <h:message for="meses" style="color: red" />
 
-                        <p:outputLabel for="cuenta" value="Selecciona una cuenta a asociar:" />
+                        <h:outputLabel for="cuenta" value="Selecciona una cuenta a asociar:" styleClass="output-text"/>
                         <p:selectOneMenu id="cuenta" value="#{prestamoController.cuenta.idcuenta}">
-                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="" />
+                            <f:selectItem itemLabel="Seleccione una cuenta" itemValue="-1" />
                             <f:selectItems value="#{prestamoController.cuentas}" var="cuenta" itemLabel="#{cuenta.nombre}" itemValue="#{cuenta.idcuenta}" />
                         </p:selectOneMenu>
                         <h:message for="cuenta" style="color: red" />
@@ -72,8 +72,12 @@
                                 #{prestamo.montoPrestamo}€
                             </h:column>
                             <h:column>
+                                <f:facet name="header">Interés</f:facet>
+                                #{prestamo.tasaInteres}%
+                            </h:column>
+                            <h:column>
                                 <f:facet name="header">Estado</f:facet>
-                                     #{prestamo.estado == 1 ? 'Pagado' : prestamo.estado == 2 ? 'Aceptado' : 'Pendiente'}
+                                     #{prestamo.estado == 1 ? 'Pagado' : prestamo.estado == 2 ? 'Aceptado' : prestamo.estado == 3 ? 'Denegado' : 'Pendiente'}
                             </h:column>
                             <h:column>
                                 <f:facet name=""></f:facet>

@@ -20,6 +20,7 @@ import EJB.ClientesCuentasFacadeLocal;
 import EJB.ClientesFacadeLocal;
 import EJB.CuentasFacadeLocal;
 import EJB.OperacionesFacadeLocal;
+import java.math.BigDecimal;
 import modelo.Clientes;
 import modelo.ClientesCuentas;
 import modelo.Cuentas;
@@ -32,6 +33,7 @@ import modelo.Operaciones;
 @Named
 @ViewScoped
 public class OperacionController implements Serializable {
+
     private Operaciones operacion;
     private List<Operaciones> operaciones;
     private Clientes cliente;
@@ -163,77 +165,138 @@ public class OperacionController implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         OperacionController other = (OperacionController) obj;
         if (operacion == null) {
-            if (other.operacion != null)
+            if (other.operacion != null) {
                 return false;
-        } else if (!operacion.equals(other.operacion))
+            }
+        } else if (!operacion.equals(other.operacion)) {
             return false;
+        }
         if (operaciones == null) {
-            if (other.operaciones != null)
+            if (other.operaciones != null) {
                 return false;
-        } else if (!operaciones.equals(other.operaciones))
+            }
+        } else if (!operaciones.equals(other.operaciones)) {
             return false;
+        }
         if (cliente == null) {
-            if (other.cliente != null)
+            if (other.cliente != null) {
                 return false;
-        } else if (!cliente.equals(other.cliente))
+            }
+        } else if (!cliente.equals(other.cliente)) {
             return false;
+        }
         if (clienteCuenta == null) {
-            if (other.clienteCuenta != null)
+            if (other.clienteCuenta != null) {
                 return false;
-        } else if (!clienteCuenta.equals(other.clienteCuenta))
+            }
+        } else if (!clienteCuenta.equals(other.clienteCuenta)) {
             return false;
+        }
         if (cuentas == null) {
-            if (other.cuentas != null)
+            if (other.cuentas != null) {
                 return false;
-        } else if (!cuentas.equals(other.cuentas))
+            }
+        } else if (!cuentas.equals(other.cuentas)) {
             return false;
+        }
         if (cuenta == null) {
-            if (other.cuenta != null)
+            if (other.cuenta != null) {
                 return false;
-        } else if (!cuenta.equals(other.cuenta))
+            }
+        } else if (!cuenta.equals(other.cuenta)) {
             return false;
+        }
         if (operacionEJB == null) {
-            if (other.operacionEJB != null)
+            if (other.operacionEJB != null) {
                 return false;
-        } else if (!operacionEJB.equals(other.operacionEJB))
+            }
+        } else if (!operacionEJB.equals(other.operacionEJB)) {
             return false;
+        }
         if (cuentaEJB == null) {
-            if (other.cuentaEJB != null)
+            if (other.cuentaEJB != null) {
                 return false;
-        } else if (!cuentaEJB.equals(other.cuentaEJB))
+            }
+        } else if (!cuentaEJB.equals(other.cuentaEJB)) {
             return false;
+        }
         if (clie == null) {
-            if (other.clie != null)
+            if (other.clie != null) {
                 return false;
-        } else if (!clie.equals(other.clie))
+            }
+        } else if (!clie.equals(other.clie)) {
             return false;
+        }
         if (clienteCuentaEJB == null) {
-            if (other.clienteCuentaEJB != null)
+            if (other.clienteCuentaEJB != null) {
                 return false;
-        } else if (!clienteCuentaEJB.equals(other.clienteCuentaEJB))
+            }
+        } else if (!clienteCuentaEJB.equals(other.clienteCuentaEJB)) {
             return false;
+        }
         return true;
     }
 
     public void creaOperacion() {
-        setCuenta(cuentaEJB.find(cuenta.getIdcuenta()));
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
+        int a = operacion.getImporte().compareTo(BigDecimal.ZERO);
+        if (a == -1 || a == 0) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "El importe de la operacion no puede ser 0 o negativo. Introduzca un importe válido",
+                            "El importe de la operacion no puede ser 0 o negativo. Introduzca un importe válido"));
+        } else {
+            setCuenta(cuentaEJB.find(cuenta.getIdcuenta()));
 
-        if(operacion.getTipoOperacion().equals("Retirada")){
-            if(operacion.getImporte().compareTo(cuenta.getSaldo()) == 1){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: " + cuenta.getSaldo()+"€",
-                        "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: " + cuenta.getSaldo()+"€"));
-            }else{
+            if (operacion.getTipoOperacion().equals("Retirada")) {
+                if (operacion.getImporte().compareTo(cuenta.getSaldo()) == 1) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: "
+                                    + cuenta.getSaldo() + "€",
+                            "Error: No se puede retirar más dinero del que hay en la cuenta. Saldo actual: "
+                                    + cuenta.getSaldo() + "€"));
+                } else {
+                    try {
+                        cuenta.setSaldo(cuenta.getSaldo().subtract(operacion.getImporte()));
+                        cuentaEJB.edit(cuenta);
+                        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                        operacion.setFecha(timestamp);
+                        operacion.setEstado(0);
+                        operacion.setCuenta(cuenta);
+                        operacionEJB.create(operacion);
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                "Info: Su operación de " + operacion.getTipoOperacion()
+                                        + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
+                                "Info: Su operación de " + operacion.getTipoOperacion()
+                                        + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()
+                                        + "€"));
+                        operaciones = operacionEJB.operacionesPorCuenta(cuentas);
+                    } catch (Exception e) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                e.toString(),
+                                e.toString()));
+                    }
+                }
+            } else {
                 try {
-                    cuenta.setSaldo(cuenta.getSaldo().subtract(operacion.getImporte()));
+                    cuenta.setSaldo(cuenta.getSaldo().add(operacion.getImporte()));
                     cuentaEJB.edit(cuenta);
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     operacion.setFecha(timestamp);
@@ -241,32 +304,16 @@ public class OperacionController implements Serializable {
                     operacion.setCuenta(cuenta);
                     operacionEJB.create(operacion);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()+"€",
-                            "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()+"€"));
+                            "Info: Su operación de " + operacion.getTipoOperacion()
+                                    + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€",
+                            "Info: Su operación de " + operacion.getTipoOperacion()
+                                    + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo() + "€"));
                     operaciones = operacionEJB.operacionesPorCuenta(cuentas);
                 } catch (Exception e) {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             e.toString(),
                             e.toString()));
                 }
-            }
-        }else{
-            try {
-                cuenta.setSaldo(cuenta.getSaldo().add(operacion.getImporte()));
-                cuentaEJB.edit(cuenta);
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                operacion.setFecha(timestamp);
-                operacion.setEstado(0);
-                operacion.setCuenta(cuenta);
-                operacionEJB.create(operacion);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()+"€",
-                        "Info: Su operación de " + operacion.getTipoOperacion() + " ha sido realizada correctamente. Saldo actual: " + cuenta.getSaldo()+"€"));
-                operaciones = operacionEJB.operacionesPorCuenta(cuentas);
-            } catch (Exception e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        e.toString(),
-                        e.toString()));
             }
         }
     }

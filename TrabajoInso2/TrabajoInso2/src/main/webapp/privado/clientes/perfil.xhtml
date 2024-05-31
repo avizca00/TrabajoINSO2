@@ -9,54 +9,64 @@
     </h:head>
     <h:body>
         <ui:include src="menu.xhtml"/>
-        <p:messages id="mess" globalOnly="true"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
         <div class="container">
             <h1>Perfil de Usuario</h1>
             <h:form>
-                
-                <h:panelGrid columns="3">
-                    <h:outputLabel for="nombre" styleClass="output-Label" value="Nombre:" />
-                    <h:inputText id="nombre" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.nombre}"/>
-                    <h:message for="nombre" style="color: red" />
+                <p:fieldset legend="Transferencia">
+                    <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
+                        <h:inputText id="nombre" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.nombre}"/>
+                        <h:message for="nombre" style="color: red" />
 
-                    <h:outputLabel for="apellido" styleClass="output-Label" value="Apellido:" />
-                    <h:inputText id="apellido" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.apellido}"/>
-                    <h:message for="apellido" style="color: red" />
+                        <h:outputLabel for="apellido"  value="Apellido:" styleClass="output-text"/>
+                        <h:inputText id="apellido" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.apellido}"/>
+                        <h:message for="apellido" style="color: red" />
 
-                    <h:outputLabel for="dni" styleClass="output-Label" value="Dni:" />
-                    <h:inputText id="dni" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.dniUsuario}"/>
-                    <h:message for="dni" style="color: red" />
+                        <h:outputLabel for="dni"  value="Dni:" styleClass="output-text"/>
+                        <h:inputText id="dni" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.dniUsuario}"/>
+                        <h:message for="dni" style="color: red" />
 
-                    <h:outputLabel for="userName" styleClass="output-Label" value="Nombre de Usuario:" />
-                    <h:inputText id="userName" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.userName}"/>
-                    <h:message for="userName" style="color: red" />
+                        <h:outputLabel for="userName"  value="Nombre de Usuario:" styleClass="output-text"/>
+                        <h:inputText id="userName" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.userName}"/>
+                        <h:message for="userName" style="color: red" />
 
-                    <h:outputLabel for="email" styleClass="output-Label" value="Email:" />
-                    <h:inputText id="email" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.email}"/>
-                    <h:message for="email" style="color: red" />
+                        <h:outputLabel for="email"  value="Email:" styleClass="output-text"/>
+                        <h:inputText id="email" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.email}"/>
+                        <h:message for="email" style="color: red" />
 
-                    <h:outputLabel for="telefono" styleClass="output-Label" value="Telefono:" />
-                    <h:inputText id="telefono" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.telefono}"/>
-                    <h:message for="telefono" style="color: red" />
+                        <h:outputLabel for="telefono" styleClass="output-Label" value="Telefono:" />
+                        <h:inputText id="telefono" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.telefono}"/>
+                        <h:message for="telefono" style="color: red" />
 
-                    <h:outputLabel for="direccion" styleClass="output-Label" value="Direccion:" />
-                    <h:inputText id="direccion" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.direccion}"/>
-                    <h:message for="direccion" style="color: red" />
+                        <h:outputLabel for="direccion" styleClass="output-Label" value="Direccion:" />
+                        <h:inputText id="direccion" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.direccion}"/>
+                        <h:message for="direccion" style="color: red" />
 
-                    <h:outputLabel for="sucursal" styleClass="output-Label" value="Selecciona una sucursal:" />
-                    <p:selectOneMenu id="sucursal" styleClass="select-One-Menu" value="#{perfilController.cuentaSeleccionada.idsucursal}">
-                        <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
-                        <f:selectItems value="#{perfilController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
-                    </p:selectOneMenu>
-                    <h:message for="sucursal" style="color: red" />
+                        <h:outputLabel for="sucursal" styleClass="output-Label" value="Selecciona una sucursal:" />
+                        <p:selectOneMenu id="sucursal" styleClass="select-One-Menu" value="#{perfilController.cuentaSeleccionada.idsucursal}">
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
+                            <f:selectItems value="#{perfilController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
+                        </p:selectOneMenu>
+                        <h:message for="sucursal" style="color: red" />
 
-                    <h:outputLabel for="password" styleClass="output-Label" value="Contraseña:" />
-                    <h:inputText id="password" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.contrasenia}"/>
-                    <h:message for="password" style="color: red" />
-                </h:panelGrid>
-                <h:commandButton value="Actualizar" action="#{perfilController.actualizar()}" styleClass="update-button" />
-                <h:commandButton value="Borrar Perfil" action="#{perfilController.eliminar()}" styleClass="delete-button" />
+                        <h:outputLabel for="password" styleClass="output-Label" value="Contraseña:" />
+                        <h:inputText id="password" styleClass="input-text" required="true" value="#{perfilController.cliente.usuario.contrasenia}"/>
+                        <h:message for="password" style="color: red" />
+                    </h:panelGrid>
+                    <h:commandButton value="Actualizar" action="#{perfilController.actualizar()}" styleClass="update-button" />
+                    <p:commandButton value="Borrar Perfil" onclick="PF('confirmDialog').show()" styleClass="delete-button" />
+                </p:fieldset>
             </h:form>
+        </div>
+        <div>
+            <!-- Dialogo de confirmacion de eliminacion -->
+            <p:confirmDialog header="Confirmar Eliminación" message="¿Está seguro de que desea eliminar su perfil? Volverá al inicio de sesión" severity="alert" widgetVar="confirmDialog">
+                <h:form id="formEliminar">
+                    <p:commandButton value="Sí" action="#{perfilController.eliminar()}" oncomplete="PF('confirmDialog').hide();"  />
+                    <p:commandButton value="No" onclick="PF('confirmDialog').hide()" type="button" />
+                </h:form>
+            </p:confirmDialog>
         </div>
     </h:body>
 

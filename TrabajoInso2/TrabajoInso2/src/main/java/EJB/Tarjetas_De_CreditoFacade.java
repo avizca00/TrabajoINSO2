@@ -38,5 +38,5 @@ public class Tarjetas_De_CreditoFacade extends AbstractFacade<Tarjetas_De_Credit
                 .setParameter("cuentas", cuentas)
                 .getResultList();
     }
-    
+
 }

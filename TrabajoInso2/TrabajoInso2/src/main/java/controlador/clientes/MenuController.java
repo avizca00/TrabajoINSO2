@@ -14,6 +14,7 @@ import modelo.Cuentas;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -33,11 +34,22 @@ public class MenuController implements Serializable {
     private ClientesCuentasFacadeLocal clientesCuentasEJB;
 
     private List<Cuentas> cuentas;
+    
+    private String error;
 
     @PostConstruct
     public void init() {
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String Error) {
+        this.error = Error;
+    }
+
+    
     public ClientesCuentasFacadeLocal getClientesCuentasEJB() {
         return clientesCuentasEJB;
     }
@@ -56,11 +68,11 @@ public class MenuController implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((clientesCuentasEJB == null) ? 0 : clientesCuentasEJB.hashCode());
-        result = prime * result + ((cuentas == null) ? 0 : cuentas.hashCode());
-        return result;
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.clientesCuentasEJB);
+        hash = 47 * hash + Objects.hashCode(this.cuentas);
+        hash = 47 * hash + Objects.hashCode(this.error);
+        return hash;
     }
 
     @Override
@@ -74,19 +86,14 @@ public class MenuController implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        MenuController other = (MenuController) obj;
-        if (clientesCuentasEJB == null) {
-            if (other.clientesCuentasEJB != null) {
-                return false;
-            }
-        } else if (!clientesCuentasEJB.equals(other.clientesCuentasEJB)) {
+        final MenuController other = (MenuController) obj;
+        if (!Objects.equals(this.error, other.error)) {
             return false;
         }
-        if (cuentas == null) {
-            if (other.cuentas != null) {
-                return false;
-            }
-        } else if (!cuentas.equals(other.cuentas)) {
+        if (!Objects.equals(this.clientesCuentasEJB, other.clientesCuentasEJB)) {
+            return false;
+        }
+        if (!Objects.equals(this.cuentas, other.cuentas)) {
             return false;
         }
         return true;
@@ -184,11 +191,10 @@ public class MenuController implements Serializable {
     }
 
     public void redirectOperaciones() {
+        System.out.println(getError());
         try {
             if (!compruebaCuentas()) {
-                FacesContext.getCurrentInstance().addMessage(null,
-                        new FacesMessage("No tienes cuentas asociadas, Crea una cuenta para poder ver tus operaciones.",
-                                "No tienes cuentas asociadas, Crea una cuenta para poder ver tus operaciones."));
+                errorMsg("operaciones");
             } else {
                 FacesContext.getCurrentInstance().getExternalContext()
                         .redirect("/TrabajoInso2/faces/privado/clientes/operacion.xhtml");
@@ -201,11 +207,14 @@ public class MenuController implements Serializable {
     public boolean compruebaCuentas() {
         Clientes c = (Clientes) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cliente");
         cuentas = clientesCuentasEJB.cuentasPorCliente(c);
-
         if (cuentas.isEmpty()) {
             return false;
         } else {
             return true;
         }
+    }
+    
+    private void errorMsg(String input){
+        setError("No tienes cuentas asociadas, Crea una cuenta para poder ver tus :"+input);        
     }
 }

@@ -32,5 +32,7 @@ public interface PrestamosFacadeLocal {
     int count();
 
     public List<Prestamos> prestamosPorCuenta(List<Cuentas> cuentas);
+
+    public List<Prestamos> findPrestamosPendientes();
     
 }

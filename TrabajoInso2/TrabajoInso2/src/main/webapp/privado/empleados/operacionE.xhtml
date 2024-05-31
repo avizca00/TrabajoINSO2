@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Operaciones Bancarias</title>
+        <h:outputStylesheet library="css" name="operacion.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menuE.xhtml"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
+        <div class="container">
+            <h2>Operaciones bancarias de #{operacionEController.cliente.usuario.nombre}</h2>
+            <p:fieldset legend="Historial de Ingresos / Retiradas">
+                <p:commandButton value="Atrás" action="#{cuentaEController.redirectUsuarios()}"/>
+                <div class="table-container">
+                    <h:dataTable id="tarjetasTable" value="#{operacionEController.operaciones}" var="operacion">
+                        <h:column>
+                            <f:facet name="header">Fecha</f:facet>
+                                #{operacion.fecha}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Tipo de Operación</f:facet>
+                                #{operacion.tipoOperacion}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Importe de Operación</f:facet>
+                            #{operacion.importe}€
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Cuenta</f:facet>
+                                #{operacion.cuenta.nombre}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </p:fieldset>
+        </div>
+
+    </h:body>
+
+</html>

@@ -269,32 +269,25 @@ public class ReciboController implements Serializable {
     }
 
     public void creaRecibo() {
-
         int a = recibo.getImporte().compareTo(BigDecimal.ZERO);
+        if (cuenta.getIdcuenta() == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
+                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
+            return;
+        }
         cuenta = cuentaEJB.find(cuenta.getIdcuenta());
-
-        System.out.println("Fecha de vencimiento: " + recibo.getFechaVencimiento());
-
         if (a == -1 || a == 0) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "El importe del recibo no puede ser 0 o negativo. Introduzca un importe válido",
                             "El importe del recibo no puede ser 0 o negativo. Introduzca un importe válido"));
-        } else if (recibo.getFechaVencimiento() == null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "La fecha de emisión del recibo no puede estar vacía. Introduzca una fecha válida",
-                            "La fecha de emisión del recibo no puede estar vacía. Introduzca una fecha válida"));
-        } else if (recibo.getFechaVencimiento().before(new Date())) {
+        } else if (recibo.getFechaVencimiento().before(new Date())) {  
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida",
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida"));
-        } else if (cuenta == null) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "No se ha seleccionado una cuenta. Seleccione una cuenta",
-                            "No se ha seleccionado una cuenta. Seleccione una cuenta"));
         } else {
             try {
                 recibo.setCuenta(cuenta);

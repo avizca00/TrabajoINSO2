@@ -14,63 +14,64 @@
         <div class="container">
             <h1>Registro</h1>
             <h:form>
-                <p:messages id="mess" globalOnly="true"/>
-                <h:panelGrid columns="3" width="100%">
-                    <h:outputLabel for="nombre" value="Nombre:" />
-                    <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{registroController.usuario.nombre}"/>
-                    <h:message for="nombre" style="color: red"/>
+                <p:fieldset legend="Registro">
+                    <p:messages id="mess" globalOnly="true" closable="true"/>
+                    <h:panelGrid columns="3" width="100%">
+                        <h:outputLabel for="nombre" value="Nombre:" styleClass="output-text"/>
+                        <h:inputText id="nombre" styleClass="input-text" requiredMessage="Campo Obligatorio" required="true" value="#{registroController.usuario.nombre}"/>
+                        <h:message for="nombre" style="color: red"/>
 
-                    <h:outputLabel for="apellido" value="Apellido:" />
-                    <h:inputText id="apellido" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.apellido}"/>
-                    <h:message for="apellido" style="color: red"/>
+                        <h:outputLabel for="apellido" value="Apellido:" styleClass="output-text" />
+                        <h:inputText id="apellido" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.apellido}"/>
+                        <h:message for="apellido" style="color: red"/>
 
-                    <h:outputLabel for="dni" value="Dni:" />
-                    <h:inputText id="dni" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.dniUsuario}"/>
-                    <h:message for="dni" style="color: red" />
+                        <h:outputLabel for="dni" value="Dni:" styleClass="output-text"/>
+                        <h:inputText id="dni" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.dniUsuario}"/>
+                        <h:message for="dni" style="color: red" />
 
-                    <h:outputLabel for="userName" value="Nombre de Usuario:" />
-                    <h:inputText id="userName" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.userName}"/>
-                    <h:message for="userName" style="color: red" />
+                        <h:outputLabel for="userName" value="Nombre de Usuario:" styleClass="output-text"/>
+                        <h:inputText id="userName" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.userName}"/>
+                        <h:message for="userName" style="color: red" />
 
-                    <h:outputLabel for="email" value="Email:" />
-                    <h:inputText id="email" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.email}"/>
-                    <h:message for="email" style="color: red" />
+                        <h:outputLabel for="email" value="Email:" styleClass="output-text"/>
+                        <h:inputText id="email" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.email}"/>
+                        <h:message for="email" style="color: red" />
 
-                    <h:outputLabel for="telefono" value="Telefono:" />
-                    <h:inputText id="telefono" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.telefono}"/>
-                    <h:message for="telefono" style="color: red" />
+                        <h:outputLabel for="telefono" value="Telefono:" styleClass="output-text"/>
+                        <h:inputText id="telefono" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.telefono}"/>
+                        <h:message for="telefono" style="color: red" />
 
-                    <h:outputLabel for="direccion" value="Direccion:" />
-                    <h:inputText id="direccion" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.direccion}"/>
-                    <h:message for="direccion" style="color: red" />
+                        <h:outputLabel for="direccion" value="Direccion:" styleClass="output-text"/>
+                        <h:inputText id="direccion" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.direccion}"/>
+                        <h:message for="direccion" style="color: red" />
 
-                    <h:outputLabel for="rol" value="Rol:" />
-                    <p:selectOneButton id="rol" value="#{registroController.rol}">
-                        <f:selectItem itemValue="Cliente" itemLabel="Cliente"/>
-                        <f:selectItem itemValue="Empleado" itemLabel="Empleado"/>
-                    </p:selectOneButton>
-                    <h:message for="rol" style="color: red" />
+                        <h:outputLabel for="rol" value="Rol:" styleClass="output-text"/>
+                        <p:selectOneButton id="rol" value="#{registroController.rol}">
+                            <f:selectItem itemValue="Cliente" itemLabel="Cliente"/>
+                            <f:selectItem itemValue="Empleado" itemLabel="Empleado"/>
+                        </p:selectOneButton>
+                        <h:message for="rol" style="color: red" />
 
-                    <p:outputLabel for="sucursal" value="Selecciona una sucursal:" />
-                    <p:selectOneMenu id="sucursal" value="#{registroController.sucursal.idsucursal}">
-                        <f:selectItem itemLabel="Seleccione una sucursal" itemValue="" />
-                        <f:selectItems value="#{registroController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
-                    </p:selectOneMenu>
-                    <h:message for="sucursal" style="color: red" />
+                        <p:outputLabel for="sucursal" value="Selecciona una sucursal:" styleClass="output-text"/>
+                        <p:selectOneMenu id="sucursal" value="#{registroController.sucursal.idsucursal}">
+                            <f:selectItem itemLabel="Seleccione una sucursal" itemValue="-1" />
+                            <f:selectItems value="#{registroController.sucursales}" var="sucursal" itemLabel="#{sucursal.ubicacion}" itemValue="#{sucursal.idsucursal}" />
+                        </p:selectOneMenu>
+                        <h:message for="sucursal" style="color: red" />
 
-                    <h:outputLabel for="password" value="Contraseña:" />
-                    <h:inputSecret id="password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.contrasenia}"/>
-                    <h:message for="password" style="color: red" />
+                        <h:outputLabel for="password" value="Contraseña:" styleClass="output-text"/>
+                        <h:inputSecret id="password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.usuario.contrasenia}"/>
+                        <h:message for="password" style="color: red" />
 
-                    <h:outputLabel for="confirm-password" value="Confirmar Contraseña:" />
-                    <h:inputSecret id="confirm-password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.confirmPassword}"/>
-                    <h:message for="confirm-password" style="color: red" />
-                </h:panelGrid>
-                <h:commandButton value="Registrarse" action="#{registroController.registrar()}" styleClass="register-button"/>
-
+                        <h:outputLabel for="confirm-password" value="Confirmar Contraseña:" styleClass="output-text"/>
+                        <h:inputSecret id="confirm-password" styleClass="input-text" requiredMessage="Campo Obligatorio"  required="true" value="#{registroController.confirmPassword}"/>
+                        <h:message for="confirm-password" style="color: red" />
+                    </h:panelGrid>
+                    <h:commandButton value="Registrarse" action="#{registroController.registrar()}" styleClass="register-button"/>
+                </p:fieldset>
             </h:form>
             <h:form>
-                <p:commandButton action="#{registroController.redirect()}" value="¿No tienes una cuenta? ¡Regístrate!" styleClass="register-button" />
+                <p:commandButton action="#{registroController.redirect()}" value="¿Ya te has registrado? ¡Inicia sesión ya!" styleClass="register-button" />
             </h:form>
         </div>
 

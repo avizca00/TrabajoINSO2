@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Cuentas Bancarias</title>
+        <h:outputStylesheet library="css" name="cuenta.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:include src="menuE.xhtml"/>
+        <p:messages id="mess" globalOnly="true" closable="true"/>
+        <div class="container">
+            <h2>Cuentas Bancarias de #{cuentaEController.cliente.usuario.nombre}</h2>
+            <h:form id="tarjetasForm">
+                <p:fieldset legend="Cuentas Bancarias">
+                    <p:commandButton value="Atrás" action="#{cuentaEController.redirectUsuarios()}"/>
+                    <div class="table-container">
+                        <h:dataTable id="tabla" value="#{cuentaEController.cuentas}" var="cuenta" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Nombre</f:facet>
+                                    #{cuenta.nombre}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">IBAN</f:facet>
+                                    #{cuenta.IBAN}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Saldo</f:facet>
+                                #{cuenta.saldo}€
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Interés</f:facet>
+                                #{cuenta.tasaInteres}%
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Límite de Transacción</f:facet>
+                                #{cuenta.limiteTransaccion}€ 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Tipo de Cuenta</f:facet>
+                                    #{cuenta.tipoCuenta}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Fecha de Apertura</f:facet>
+                                    #{cuenta.fechaApertura}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Última Fecha de Transacción</f:facet>
+                                    #{cuenta.fechaUltimaTransaccion}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="">Acción 2</f:facet>
+                                <p:commandButton oncomplete="PF('confirmDialog').show()" action="#{cuentaEController.setCuenta(cuenta)}" value="Eliminar" update="formEliminar" />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </p:fieldset>
+            </h:form>
+            <div>
+            <!-- Dialogo de confirmacion de eliminacion -->
+            <p:confirmDialog header="Confirmar Eliminación" message="¿Está seguro de que desea eliminar esta cuenta?" severity="alert" widgetVar="confirmDialog">
+                <h:form id="formEliminar">
+                    <p:commandButton value="Sí" action="#{cuentaEController.eliminarCuenta()}" oncomplete="PF('confirmDialog').hide();" update=":tarjetasForm:tabla" />
+                    <p:commandButton value="No" onclick="PF('confirmDialog').hide()" type="button" />
+                </h:form>
+            </p:confirmDialog>
+        </div>
+        </div>
+
+    </h:body>
+
+</html>
