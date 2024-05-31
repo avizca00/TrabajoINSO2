@@ -72,6 +72,10 @@
                                 #{prestamo.montoPrestamo}€
                             </h:column>
                             <h:column>
+                                <f:facet name="header">Interés</f:facet>
+                                #{prestamo.tasaInteres}%
+                            </h:column>
+                            <h:column>
                                 <f:facet name="header">Estado</f:facet>
                                      #{prestamo.estado == 1 ? 'Pagado' : prestamo.estado == 2 ? 'Aceptado' : prestamo.estado == 3 ? 'Denegado' : 'Pendiente'}
                             </h:column>

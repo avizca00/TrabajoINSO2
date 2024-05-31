@@ -176,12 +176,23 @@ public class CuentaController implements Serializable {
 
     public void crearCuenta() {
         int a = cuenta.getSaldo().compareTo(BigDecimal.ZERO);
+        int b = cuenta.getTasaInteres().compareTo(BigDecimal.ZERO);
+        int c = cuenta.getLimiteTransaccion().compareTo(BigDecimal.ZERO);
         if (a == -1 || a == 0) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "El saldo de la cuenta no puede ser 0 o negativo. Introduzca un saldo válido",
                             "El saldo de la cuenta no puede ser 0 o negativo. Introduzca un saldo válido"));
-
+        } else if (b == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "La tasa de interés de la cuenta no puede ser 0 o negativa. Introduzca una tasa de interés válida",
+                            "La tasa de interés de la cuenta no puede ser 0 o negativa. Introduzca una tasa de interés válida"));
+        } else if (c == -1 || c == 0) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "El límite de transacción de la cuenta no puede ser 0 o negativo. Introduzca un límite de transacción válido",
+                            "El límite de transacción de la cuenta no puede ser 0 o negativo. Introduzca un límite de transacción válido"));
         } else {
             try {
                 Date date = new Date();

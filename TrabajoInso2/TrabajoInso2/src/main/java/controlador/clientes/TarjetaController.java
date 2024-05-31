@@ -297,6 +297,14 @@ public class TarjetaController implements Serializable {
                                 "No se ha seleccionado una cuenta. Seleccione una cuenta"));
                 return;
             }
+            int a = tarjetaModElim.getSaldoDisponible().compareTo(BigDecimal.ZERO);
+            if (a == -1 || a == 0) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                "El saldo de la tarjeta no puede ser 0 o negativo. Introduzca un saldo válido",
+                                "El saldo de la tarjeta no puede ser 0 o negativo. Introduzca un saldo válido"));
+                return;
+            }
             Cuentas c = cuentaEJB.find(this.cuenta.getIdcuenta());
             tarjetaModElim.setCuenta(c);
             tarjetaEJB.edit(tarjetaModElim);

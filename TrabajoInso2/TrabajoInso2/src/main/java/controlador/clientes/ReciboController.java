@@ -269,10 +269,8 @@ public class ReciboController implements Serializable {
     }
 
     public void creaRecibo() {
-        System.out.println("Rama1");
         int a = recibo.getImporte().compareTo(BigDecimal.ZERO);
         if (cuenta.getIdcuenta() == -1) {
-            System.out.println("Rama1.1");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "No se ha seleccionado una cuenta. Seleccione una cuenta",
@@ -280,22 +278,18 @@ public class ReciboController implements Serializable {
             return;
         }
         cuenta = cuentaEJB.find(cuenta.getIdcuenta());
-        System.out.println("Rama2");
         if (a == -1 || a == 0) {
-            System.out.println("Rama2.1");
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "El importe del recibo no puede ser 0 o negativo. Introduzca un importe válido",
                             "El importe del recibo no puede ser 0 o negativo. Introduzca un importe válido"));
-        } else if (recibo.getFechaVencimiento().before(new Date())) {
-            System.out.println("Rama2.2");
+        } else if (recibo.getFechaVencimiento().before(new Date())) {  
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida",
                             "La fecha de emisión del recibo no puede ser anterior a la fecha actual. Introduzca una fecha válida"));
         } else {
             try {
-                System.out.println("Rama2.3");
                 recibo.setCuenta(cuenta);
                 Date fechDate = new Date();
                 recibo.setFechaEmision(fechDate);
@@ -306,7 +300,6 @@ public class ReciboController implements Serializable {
                                 "Recibo creado con éxito",
                                 "Recibo creado con éxito"));
                 try {
-                    System.out.println("Rama2.3.1");
                     notificacion.setPagoRealizado(0);
                     notificacion.setReciboDomiciliario(recibo);
                     notificacion.setFecha(fechDate);
@@ -320,7 +313,6 @@ public class ReciboController implements Serializable {
                     notificacion.setDescripcion("El recibo del mes " + monthName + " está en estado pendiente");
                     notificacionEJB.create(notificacion);
                 } catch (Exception e) {
-                    System.out.println("Rama2.3.2");
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                     "Error al crear la notificación",
@@ -328,7 +320,6 @@ public class ReciboController implements Serializable {
                 }
                 recibos = reciboEJB.recibosPorCuenta(cuentas);
             } catch (Exception e) {
-                System.out.println("Rama2.4");
                 FacesContext.getCurrentInstance().addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                 "Error al obtener las notificaciones",
